@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="agent-api-10.0">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/jetbrains/teamcity/agent-api/10.0/agent-api-10.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

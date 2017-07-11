@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="common-api-2017.1">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/jetbrains/teamcity/common-api/2017.1/common-api-2017.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
