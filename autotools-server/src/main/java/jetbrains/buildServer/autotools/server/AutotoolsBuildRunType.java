@@ -11,12 +11,12 @@ import jetbrains.buildServer.serverSide.RunTypeRegistry;
 import jetbrains.buildServer.web.openapi.PluginDescriptor;
 import org.jetbrains.annotations.NotNull;
 
-import static jetbrains.buildServer.autotools.common.AutotoolsConfigureConstants.*;
+import static jetbrains.buildServer.autotools.common.AutotoolsBuildConstants.*;
 
-public class AutotoolsRunType extends RunType{
+public class AutotoolsBuildRunType extends RunType{
 
   private final PluginDescriptor myPluginDescriptor;
-  public AutotoolsRunType(@NotNull final RunTypeRegistry runTypeRegistry, @NotNull final PluginDescriptor descriptor) {
+  public AutotoolsBuildRunType(@NotNull final RunTypeRegistry runTypeRegistry, @NotNull final PluginDescriptor descriptor) {
     runTypeRegistry.registerRunType(this);
     myPluginDescriptor = descriptor;
   }
@@ -42,20 +42,23 @@ public class AutotoolsRunType extends RunType{
 
   @Override
   public String getEditRunnerParamsJspFilePath() {
-    return myPluginDescriptor.getPluginResourcesPath("editAutotoolsConfigureRunner.jsp");
+    return myPluginDescriptor.getPluginResourcesPath("editAutotoolsBuildRunner.jsp");
   }
 
   @Override
   public String getViewRunnerParamsJspFilePath() {
-    return myPluginDescriptor.getPluginResourcesPath("viewAutotoolsConfigureRunner.jsp");
+    return myPluginDescriptor.getPluginResourcesPath("viewAutotoolsBuildRunner.jsp");
   }
 
   @Override
   public Map<String, String> getDefaultRunnerProperties() {
+
     final String trueStr = Boolean.toString(true);
     final Map<String, String> properties = new HashMap<>();
     properties.put(UI_REDIRECT_STDERR, trueStr);
     properties.put(UI_NEED_AUTORECONF, trueStr);
+    properties.put(UI_ADDITIONAL_MAKE_PARAMS, "");
+    properties.put(UI_ADDITIONAL_CONF_PARAMS, "");
     return properties;
   }
 }

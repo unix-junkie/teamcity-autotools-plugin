@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/src/main/java/META-INF/build-server-plugin-autotoolsrunner.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
+  </component>
   <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
@@ -18,5 +27,17 @@
     <orderEntry type="library" exported="" name="org.springframework:spring-beans:4.3.9.RELEASE" level="project" />
     <orderEntry type="library" name="common-api-2017.1" level="project" />
     <orderEntry type="library" name="server-api-2017.1" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$APPLICATION_HOME_DIR$/redist/annotations-java8.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="obsolete-openapi-9.0-javadoc" level="project" />
+    <orderEntry type="library" name="org.jetbrains:annotations:15.0" level="project" />
+    <orderEntry type="library" name="org.jetbrains.teamcity:server-api:10.0" level="project" />
   </component>
 </module>

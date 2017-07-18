@@ -14,11 +14,9 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
-
-<!--suppress SpringBeanConstructorArgInspection, AutowiredDependenciesInspection -->
-<beans default-autowire="constructor">
-  <bean class="jetbrains.buildServer.autotools.server.AutotoolsBuildRunType"/>
-  <bean class="jetbrains.buildServer.autotools.server.AutotoolsDiscoveryExtension"/>
+<beans xmlns = "http://www.springframework.org/schema/beans"
+       xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation = "http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
+       default-autowire = "constructor">
+  <bean class="jetbrains.buildServer.autotools.agent.AutotoolsBuildCLBServiceFactory"/>
 </beans>

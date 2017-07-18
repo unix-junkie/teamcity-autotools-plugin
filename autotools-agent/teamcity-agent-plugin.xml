@@ -15,10 +15,7 @@
   ~ limitations under the License.
   -->
 
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
-
-<!--suppress SpringBeanConstructorArgInspection, AutowiredDependenciesInspection -->
-<beans default-autowire="constructor">
-  <bean class="jetbrains.buildServer.autotools.server.AutotoolsBuildRunType"/>
-  <bean class="jetbrains.buildServer.autotools.server.AutotoolsDiscoveryExtension"/>
-</beans>
+<teamcity-agent-plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:noNamespaceSchemaLocation="urn:schemas-jetbrains-com:teamcity-agent-plugin-v1-xml">
+  <plugin-deployment use-separate-classloader="true"/>
+</teamcity-agent-plugin>

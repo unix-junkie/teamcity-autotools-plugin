@@ -19,6 +19,6 @@
 
 <!--suppress SpringBeanConstructorArgInspection, AutowiredDependenciesInspection -->
 <beans default-autowire="constructor">
-
+  <bean class="jetbrains.buildServer.autotools.server.AutotoolsBuildRunType"/>
   <bean class="jetbrains.buildServer.autotools.server.AutotoolsDiscoveryExtension"/>
 </beans>
