@@ -1,10 +1,13 @@
 package jetbrains.buildServer.autotools.agent;
 
 import com.intellij.execution.configurations.GeneralCommandLine;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.*;
+import jetbrains.buildServer.BuildProblemData;
 import jetbrains.buildServer.ExecResult;
 import jetbrains.buildServer.RunBuildException;
 import jetbrains.buildServer.SimpleCommandLineProcessRunner;
@@ -31,11 +34,49 @@ public class AutotoolsBuildCLBService extends BuildServiceAdapter {
   private SimpleBuildLogger myLogger;
   @Override
   public ProgramCommandLine makeProgramCommandLine() throws RunBuildException {
+    myLogger = getBuild().getBuildLogger();
     return makeCommandLineForCustomScript();
   }
 
-  private String getArtifactName(){
-    String artifactName = getBuild().getProjectName();
+  private String getVersion(){
+    String version = "";
+    try {
+      File configure_ac = null;
+      for (File file : getBuild().getCheckoutDirectory().listFiles()) {
+        if (file.getName().equalsIgnoreCase("configure.ac") || file.getName().equalsIgnoreCase("configure.in")) {
+          configure_ac = file;
+          break;
+        }
+      }
+
+      if (configure_ac == null) return version;
+
+      Scanner scanner = new Scanner(configure_ac);
+      while (scanner.hasNextLine()) {
+        String line = scanner.nextLine();
+        int idx = line.indexOf("AC_INIT");
+        if (idx == -1)
+          continue;
+        idx += 7;
+        int idx2 = line.indexOf(")");
+        String ac_init = line.substring(idx, idx2);
+        String[] params = ac_init.split(",");
+        if (params.length < 2)
+          break;
+        idx = params[1].indexOf("["); idx2 = params[1].indexOf("]");
+        if (idx == -1 || idx2 == -1)
+          break;
+        return version = params[1].substring(idx + 1, idx2);
+      }
+
+      return version;
+    }
+    catch (Exception e){
+      return version;
+    }
+  }
+  private String getArtifactName() {
+    String artifactName = getBuild().getProjectName() + "_" + getVersion();
     return artifactName;
   }
 
@@ -73,6 +114,12 @@ public class AutotoolsBuildCLBService extends BuildServiceAdapter {
     return var10000;
   }
 
+  protected String getCheckProblemServiceMessage(String dectription, String id){
+    String message =   "if [ $? -ne 0 ]\nthen" +
+    " echo \"##teamcity[buildProblem description='" + dectription + "' identity='" + id + "']\"\n exit\nfi";
+    return message;
+  }
+
   @NotNull
   protected String getCustomScriptContent() throws RunBuildException {
     String config_params = "";
@@ -86,7 +133,7 @@ public class AutotoolsBuildCLBService extends BuildServiceAdapter {
       make_params = " " + getRunnerParameters().get(UI_ADDITIONAL_MAKE_PARAMS);
     }
 
-    String autoreconf = "autoreconf -ifs\n";
+    String autoreconf = "autoreconf -ifs\n" + getCheckProblemServiceMessage("autoreconf step failed.", "autoreconf");
     for (File file: getBuild().getCheckoutDirectory().listFiles()){
       if (file.getName().equalsIgnoreCase("configure")) {
         autoreconf = "";
@@ -94,14 +141,17 @@ public class AutotoolsBuildCLBService extends BuildServiceAdapter {
       }
     }
 
-    String scriptContent = "#!/bin/sh\nset -e\n" + autoreconf + "./configure" + config_params + "\n"
-                           + "make" + make_params + "\n" +
+    String scriptContent = "#!/bin/sh\n" + autoreconf + "\n"
+                           + "./configure" + config_params + "\n"
+                           + getCheckProblemServiceMessage("configure script failed.", "configure") + "\n"
+                           + "make" + make_params + "\n" + getCheckProblemServiceMessage("make step failed.", "make") + "\n" +
                            "make DESTDIR=" +
-                           getBuild().getBuildTempDirectory().getPath() + "/artifacts" + " install\n"
-                        + "cd " + getBuild().getBuildTempDirectory().getPath() + "/artifacts\n"
+                           getBuild().getBuildTempDirectory().getPath() + "/artifacts" + " install\n" +
+                           getCheckProblemServiceMessage("make install step failed.", "make")
+                        + "\ncd " + getBuild().getBuildTempDirectory().getPath() + "/artifacts\n"
                            + "find * -type f -print > ../files.lst\n" +
-                         "tar cvf  " + getArtifactName() + ".tar `cat ../files.lst`\n" +
-                          "gzip -9 " + getArtifactName() + ".tar";
+                         "tar cvf  " + getArtifactName() + ".tar `cat ../files.lst`\n" + getCheckProblemServiceMessage("tar step failed.", "tar") +
+                          "\ngzip -9 " + getArtifactName() + ".tar\n" + getCheckProblemServiceMessage("gzip step failed.", "gzip");
     Loggers.AGENT.info("XXX: script: " + scriptContent);
 
     return scriptContent;
@@ -120,7 +170,6 @@ public class AutotoolsBuildCLBService extends BuildServiceAdapter {
 
   public void afterProcessFinished() throws RunBuildException {
     super.afterProcessFinished();
-    myLogger = getBuild().getBuildLogger();
     String artifactMessage = "##teamcity[publishArtifacts " +"\'" + getBuild().getBuildTempDirectory().getPath() +  "/artifacts/" + getArtifactName() + ".tar.gz\'" + "]";
     myLogger.message(artifactMessage);
 
@@ -129,10 +178,13 @@ public class AutotoolsBuildCLBService extends BuildServiceAdapter {
       this.myFilesToDelete.remove(file);
       FileUtil.delete(file);
     }
+
+
   }
 
   @NotNull
   protected String getCustomScriptExtension() {
     return ".sh";
   }
+
 }
