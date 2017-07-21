@@ -31,4 +31,12 @@
   </td>
 </tr>
 
+<tr class="parameter">
+<td>
+  <props:checkboxProperty name="${bean.needAutoreconf}" />
+  <label for="${bean.needAutoreconf}">Execute autoreconf</label>
+  <br/>
+</td>
+</tr>
+
 

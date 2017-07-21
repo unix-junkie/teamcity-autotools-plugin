@@ -22,10 +22,11 @@ public class AutotoolsBuildBean {
   public String getRedirectStderrKey() {
     return UI_REDIRECT_STDERR;
   }
-
+  @NotNull
   public String getNeedAutoreconf() {
     return UI_NEED_AUTORECONF;
   }
+  @NotNull
   public String getConfigurePath(){
     return UI_SOURCE_PATH;
   }

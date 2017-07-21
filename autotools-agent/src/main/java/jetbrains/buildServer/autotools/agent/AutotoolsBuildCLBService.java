@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.*;
+import javax.swing.text.StyledEditorKit;
 import jetbrains.buildServer.BuildProblemData;
 import jetbrains.buildServer.ExecResult;
 import jetbrains.buildServer.RunBuildException;
@@ -24,6 +25,7 @@ import jetbrains.buildServer.log.Loggers;
 import jetbrains.buildServer.util.FileUtil;
 import org.apache.commons.logging.Log;
 import org.jetbrains.annotations.NotNull;
+import sun.tools.jar.CommandLine;
 
 /**
  * Created by naduxa on 12.07.2017.
@@ -76,7 +78,7 @@ public class AutotoolsBuildCLBService extends BuildServiceAdapter {
     }
   }
   private String getArtifactName() {
-    String artifactName = getBuild().getProjectName() + "_" + getVersion();
+    String artifactName = getBuild().getProjectName().replace(' ', '_') + "_" + getVersion().replace(' ', '_');
     return artifactName;
   }
 
@@ -114,47 +116,69 @@ public class AutotoolsBuildCLBService extends BuildServiceAdapter {
     return var10000;
   }
 
-  protected String getCheckProblemServiceMessage(String dectription, String id){
-    String message =   "if [ $? -ne 0 ]\nthen" +
-    " echo \"##teamcity[buildProblem description='" + dectription + "' identity='" + id + "']\"\n exit\nfi";
+  protected String getCheckProblemServiceMessage(String id){
+    String message =   "code=$?\nif [ \"$code\" -eq 127 ]\nthen" +
+    "\necho \"##teamcity[buildProblem description='" + id + " not available." + "' identity='" + id + "']\"\n exit\nfi"
+                      + "\nif [ \"$code\" -ne 0 ]\nthen" +
+    "\necho \"##teamcity[buildProblem description='" + id + " step failed." + "' identity='" + id + "']\"\n" + getFailedArtifactScript(id) + "\n exit\nfi";
     return message;
+  }
+
+  protected Boolean isNeededAutoreconf(){
+    if (getRunnerParameters().get(UI_NEED_AUTORECONF) == null || !getRunnerParameters().get(UI_NEED_AUTORECONF).equalsIgnoreCase("true")) {
+      myLogger.message("NEED_AUTORECONF: I WILL FIND");
+      for (File file : getBuild().getCheckoutDirectory().listFiles()) {
+        if (file.getName().equalsIgnoreCase("configure")) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
 
   @NotNull
   protected String getCustomScriptContent() throws RunBuildException {
     String config_params = "";
     String make_params = "";
-
     if (getRunnerParameters().get(UI_ADDITIONAL_CONF_PARAMS) != "" && getRunnerParameters().get(UI_ADDITIONAL_CONF_PARAMS) != null){
       config_params = " " + getRunnerParameters().get(UI_ADDITIONAL_CONF_PARAMS);
     }
-
     if (getRunnerParameters().get(UI_ADDITIONAL_MAKE_PARAMS) != null && getRunnerParameters().get(UI_ADDITIONAL_MAKE_PARAMS) != "") {
       make_params = " " + getRunnerParameters().get(UI_ADDITIONAL_MAKE_PARAMS);
     }
-
-    String autoreconf = "autoreconf -ifs\n" + getCheckProblemServiceMessage("autoreconf step failed.", "autoreconf");
-    for (File file: getBuild().getCheckoutDirectory().listFiles()){
-      if (file.getName().equalsIgnoreCase("configure")) {
-        autoreconf = "";
-        break;
-      }
+    String autoreconf = "autoreconf -ifs\n" + getCheckProblemServiceMessage("autoreconf");
+    if (!isNeededAutoreconf()) {
+      autoreconf = "";
     }
 
     String scriptContent = "#!/bin/sh\n" + autoreconf + "\n"
                            + "./configure" + config_params + "\n"
-                           + getCheckProblemServiceMessage("configure script failed.", "configure") + "\n"
-                           + "make" + make_params + "\n" + getCheckProblemServiceMessage("make step failed.", "make") + "\n" +
+                           + getCheckProblemServiceMessage("configure") + "\n"
+                           + "make " + make_params + "\n" + getCheckProblemServiceMessage("make") + "\n" +
                            "make DESTDIR=" +
                            getBuild().getBuildTempDirectory().getPath() + "/artifacts" + " install\n" +
-                           getCheckProblemServiceMessage("make install step failed.", "make")
+                           getCheckProblemServiceMessage("make install")
                         + "\ncd " + getBuild().getBuildTempDirectory().getPath() + "/artifacts\n"
                            + "find * -type f -print > ../files.lst\n" +
-                         "tar cvf  " + getArtifactName() + ".tar `cat ../files.lst`\n" + getCheckProblemServiceMessage("tar step failed.", "tar") +
-                          "\ngzip -9 " + getArtifactName() + ".tar\n" + getCheckProblemServiceMessage("gzip step failed.", "gzip");
+                         "tar cvf  " + getArtifactName() + ".tar `cat ../files.lst`\n" + getCheckProblemServiceMessage("tar") +
+                          "\ngzip -9 " + getArtifactName() + ".tar\n" + getCheckProblemServiceMessage("gzip") + "\n" +
+                          "echo " + getSuccessArtifactMessage();
     Loggers.AGENT.info("XXX: script: " + scriptContent);
-
     return scriptContent;
+  }
+
+  protected String getSuccessArtifactMessage(){
+    final String artifactMessage = "\"##teamcity[publishArtifacts '" + getBuild().getBuildTempDirectory().getPath() +  "/artifacts/" + getArtifactName() + ".tar.gz'" + "]\"";
+    return artifactMessage;
+  }
+
+  protected String getFailedArtifactScript(String id){
+    String script = "";
+    if (id.equalsIgnoreCase("configure"))
+      script = "\ncp config.log " + getBuild().getBuildTempDirectory().getPath() +  "/config.log"  + "\necho \"##teamcity[publishArtifacts '" + getBuild().getBuildTempDirectory().getPath() +  "/config.log']\"\n";
+    //if (id.equalsIgnoreCase("make"))
+    //  script = "\nfind . -type f -name ‘Makefile.*’ | xargs  tar -cvf " + getBuildTempDirectory().getPath() +  "/makefiles.tar\n" + "\ncd " + getBuildTempDirectory().getAbsolutePath() + "\ngzip -9 makefiles.tar\n";
+    return script;
   }
 
   @NotNull
@@ -170,8 +194,6 @@ public class AutotoolsBuildCLBService extends BuildServiceAdapter {
 
   public void afterProcessFinished() throws RunBuildException {
     super.afterProcessFinished();
-    String artifactMessage = "##teamcity[publishArtifacts " +"\'" + getBuild().getBuildTempDirectory().getPath() +  "/artifacts/" + getArtifactName() + ".tar.gz\'" + "]";
-    myLogger.message(artifactMessage);
 
     while (!this.myFilesToDelete.isEmpty()) {
       File file = myFilesToDelete.iterator().next();
