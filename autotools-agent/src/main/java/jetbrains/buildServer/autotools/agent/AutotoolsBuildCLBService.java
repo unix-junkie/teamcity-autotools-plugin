@@ -1,133 +1,155 @@
 package jetbrains.buildServer.autotools.agent;
 
 import com.intellij.execution.configurations.GeneralCommandLine;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.util.*;
-import javax.swing.text.StyledEditorKit;
-import jetbrains.buildServer.BuildProblemData;
 import jetbrains.buildServer.ExecResult;
 import jetbrains.buildServer.RunBuildException;
 import jetbrains.buildServer.SimpleCommandLineProcessRunner;
-import jetbrains.buildServer.agent.AgentBuildRunner;
-import jetbrains.buildServer.agent.AgentRunningBuild;
-import jetbrains.buildServer.agent.BuildAgent;
-import jetbrains.buildServer.agent.SimpleBuildLogger;
 import jetbrains.buildServer.agent.runner.BuildServiceAdapter;
 import jetbrains.buildServer.agent.runner.ProgramCommandLine;
 import jetbrains.buildServer.agent.runner.SimpleProgramCommandLine;
 import static jetbrains.buildServer.autotools.common.AutotoolsBuildConstants.*;
-
+import java.lang.Class;
 import jetbrains.buildServer.log.Loggers;
 import jetbrains.buildServer.util.FileUtil;
-import org.apache.commons.logging.Log;
+import org.apache.commons.compress.utils.Charsets;
 import org.jetbrains.annotations.NotNull;
-import sun.tools.jar.CommandLine;
+import sun.nio.cs.StandardCharsets;
 
 /**
- * Created by naduxa on 12.07.2017.
+ * Created on 12.07.2017.
+ * @author     : Nadezhda Demina
  */
-public class AutotoolsBuildCLBService extends BuildServiceAdapter {
-
-  private Set<File> myFilesToDelete = new HashSet<File>();
-  private SimpleBuildLogger myLogger;
+public final class AutotoolsBuildCLBService extends BuildServiceAdapter {
+  /**
+   * Collection of work files be deleted in the end.
+   */
+  private final Collection<File> myFilesToDelete = new HashSet<File>();
   @Override
+  @NotNull
   public ProgramCommandLine makeProgramCommandLine() throws RunBuildException {
-    myLogger = getBuild().getBuildLogger();
-    return makeCommandLineForCustomScript();
+    return makeCommandLineForScript();
   }
 
+  /**
+   * Returns version of temp project.
+   *<P>
+   * @return version of temp project
+   */
+  @NotNull
   private String getVersion(){
-    String version = "";
-    try {
-      File configure_ac = null;
-      for (File file : getBuild().getCheckoutDirectory().listFiles()) {
-        if (file.getName().equalsIgnoreCase("configure.ac") || file.getName().equalsIgnoreCase("configure.in")) {
-          configure_ac = file;
-          break;
-        }
+    File configure_ac = null;
+    for (final File file : getBuild().getCheckoutDirectory().listFiles()) {
+      if (file.getName().equalsIgnoreCase("configure.ac") || file.getName().equalsIgnoreCase("configure.in")) {
+        configure_ac = file;
+        break;
       }
-
-      if (configure_ac == null) return version;
-
-      Scanner scanner = new Scanner(configure_ac);
+    }
+    if (configure_ac == null) {
+      return "";
+    }
+    try {
+      final Scanner scanner = new Scanner(configure_ac);
       while (scanner.hasNextLine()) {
-        String line = scanner.nextLine();
+        final String line = scanner.nextLine();
         int idx = line.indexOf("AC_INIT");
-        if (idx == -1)
+        if (idx == -1) {
           continue;
+        }
         idx += 7;
         int idx2 = line.indexOf(")");
-        String ac_init = line.substring(idx, idx2);
-        String[] params = ac_init.split(",");
-        if (params.length < 2)
+        final String ac_init = line.substring(idx, idx2);
+        final String[] params = ac_init.split(",");
+        if (params.length < 2) {
           break;
+        }
         idx = params[1].indexOf("["); idx2 = params[1].indexOf("]");
-        if (idx == -1 || idx2 == -1)
+        if (idx == -1 || idx2 == -1) {
           break;
-        return version = params[1].substring(idx + 1, idx2);
+        }
+        return params[1].substring(idx + 1, idx2);
       }
-
-      return version;
+      return "";
     }
-    catch (Exception e){
-      return version;
+    catch (final Exception e){
+      return "";
     }
   }
+
+  /**
+   * Returns name of artifact of successful build.
+   * @return name of artifact
+   */
+  @NotNull
   private String getArtifactName() {
-    String artifactName = getBuild().getProjectName().replace(' ', '_') + "_" + getVersion().replace(' ', '_');
+    final String artifactName = getBuild().getProjectName().replace(' ', '_') + "_" + getVersion().replace(' ', '_');
     return artifactName;
   }
 
+  /**
+   *  Returns commandLine when need to execute script.
+   * @return commindLine with script
+   * @throws RunBuildException if ssetting executable attribute for script be failed
+   */
   @NotNull
-  protected ProgramCommandLine makeCommandLineForCustomScript() throws RunBuildException {
-    String script = this.getCustomScript();
-    enableExecution(script, this.getWorkingDirectory().getAbsolutePath());
-    return this.createCommandLine(script, Collections.<String>emptyList());
+  private ProgramCommandLine makeCommandLineForScript() throws RunBuildException {
+    final String script = getScript();
+    enableExecution(script, getWorkingDirectory().getAbsolutePath());
+    return createCommandLine(script, Collections.<String>emptyList());
   }
 
-  private static void enableExecution(@NotNull String filePath, @NotNull String baseDir) {
-    GeneralCommandLine commandLine = new GeneralCommandLine();
+  /**
+   * Set executable attribute for file
+   * @param filePath File to be setted executable attribute
+   * @param baseDir Directory to be setted Work Directory
+   */
+  private static void enableExecution(@NotNull final String filePath, @NotNull final String baseDir) {
+    final GeneralCommandLine commandLine = new GeneralCommandLine();
     commandLine.setExePath("chmod");
     commandLine.addParameter("+x");
     commandLine.addParameter(filePath);
     commandLine.setWorkDirectory(baseDir);
-    ExecResult execResult = SimpleCommandLineProcessRunner.runCommand(commandLine, (byte[])null);
+    final ExecResult execResult = SimpleCommandLineProcessRunner.runCommand(commandLine, (byte[])null);
+    if(execResult.getExitCode() != 0) {
+      Loggers.AGENT.warn("Failed to set executable attribute for " + filePath + ": chmod +x exit code is " + execResult.getExitCode());
+    }
   }
 
+  /**
+   * Creates a script file in AgentTempDirectory and returns absolute path.
+   * @return path of script file
+   * @throws RunBuildException if failed to create temporary script file in directory
+   */
   @NotNull
-  protected String getCustomScript() throws RunBuildException {
-    String scriptContent = this.getCustomScriptContent();
+  private String getScript() throws RunBuildException {
+    final String scriptContent = getScriptContent();
 
-    String var10000;
+    final String var10000;
     try {
-      File scriptFile = File.createTempFile("custom_script", this.getCustomScriptExtension(), this.getAgentTempDirectory());
+      final File scriptFile = File.createTempFile("build_script", getScriptExtension(), getAgentTempDirectory());
       FileUtil.writeFile(scriptFile, scriptContent, Charset.defaultCharset().name());
-      this.myFilesToDelete.add(scriptFile);
+      myFilesToDelete.add(scriptFile);
       var10000 = scriptFile.getAbsolutePath();
-    } catch (IOException var4) {
-        RunBuildException exception = new RunBuildException("Failed to create temporary custom script file in directory '" + this.getAgentTempDirectory() + "': " + var4.toString(), var4);
+    } catch (final IOException var4) {
+        final RunBuildException exception = new RunBuildException("Failed to create temporary build script file in directory '" + getAgentTempDirectory() + "': " + var4.toString(), var4);
         exception.setLogStacktrace(false);
         throw exception;
     }
+
     return var10000;
   }
 
-  protected String getCheckProblemServiceMessage(String id){
-    String message =   "code=$?\nif [ \"$code\" -eq 127 ]\nthen" +
-    "\necho \"##teamcity[buildProblem description='" + id + " not available." + "' identity='" + id + "']\"\n exit\nfi"
-                      + "\nif [ \"$code\" -ne 0 ]\nthen" +
-    "\necho \"##teamcity[buildProblem description='" + id + " step failed." + "' identity='" + id + "']\"\n" + getFailedArtifactScript(id) + "\n exit\nfi";
-    return message;
-  }
 
-  protected Boolean isNeededAutoreconf(){
+  /**
+   * It identifies the need  to execute autoreconf
+   * @return true, if it is needed to execute autoreconf
+   */
+  @NotNull
+  private Boolean isNeededAutoreconf(){
     if (getRunnerParameters().get(UI_NEED_AUTORECONF) == null || !getRunnerParameters().get(UI_NEED_AUTORECONF).equalsIgnoreCase("true")) {
-      myLogger.message("NEED_AUTORECONF: I WILL FIND");
-      for (File file : getBuild().getCheckoutDirectory().listFiles()) {
+      for (final File file : getBuild().getCheckoutDirectory().listFiles()) {
         if (file.getName().equalsIgnoreCase("configure")) {
           return false;
         }
@@ -136,76 +158,81 @@ public class AutotoolsBuildCLBService extends BuildServiceAdapter {
     return true;
   }
 
+  /**
+   * Addes needed enviroment variblies for build script.
+   */
+  private void addMyEnviroventVariblies(){
+    getBuild().addSharedEnvironmentVariable("CONF_PATH", getBuild().getCheckoutDirectory().getAbsolutePath());
+    getBuild().addSharedEnvironmentVariable("ARTIFACT_NAME", getArtifactName());
+    if (isNeededAutoreconf()) {
+      getBuild().addSharedEnvironmentVariable("NEED_AUTORECONF", "1");
+    }
+    else{
+      getBuild().addSharedEnvironmentVariable("NEED_AUTORECONF", "0");
+    }
+
+    if (getRunnerParameters().get(UI_ADDITIONAL_CONF_PARAMS) != null && !getRunnerParameters().get(UI_ADDITIONAL_CONF_PARAMS).equalsIgnoreCase("")) {
+      getBuild().addSharedEnvironmentVariable("CONF_PARAMS", getRunnerParameters().get(UI_ADDITIONAL_CONF_PARAMS));
+    }
+    if (getRunnerParameters().get(UI_ADDITIONAL_MAKE_PARAMS) != null && !getRunnerParameters().get(UI_ADDITIONAL_MAKE_PARAMS).equalsIgnoreCase("")) {
+      getBuild().addSharedEnvironmentVariable("MK_PARAMS", getRunnerParameters().get(UI_ADDITIONAL_MAKE_PARAMS));
+    }
+  }
+
+  /**
+   * Returns  content of script for build steps (autoreconf, ./configure, make, make install),
+   * @return content of script
+   */
   @NotNull
-  protected String getCustomScriptContent() throws RunBuildException {
-    String config_params = "";
-    String make_params = "";
-    if (getRunnerParameters().get(UI_ADDITIONAL_CONF_PARAMS) != "" && getRunnerParameters().get(UI_ADDITIONAL_CONF_PARAMS) != null){
-      config_params = " " + getRunnerParameters().get(UI_ADDITIONAL_CONF_PARAMS);
-    }
-    if (getRunnerParameters().get(UI_ADDITIONAL_MAKE_PARAMS) != null && getRunnerParameters().get(UI_ADDITIONAL_MAKE_PARAMS) != "") {
-      make_params = " " + getRunnerParameters().get(UI_ADDITIONAL_MAKE_PARAMS);
-    }
-    String autoreconf = "autoreconf -ifs\n" + getCheckProblemServiceMessage("autoreconf");
-    if (!isNeededAutoreconf()) {
-      autoreconf = "";
-    }
-
-    String scriptContent = "#!/bin/sh\n" + autoreconf + "\n"
-                           + "./configure" + config_params + "\n"
-                           + getCheckProblemServiceMessage("configure") + "\n"
-                           + "make " + make_params + "\n" + getCheckProblemServiceMessage("make") + "\n" +
-                           "make DESTDIR=" +
-                           getBuild().getBuildTempDirectory().getPath() + "/artifacts" + " install\n" +
-                           getCheckProblemServiceMessage("make install")
-                        + "\ncd " + getBuild().getBuildTempDirectory().getPath() + "/artifacts\n"
-                           + "find * -type f -print > ../files.lst\n" +
-                         "tar cvf  " + getArtifactName() + ".tar `cat ../files.lst`\n" + getCheckProblemServiceMessage("tar") +
-                          "\ngzip -9 " + getArtifactName() + ".tar\n" + getCheckProblemServiceMessage("gzip") + "\n" +
-                          "echo " + getSuccessArtifactMessage();
-    Loggers.AGENT.info("XXX: script: " + scriptContent);
-    return scriptContent;
-  }
-
-  protected String getSuccessArtifactMessage(){
-    final String artifactMessage = "\"##teamcity[publishArtifacts '" + getBuild().getBuildTempDirectory().getPath() +  "/artifacts/" + getArtifactName() + ".tar.gz'" + "]\"";
-    return artifactMessage;
-  }
-
-  protected String getFailedArtifactScript(String id){
+  private String getScriptContent() throws RunBuildException {
+    addMyEnviroventVariblies();
     String script = "";
-    if (id.equalsIgnoreCase("configure"))
-      script = "\ncp config.log " + getBuild().getBuildTempDirectory().getPath() +  "/config.log"  + "\necho \"##teamcity[publishArtifacts '" + getBuild().getBuildTempDirectory().getPath() +  "/config.log']\"\n";
-    //if (id.equalsIgnoreCase("make"))
-    //  script = "\nfind . -type f -name ‘Makefile.*’ | xargs  tar -cvf " + getBuildTempDirectory().getPath() +  "/makefiles.tar\n" + "\ncd " + getBuildTempDirectory().getAbsolutePath() + "\ngzip -9 makefiles.tar\n";
+    try {
+      final BufferedReader r = new BufferedReader(
+        new InputStreamReader(getClass().getResourceAsStream("/build_script.txt"), Charsets.UTF_8));
+      String str = "";
+      while ((str = r.readLine()) != null) {
+        script += str + "\n";
+      }
+      r.close();
+    }
+    catch (IOException e){
+      final RunBuildException exception = new RunBuildException("Failed to read temporary build script file in plugin resources.");
+      exception.setLogStacktrace(false);
+      throw exception;
+    }
     return script;
   }
 
+  /**
+   * Creates command Line with content exePath and list of arguments.
+   * @param exePath  path to execute
+   * @param arguments arguments for execution
+   * @return ProgramCommandLine
+   */
   @NotNull
-  protected ProgramCommandLine createCommandLine(@NotNull String exePath) {
-    return this.createCommandLine(exePath, Collections.<String>emptyList());
+  private ProgramCommandLine createCommandLine(@NotNull final String exePath, @NotNull final List<String> arguments) {
+    return new SimpleProgramCommandLine(getRunnerContext(), exePath, arguments);
   }
 
-  @NotNull
-  protected ProgramCommandLine createCommandLine(@NotNull String exePath, @NotNull List<String> arguments) {
-    return new SimpleProgramCommandLine(this.getRunnerContext(), exePath, arguments);
-  }
-
-
+  @Override
   public void afterProcessFinished() throws RunBuildException {
-    super.afterProcessFinished();
 
-    while (!this.myFilesToDelete.isEmpty()) {
-      File file = myFilesToDelete.iterator().next();
-      this.myFilesToDelete.remove(file);
+
+    super.afterProcessFinished();
+    while (!myFilesToDelete.isEmpty()) {
+      final File file = myFilesToDelete.iterator().next();
+      myFilesToDelete.remove(file);
       FileUtil.delete(file);
     }
-
-
   }
 
+  /**
+   * Returns extension of srcipt
+   * @return
+   */
   @NotNull
-  protected String getCustomScriptExtension() {
+  private static String getScriptExtension() {
     return ".sh";
   }
 

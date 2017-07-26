@@ -4,31 +4,36 @@ import org.jetbrains.annotations.NotNull;
 import static jetbrains.buildServer.autotools.common.AutotoolsBuildConstants.*;
 
 /**
- * Created by naduxa on 12.07.2017.
+ * Created on 12.07.2017.
+ * @author     : Nadezhda Demina
  */
+public final class AutotoolsBuildBean {
 
-public class AutotoolsBuildBean {
+  /**
+   * Returns parameter name of ./configure parameters and flags.
+   * @return parameter name of ./configure parameters
+   */
   @NotNull
   public String getAdditionalConfigurateParamsKey() {
     return UI_ADDITIONAL_CONF_PARAMS;
   }
 
+  /**
+   * Returns parameter name of make parameters and flags.
+   * @return parameter name of make parameters
+   */
   @NotNull
   public String getAdditionalMakeParamsKey() {
     return UI_ADDITIONAL_MAKE_PARAMS;
   }
 
-  @NotNull
-  public String getRedirectStderrKey() {
-    return UI_REDIRECT_STDERR;
-  }
+  /**
+   * Return parameter name of flag needed autoreconf.
+   * @return parameter name of flag needed autoreconf
+   */
   @NotNull
   public String getNeedAutoreconf() {
     return UI_NEED_AUTORECONF;
-  }
-  @NotNull
-  public String getConfigurePath(){
-    return UI_SOURCE_PATH;
   }
 
 }
