@@ -1,6 +1,14 @@
 #!/bin/sh
 export LC_ALL=C
 set +e
+
+remove_exist_file(){
+  if [ -f $1 ]
+  then
+   rm $1
+  fi
+}
+
 if [ "$NEED_AUTORECONF" -eq 1 ]
 then
  autoreconf -ifs
@@ -16,6 +24,11 @@ then
   exit
  fi
 fi
+
+remove_exist_file $TMPDIR/artifacts/$ARTIFACT_NAME.tar.gz
+remove_exist_file $TMPDIR/config.log
+remove_exist_file $TMPDIR/makefiles.tar.gz
+
 if [ "$CONF_PARAMS" = "" ]
 then
  $CONF_PATH/configure
@@ -35,6 +48,8 @@ then
  echo "##teamcity[publishArtifacts '$TMPDIR/config.log']"
  exit
 fi
+
+echo "##teamcity[compilationStarted compiler='CC']"
 if [ "$MK_PARAMS" = "" ]
 then
  make
@@ -56,6 +71,8 @@ then
  echo "##teamcity[publishArtifacts '$TMPDIR/makefiles.tar.gz']"
  exit
 fi
+echo "##teamcity[compilationFinished compiler='CC']"
+
 make DESTDIR=$TMPDIR/artifacts install
 code=$?
 if [ "$code" -eq 127 ]
@@ -68,6 +85,7 @@ then
  echo "##teamcity[buildProblem description='make install step failed.' identity='make install']"
  exit
 fi
+
 cd $TMP/artifacts
 find * -type f -print > ../files.lst
 tar cvf  $ARTIFACT_NAME.tar `cat ../files.lst`
@@ -82,6 +100,7 @@ then
  echo "##teamcity[buildProblem description='tar step failed.' identity='tar']"
  exit
 fi
+
 gzip -9 $ARTIFACT_NAME.tar
 code=$?
 if [ "$code" -eq 127 ]
