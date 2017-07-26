@@ -188,13 +188,13 @@ public final class AutotoolsBuildCLBService extends BuildServiceAdapter {
     addMyEnviroventVariblies();
     String script = "";
     try {
-      final BufferedReader r = new BufferedReader(
-        new InputStreamReader(getClass().getResourceAsStream("/build_script.txt"), Charsets.UTF_8));
+      final BufferedReader bufferead = new BufferedReader(
+        new InputStreamReader(getClass().getResourceAsStream("/build_script.sh"), Charset.forName("UTF-8")));
       String str = "";
-      while ((str = r.readLine()) != null) {
+      while ((str = bufferead.readLine()) != null) {
         script += str + "\n";
       }
-      r.close();
+      bufferead.close();
     }
     catch (IOException e){
       final RunBuildException exception = new RunBuildException("Failed to read temporary build script file in plugin resources.");

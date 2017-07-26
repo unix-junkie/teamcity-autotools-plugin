@@ -5,7 +5,6 @@ if [ "$NEED_AUTORECONF" -eq 1 ]
 then
  autoreconf -ifs
  code=$?
- echo "I was there"
  if [ "$code" -eq 127 ]
  then
   echo "##teamcity[buildProblem description='autoreconf not available.' identity='autoreconf']"
