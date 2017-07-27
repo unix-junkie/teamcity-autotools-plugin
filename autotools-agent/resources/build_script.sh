@@ -2,13 +2,6 @@
 export LC_ALL=C
 set +e
 
-remove_exist_file(){
-  if [ -f $1 ]
-  then
-   rm $1
-  fi
-}
-
 if [ "$NEED_AUTORECONF" -eq 1 ]
 then
  autoreconf -ifs
@@ -25,9 +18,9 @@ then
  fi
 fi
 
-remove_exist_file $TMPDIR/artifacts/$ARTIFACT_NAME.tar.gz
-remove_exist_file $TMPDIR/config.log
-remove_exist_file $TMPDIR/makefiles.tar.gz
+rm -f $TMPDIR/artifacts/$ARTIFACT_NAME.tar.gz
+rm -f $TMPDIR/config.log
+rm -f $TMPDIR/makefiles.tar.gz
 
 if [ "$CONF_PARAMS" = "" ]
 then
