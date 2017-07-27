@@ -8,6 +8,7 @@
             <element id="file-copy" path="$PROJECT_DIR$/autotools-agent/teamcity-agent-plugin.xml" output-file-name="teamcity-plugin.xml" />
             <element id="archive" name="autotools-agent.jar">
               <element id="module-output" name="autotools-agent" />
+              <element id="dir-copy" path="$PROJECT_DIR$/autotools-agent/resources" />
             </element>
             <element id="archive" name="autotools-common.jar">
               <element id="module-output" name="autotools-common" />

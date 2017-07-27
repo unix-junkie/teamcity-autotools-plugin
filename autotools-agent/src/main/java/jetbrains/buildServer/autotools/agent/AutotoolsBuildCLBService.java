@@ -11,12 +11,10 @@ import jetbrains.buildServer.agent.runner.BuildServiceAdapter;
 import jetbrains.buildServer.agent.runner.ProgramCommandLine;
 import jetbrains.buildServer.agent.runner.SimpleProgramCommandLine;
 import static jetbrains.buildServer.autotools.common.AutotoolsBuildConstants.*;
-import java.lang.Class;
+import jetbrains.buildServer.messages.DefaultMessagesInfo;
 import jetbrains.buildServer.log.Loggers;
 import jetbrains.buildServer.util.FileUtil;
-import org.apache.commons.compress.utils.Charsets;
 import org.jetbrains.annotations.NotNull;
-import sun.nio.cs.StandardCharsets;
 
 /**
  * Created on 12.07.2017.
