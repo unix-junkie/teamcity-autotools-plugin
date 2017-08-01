@@ -9,8 +9,16 @@
 <forms:workingDirectory/>
 
 <tr class="parameter">
+  <td>Enter ./configure path:</td>
+  <td><props:textProperty name="${bean.sourcePath}" value="${propertiesBean.defaultProperties[bean.sourcePath]}" className="longField" maxlength="256"/>
+    <span class="smallNote">Enter ./configure path without begining on "/"
+    </span>
+  </td>
+</tr>
+
+<tr class="parameter">
   <td>Additional ./configure command line parameters:</td>
-  <td><props:textProperty name="${bean.additionalConfigurateParamsKey}" className="longField" maxlength="256"/>
+  <td><props:textProperty name="${bean.additionalConfigurateParamsKey}"  value="${propertiesBean.properties[bean.additionalConfigurateParamsKey]}"  className="longField" maxlength="256"/>
     <span class="smallNote">Enter parameters for ./configure (equals '--config &lt;tgt&gt;' cmd param)
     </span>
   </td>
@@ -18,7 +26,7 @@
 
 <tr class="parameter">
   <td>Additional make command line parameters:</td>
-  <td><props:textProperty name="${bean.additionalMakeParamsKey}" className="longField" maxlength="256"/>
+  <td><props:textProperty name="${bean.additionalMakeParamsKey}" value="${propertiesBean.properties[bean.additionalMakeParamsKey]}"  className="longField" maxlength="256"/>
     <span class="smallNote">Enter parameters for ./configure (equals '--config &lt;tgt&gt;' cmd param)
     </span>
   </td>

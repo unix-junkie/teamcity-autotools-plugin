@@ -160,7 +160,14 @@ public final class AutotoolsBuildCLBService extends BuildServiceAdapter {
    * Addes needed enviroment variblies for build script.
    */
   private void addMyEnviroventVariblies(){
-    getBuild().addSharedEnvironmentVariable("CONF_PATH", getBuild().getCheckoutDirectory().getAbsolutePath());
+
+    for (Map.Entry<String, String> e : getRunnerParameters().entrySet()){
+      getBuild().getBuildLogger().message("XXX " + e.getKey() + " " + e.getValue());
+    }
+    String sourcePath = getRunnerParameters().get(UI_SOURCE_PATH) == null ? "" : getRunnerParameters().get(UI_SOURCE_PATH);
+    sourcePath = (sourcePath != "" && sourcePath.charAt(0) != '/') ? "/" + sourcePath : sourcePath;
+    getBuild().addSharedEnvironmentVariable("SOURCE_PATH", getBuild().getCheckoutDirectory().getAbsolutePath() + sourcePath);
+    getBuild().getBuildLogger().message("XXX " + getEnvironmentVariables().get("SOURCE_PATH"));
     getBuild().addSharedEnvironmentVariable("ARTIFACT_NAME", getArtifactName());
     if (isNeededAutoreconf()) {
       getBuild().addSharedEnvironmentVariable("NEED_AUTORECONF", "1");

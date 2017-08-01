@@ -36,4 +36,9 @@ public final class AutotoolsBuildBean {
     return UI_NEED_AUTORECONF;
   }
 
+
+  @NotNull
+  public String getSourcePath(){
+    return UI_SOURCE_PATH;
+  }
 }

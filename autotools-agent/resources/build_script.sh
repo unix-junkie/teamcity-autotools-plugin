@@ -2,6 +2,7 @@
 export LC_ALL=C
 set +e
 
+cd "$SOURCE_PATH"
 if [ "$NEED_AUTORECONF" -eq 1 ]
 then
  autoreconf -ifs
@@ -22,11 +23,11 @@ rm -f $TMPDIR/artifacts/$ARTIFACT_NAME.tar.gz
 rm -f $TMPDIR/config.log
 rm -f $TMPDIR/makefiles.tar.gz
 
-if [ "$CONF_PARAMS" = "" ]
+if [ "$SOURCE_PATH" = "" ]
 then
- $CONF_PATH/configure
+ $SOURCE_PATH/configure
 else
- $CONF_PATH/configure $CONF_PARAMS
+ $SOURCE_PATH/configure $CONF_PARAMS
 fi
 code=$?
 if [ "$code" -eq 127 ]
@@ -65,6 +66,19 @@ then
  exit
 fi
 echo "##teamcity[compilationFinished compiler='CC']"
+
+make check
+code=$?
+if [ "$code" -eq 127 ]
+then
+ echo "##teamcity[buildProblem description='make not available.' identity='make']"
+ exit
+fi
+if [ "$code" -ne 0 ]
+then
+ echo "##teamcity[buildProblem description='make check step failed.' identity='make check']"
+ exit
+fi
 
 make DESTDIR=$TMPDIR/artifacts install
 code=$?

@@ -26,6 +26,7 @@ public final class AutotoolsDiscoveryExtension extends BreadthFirstRunnerDiscove
     final List<DiscoveredObject> discovered = new ArrayList<>();
 
     for (final Element file: filesList){
+
       if (file.getName().equalsIgnoreCase(CONFIGURESCR_NAME + ".ac") || file.getName().equalsIgnoreCase(CONFIGURESCR_NAME + ".in")
         || file.getName().equalsIgnoreCase(CONFIGURESCR_NAME)){
         discovered.add(new DiscoveredObject(AutotoolsBuildConstants.TYPE, CollectionsUtil.asMap(AutotoolsBuildConstants.UI_SOURCE_PATH, element.getFullName())));

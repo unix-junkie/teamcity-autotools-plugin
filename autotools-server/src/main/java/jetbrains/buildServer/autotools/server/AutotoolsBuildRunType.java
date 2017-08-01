@@ -68,7 +68,7 @@ public class AutotoolsBuildRunType extends RunType{
     final String trueStr = Boolean.toString(true);
     final Map<String, String> properties = new HashMap<>();
     properties.put(UI_NEED_AUTORECONF, trueStr);
-    properties.put(UI_ADDITIONAL_MAKE_PARAMS, "all check");
+    properties.put(UI_ADDITIONAL_MAKE_PARAMS, "all");
     properties.put(UI_ADDITIONAL_CONF_PARAMS, "");
     return properties;
   }
