@@ -49,6 +49,9 @@ public final class AutotoolsBuildConstants {
    */
   public static final String UI_SOURCE_PATH = UI_PREFIX  + "source_path";
 
+  public static final String HAS_RUNTEST_VAR = "HAS_RUNTEST";
+  public static final String RUNTEST_XML_FILE_VAR = "RUNTEST_XML_FILE";
+
 
 
 }
