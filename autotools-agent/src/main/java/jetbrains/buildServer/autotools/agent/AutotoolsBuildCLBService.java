@@ -164,6 +164,14 @@ public final class AutotoolsBuildCLBService extends BuildServiceAdapter {
     sourcePath = (sourcePath != "" && sourcePath.charAt(0) != '/') ? "/" + sourcePath : sourcePath;
     getBuild().addSharedEnvironmentVariable("SOURCE_PATH", getBuild().getCheckoutDirectory().getAbsolutePath() + sourcePath);
     getBuild().addSharedEnvironmentVariable("ARTIFACT_NAME", getArtifactName());
+    getBuild().addSharedEnvironmentVariable("LAST_STEP", "9");
+
+    if (!getRunnerParameters().containsKey(UI_MAKE_CHECK) || getRunnerParameters().get(UI_MAKE_CHECK) == null){
+      getBuild().addSharedEnvironmentVariable(UI_MAKE_CHECK, "check");
+    }
+    else
+      getBuild().addSharedEnvironmentVariable(UI_MAKE_CHECK, getRunnerParameters().get(UI_MAKE_CHECK));
+
     if (isNeededAutoreconf()) {
       getBuild().addSharedEnvironmentVariable("NEED_AUTORECONF", "1");
     }

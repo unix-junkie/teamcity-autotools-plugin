@@ -41,4 +41,9 @@ public final class AutotoolsBuildBean {
   public String getSourcePath(){
     return UI_SOURCE_PATH;
   }
+
+  @NotNull
+  public String getMakeCheckParam(){
+    return UI_MAKE_CHECK;
+  }
 }

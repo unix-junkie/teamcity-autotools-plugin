@@ -70,6 +70,7 @@ public class AutotoolsBuildRunType extends RunType{
     properties.put(UI_NEED_AUTORECONF, trueStr);
     properties.put(UI_ADDITIONAL_MAKE_PARAMS, "all");
     properties.put(UI_ADDITIONAL_CONF_PARAMS, "");
+    properties.put(UI_MAKE_CHECK, "check");
     return properties;
   }
 }

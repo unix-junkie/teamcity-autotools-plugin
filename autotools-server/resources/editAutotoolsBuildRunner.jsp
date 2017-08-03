@@ -11,7 +11,7 @@
 
 <tr class="parameter">
   <td>Enter ./configure path:</td>
-  <td><props:textProperty name="${bean.sourcePath}" value="${propertiesBean.defaultProperties[bean.sourcePath]}" className="longField" maxlength="256"/>
+  <td><props:textProperty name="${bean.sourcePath}" value="${propertiesBean.properties[bean.sourcePath]}" className="longField" maxlength="256"/>
     <span class="smallNote">Enter ./configure path
     </span>
   </td>
@@ -30,6 +30,15 @@
   <td>Additional make command line targets:</td>
   <td><props:textProperty name="${bean.additionalMakeParamsKey}" value="${propertiesBean.defaultProperties[bean.additionalMakeParamsKey]}" className="longField" maxlength="256"/>
     <span class="smallNote">Enter targets for make
+    </span>
+  </td>
+</tr>
+
+
+<tr class="parameter">
+  <td>Additional make check command line params:</td>
+  <td><props:textProperty name="${bean.makeCheckParam}" value="${propertiesBean.defaultProperties[bean.makeCheckParam]}" className="longField" maxlength="256"/>
+    <span class="smallNote">Enter targets for make check/test
     </span>
   </td>
 </tr>
