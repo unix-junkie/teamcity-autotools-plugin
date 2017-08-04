@@ -60,8 +60,7 @@ public class AutotoolsLifeCycleListener extends AgentLifeCycleAdapter {
     for (final String line : execResult.getOutLines()) {
       if (!line.startsWith("DejaGnu version")) continue;
       Matcher matcher = Pattern.compile("\\d+(\\.\\d+)+").matcher(line);
-      if (matcher.find())
-      {
+      if (matcher.find()) {
         version = matcher.group();
       }
     }
@@ -72,6 +71,7 @@ public class AutotoolsLifeCycleListener extends AgentLifeCycleAdapter {
   public void beforeRunnerStart(@NotNull final BuildRunnerContext runner) {
     findToolRuntest(runner);
     testReporter = new AutotoolsTestsReporter(System.currentTimeMillis(), runner.getBuild().getBuildLogger(), runner.getBuild().getCheckoutDirectory().getAbsolutePath() + "/") ;
+    testReporter.findDejagnu(runner.getBuild().getCheckoutDirectory());
   }
 
 

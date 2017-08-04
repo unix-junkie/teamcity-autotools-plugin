@@ -36,8 +36,8 @@ public final class AutotoolsTestsReporter {
    * Path of checkout directory
    */
   private final String MySrcPath;
-
-
+  private Boolean hasDejagnu;
+  private long myTimeXml;
   /**
    * Constant array with values of success TestResults
    */
@@ -57,11 +57,34 @@ public final class AutotoolsTestsReporter {
     myTimeBeforeStart = timeBeforeStart;
     myLogger = logger;
     MySrcPath = srcPath;
+    myTimeXml = 0;
     myTestsLogFiles = new HashMap<String, File>();
     myTestsTrsFiles = new HashMap<String, File>();
     myTestsXmlFiles = new ArrayList<File>();
+    hasDejagnu = false;
   }
 
+  private boolean hasDejagnuOpt(@NotNull final File srcDir){
+    try {
+      final String entireFileText = new Scanner(srcDir).useDelimiter("\\A").next();
+      return entireFileText.contains("dejagnu") || entireFileText.contains("DEJATOOL") || entireFileText.contains("DEJAGNU");
+    }
+    catch (IOException e){
+      return false;
+    }
+  }
+  public void findDejagnu(@NotNull final File srcDir){
+    if (hasDejagnu) return;
+    for (final File f : srcDir.listFiles()){
+      if (f.isDirectory()){
+        findDejagnu(f);
+      }
+      if (isThisExtensionFile(f, ".am") && hasDejagnuOpt(f)){
+        hasDejagnu = true;
+        return;
+      }
+    }
+  }
   /**
    * Returns True if this file has this extension.
    * @param file File, should be checked
@@ -77,6 +100,7 @@ public final class AutotoolsTestsReporter {
     final String fileExtension = fileName.substring(dotIdx);
     return fileExtension.equalsIgnoreCase(extension);
   }
+
 
   /**
    * Finds files, created after execution test, and contains test-results and put their in maps.
@@ -108,7 +132,7 @@ public final class AutotoolsTestsReporter {
         }
       }
 
-      if (isThisExtensionFile(file, ".xml")){
+      if (hasDejagnu && isThisExtensionFile(file, ".xml") && file.lastModified() >= myTimeBeforeStart){
         myTestsXmlFiles.add(file);
       }
     }
@@ -176,9 +200,11 @@ public final class AutotoolsTestsReporter {
    *  Parse results tests what is readed from xmlFile.
    * @param xmlFile
    */
+
+
   private void parseXmlTestResults(@NotNull final File xmlFile){
     Boolean isTestXml = false;
-    String testSuiteName = getRelativePath(xmlFile.getAbsolutePath());
+    final String testSuiteName = getRelativePath(xmlFile.getAbsolutePath());
     try {
       final XMLInputFactory f = XMLInputFactory.newInstance();
       final XMLStreamReader reader = f.createXMLStreamReader(new FileReader(xmlFile));
@@ -186,7 +212,6 @@ public final class AutotoolsTestsReporter {
       String testName = null;
       String tempTag = "";
       String testOutput = "";
-      int k = 0;
       while (reader.hasNext()){
         if (!isTestXml && reader.hasName()){
           if (!reader.getLocalName().equalsIgnoreCase("testsuite")){
@@ -198,7 +223,6 @@ public final class AutotoolsTestsReporter {
         if (reader.isStartElement() && reader.hasName() && reader.getLocalName().equalsIgnoreCase("test")){
           testResult = null;
           testName = null;
-          k++;
         }
         if (reader.isEndElement() && reader.hasName() && reader.getLocalName().equalsIgnoreCase("test")){
           if (testResult != null && testName != null){
