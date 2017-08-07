@@ -70,7 +70,9 @@ public class AutotoolsLifeCycleListener extends AgentLifeCycleAdapter {
   @Override
   public void beforeRunnerStart(@NotNull final BuildRunnerContext runner) {
     findToolRuntest(runner);
-    testReporter = new AutotoolsTestsReporter(System.currentTimeMillis(), runner.getBuild().getBuildLogger(), runner.getBuild().getCheckoutDirectory().getAbsolutePath() + "/") ;
+    testReporter = new AutotoolsTestsReporter(System.currentTimeMillis(), runner.getBuild().getBuildLogger(),
+                                              runner.getBuild().getCheckoutDirectory().getAbsolutePath() + "/",
+                                              Boolean.parseBoolean(runner.getRunnerParameters().get(UI_NEED_DEJAGNU_VALID_XML)));
     testReporter.findDejagnu(runner.getBuild().getCheckoutDirectory());
   }
 

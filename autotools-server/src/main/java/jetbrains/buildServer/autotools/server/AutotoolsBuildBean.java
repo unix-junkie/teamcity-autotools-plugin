@@ -36,12 +36,28 @@ public final class AutotoolsBuildBean {
     return UI_NEED_AUTORECONF;
   }
 
+  /**
+   * Return parameter name of flag needed make dejagnu xml valid
+   * @return parameter name of flag needed make dejagnu xml valid
+   */
+  @NotNull
+  public String getNeedMakeDejagnuXmlValid(){
+   return UI_NEED_DEJAGNU_VALID_XML;
+  }
 
+  /**
+   * Returns parameter name of path to source directory
+   * @return
+   */
   @NotNull
   public String getSourcePath(){
     return UI_SOURCE_PATH;
   }
 
+  /**
+   * Returns parameter name of make check parameters and flags
+   * @return
+   */
   @NotNull
   public String getMakeCheckParam(){
     return UI_MAKE_CHECK;

@@ -65,12 +65,12 @@ public class AutotoolsBuildRunType extends RunType{
   @Override
   public Map<String, String> getDefaultRunnerProperties() {
 
-    final String trueStr = Boolean.toString(true);
     final Map<String, String> properties = new HashMap<>();
-    properties.put(UI_NEED_AUTORECONF, trueStr);
+    properties.put(UI_NEED_AUTORECONF, Boolean.toString(true));
     properties.put(UI_ADDITIONAL_MAKE_PARAMS, "all");
     properties.put(UI_ADDITIONAL_CONF_PARAMS, "");
     properties.put(UI_MAKE_CHECK, "check");
+    properties.put(UI_NEED_DEJAGNU_VALID_XML, Boolean.toString(true));
     return properties;
   }
 }

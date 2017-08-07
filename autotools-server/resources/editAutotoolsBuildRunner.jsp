@@ -51,4 +51,12 @@
 </td>
 </tr>
 
+<tr class="parameter">
+  <td>
+    <props:checkboxProperty name="${bean.needMakeDejagnuXmlValid}" value="${propertiesBean.defaultProperties[bean.needMakeDejagnuXmlValid]}" />
+    <label for="${bean.needMakeDejagnuXmlValid}">Make Dejagnu xml </label>
+    <br/>
+  </td>
+</tr>
+
 

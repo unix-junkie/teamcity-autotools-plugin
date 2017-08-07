@@ -28,7 +28,7 @@ public final class AutotoolsBuildConstants {
   /**
    * This constant is for prefix UI elements plugin names.
    */
-  public static final String UI_PREFIX = "ui-" + TYPE + "-";
+  private static final String UI_PREFIX = "ui-" + TYPE + "-";
 
   /**
    * This constant is for UI element name of configure script arguments.
@@ -44,6 +44,7 @@ public final class AutotoolsBuildConstants {
    */
   public static final String UI_NEED_AUTORECONF = UI_PREFIX + "need_autoreconf";
 
+  public static final String UI_NEED_DEJAGNU_VALID_XML= UI_PREFIX + "need_xml_replaces";
   /**
    *  This constant is for UI element name of source path.
    */

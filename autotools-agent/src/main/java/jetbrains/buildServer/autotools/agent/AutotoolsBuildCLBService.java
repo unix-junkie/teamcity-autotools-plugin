@@ -11,7 +11,6 @@ import jetbrains.buildServer.agent.runner.BuildServiceAdapter;
 import jetbrains.buildServer.agent.runner.ProgramCommandLine;
 import jetbrains.buildServer.agent.runner.SimpleProgramCommandLine;
 import static jetbrains.buildServer.autotools.common.AutotoolsBuildConstants.*;
-import jetbrains.buildServer.messages.DefaultMessagesInfo;
 import jetbrains.buildServer.log.Loggers;
 import jetbrains.buildServer.util.FileUtil;
 import org.jetbrains.annotations.NotNull;
@@ -230,8 +229,6 @@ public final class AutotoolsBuildCLBService extends BuildServiceAdapter {
 
   @Override
   public void afterProcessFinished() throws RunBuildException {
-
-
     super.afterProcessFinished();
     while (!myFilesToDelete.isEmpty()) {
       final File file = myFilesToDelete.iterator().next();

@@ -2,6 +2,7 @@ package jetbrains.buildServer.autotools.agent;
 
 import java.io.*;
 import java.util.*;
+import javax.swing.text.StyledEditorKit;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
@@ -15,55 +16,68 @@ import org.jetbrains.annotations.NotNull;
  */
 public final class AutotoolsTestsReporter {
   /**
-   * Current buildLogger
+   * Current buildLogger.
    */
   private BuildProgressLogger myLogger;
   /**
-   * Time of current build runner start
+   * Time of current build runner start.
    */
   private final long myTimeBeforeStart;
   /**
-   * .log files with test results
+   * .log files with test results.
    */
   private final Map<String, File> myTestsLogFiles;
   /**
-   * .trs files with test results
+   * .trs files with test results.
    */
   private final Map<String, File> myTestsTrsFiles;
 
   private final List<File> myTestsXmlFiles;
   /**
-   * Path of checkout directory
+   * Path of checkout directory.
    */
   private final String MySrcPath;
-  private Boolean hasDejagnu;
-  private long myTimeXml;
   /**
-   * Constant array with values of success TestResults
+   * Flag to know has Dejagnu test Framework.
+   */
+  private Boolean hasDejagnu;
+
+  /**
+   * Flag to know need to make xml valid.
+   */
+  private Boolean myNeedMakeXmlValid;
+  /**
+   * Constant array with values of success TestResults.
    */
   private final static String successTestResults[] = {"PASS", "XFAIL"};
 
   /**
-   * Constant array with values of fail TestResults
+   * Constant array with values of fail TestResults.
    */
   private final static String failTestResults[] = {"XPASS", "FAIL", "ERROR", "UNRESOLVED"};
   /**
-   *Constant array with values of skip TestResults
+   *Constant array with values of skip TestResults.
    */
   private final static String skipTestResults[] = {"SKIP", "UNTESTED",  "UNSUPPORTED", "WARNING", "NOTE"};
 
 
-  public AutotoolsTestsReporter(@NotNull final long timeBeforeStart, @NotNull final BuildProgressLogger logger, @NotNull final String srcPath){
+  public AutotoolsTestsReporter(@NotNull final long timeBeforeStart, @NotNull final BuildProgressLogger logger, @NotNull final String srcPath, @NotNull final Boolean needMakeXmlValid){
     myTimeBeforeStart = timeBeforeStart;
     myLogger = logger;
     MySrcPath = srcPath;
-    myTimeXml = 0;
+    myNeedMakeXmlValid = needMakeXmlValid;
     myTestsLogFiles = new HashMap<String, File>();
     myTestsTrsFiles = new HashMap<String, File>();
     myTestsXmlFiles = new ArrayList<File>();
     hasDejagnu = false;
   }
 
+  /**
+   * Returns True if project has Dejagnu options
+   * @param srcDir Source directory
+   * @return true if project has Dejagnu options
+   */
+  @NotNull
   private boolean hasDejagnuOpt(@NotNull final File srcDir){
     try {
       final String entireFileText = new Scanner(srcDir).useDelimiter("\\A").next();
@@ -73,7 +87,30 @@ public final class AutotoolsTestsReporter {
       return false;
     }
   }
-  public void findDejagnu(@NotNull final File srcDir){
+
+  /**
+   * Get string from xmlFile and replace invalid charecters.
+   * @param xmlFile File with Xml
+   * @return string with update xml data
+   */
+  @NotNull
+  private String makeXmlValid(@NotNull final File xmlFile){
+   try {
+      final String entireFileText = new Scanner(xmlFile).useDelimiter("\\A").next();
+      return entireFileText.replaceAll("&[^;]", "&amp;");
+    }
+    catch (IOException e){
+      myLogger.warning("AutotoolsTestRepoter: makeXmlValid exception " + e.getMessage());
+      Loggers.AGENT.warn("AutotoolsTestRepoter: makeXmlValid exception " + e.getMessage());
+      return "";
+    }
+  }
+
+  /**
+   *
+   * @param srcDir
+   */
+  void findDejagnu(@NotNull final File srcDir){
     if (hasDejagnu) return;
     for (final File f : srcDir.listFiles()){
       if (f.isDirectory()){
@@ -110,7 +147,7 @@ public final class AutotoolsTestsReporter {
   private String getRelativePath(@NotNull final String path){
     return path.replaceFirst(MySrcPath, "");
   }
-  public void searchTestsFiles(@NotNull final File srcDir){
+  void searchTestsFiles(@NotNull final File srcDir){
     for (final File file : srcDir.listFiles()){
       if (file.isDirectory()){
         searchTestsFiles(file);
@@ -142,7 +179,7 @@ public final class AutotoolsTestsReporter {
   /**
    * Handles all tests results files.
    */
-  public void doTestsReport(){
+  void doTestsReport(){
     for (final Map.Entry<String, File> entry : myTestsTrsFiles.entrySet()){
       parseTrsTestResults(entry.getKey(), entry.getValue());
     }
@@ -151,6 +188,7 @@ public final class AutotoolsTestsReporter {
       parseXmlTestResults(file);
     }
   }
+
 
   /**
    * Parse results test testName what is readed from trsFile.
@@ -196,18 +234,18 @@ public final class AutotoolsTestsReporter {
     }
   }
 
+
   /**
    *  Parse results tests what is readed from xmlFile.
    * @param xmlFile
    */
-
-
   private void parseXmlTestResults(@NotNull final File xmlFile){
     Boolean isTestXml = false;
     final String testSuiteName = getRelativePath(xmlFile.getAbsolutePath());
     try {
       final XMLInputFactory f = XMLInputFactory.newInstance();
-      final XMLStreamReader reader = f.createXMLStreamReader(new FileReader(xmlFile));
+      final XMLStreamReader reader = myNeedMakeXmlValid ? f.createXMLStreamReader(new StringReader(makeXmlValid(xmlFile))) : f.createXMLStreamReader(new FileReader(xmlFile));
+
       String testResult = null;
       String testName = null;
       String tempTag = "";
