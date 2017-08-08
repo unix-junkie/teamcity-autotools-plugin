@@ -1,5 +1,5 @@
 .idea/deployment.xml
   .idea/workspace.xml
  /.idea/kotlinc.xml
-/target/classes/
+**/target/classes/
 /out/
