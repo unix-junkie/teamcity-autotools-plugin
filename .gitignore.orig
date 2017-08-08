@@ -1,0 +1,23 @@
+.idea/deployment.xml
+.idea/workspace.xml
+<<<<<<< Updated upstream
+/.idea/kotlinc.xml
+**/target/classes/
+/out/
+=======
+/.idea/artifacts/autotools_plugin.xml
+/.idea/dictionaries/naduxa.xml
+/.idea/libraries/org_hamcrest_hamcrest_library_1_3.xml
+/autotools-agent/src/main/java/jetbrains/buildServer/autotools/agent/AutotoolsBuildCLBService.java
+/autotools-agent/src/main/java/jetbrains/buildServer/autotools/agent/MyTestAgentLifeCycleAdapter.java
+/autotools-agent/src/main/java/META-INF/build-agent-plugin-autotoolsrunner.xml
+/autotools-agent/target/classes/jetbrains/buildServer/autotools/agent/AutotoolsBuildCLBService.class
+/autotools-agent/target/classes/jetbrains/buildServer/autotools/agent/AutotoolsBuildCLBServiceFactory.class
+/autotools-agent/target/classes/jetbrains/buildServer/autotools/agent/MyTestAgentLifeCycleAdapter.class
+/autotools-agent/target/classes/META-INF/build-agent-plugin-autotoolsrunner.xml
+/autotools-common/target/classes/jetbrains/buildServer/autotools/common/AutotoolsBuildConstants.class
+/autotools-server/target/classes/jetbrains/buildServer/autotools/server/AutotoolsBuildBean.class
+/autotools-server/target/classes/jetbrains/buildServer/autotools/server/AutotoolsBuildRunType.class
+/autotools-server/target/classes/jetbrains/buildServer/autotools/server/AutotoolsDiscoveryExtension.class
+/out/artifacts/autotools_plugin/autotools-plugin.zip
+>>>>>>> Stashed changes
