@@ -8,7 +8,7 @@
             <element id="file-copy" path="$PROJECT_DIR$/autotools-agent/teamcity-agent-plugin.xml" output-file-name="teamcity-plugin.xml" />
             <element id="archive" name="autotools-agent.jar">
               <element id="module-output" name="autotools-agent" />
-              <element id="dir-copy" path="$PROJECT_DIR$/autotools-agent/resources" />
+              <element id="dir-copy" path="$PROJECT_DIR$/autotools-agent/src/main/resources" />
             </element>
             <element id="archive" name="autotools-common.jar">
               <element id="module-output" name="autotools-common" />
@@ -21,7 +21,7 @@
           </element>
           <element id="archive" name="autotools-server-resources.jar">
             <element id="directory" name="buildServerResources">
-              <element id="dir-copy" path="$PROJECT_DIR$/autotools-server/resources" />
+              <element id="dir-copy" path="$PROJECT_DIR$/autotools-server/src/main/resources" />
             </element>
           </element>
           <element id="archive" name="autotools-common.jar">
