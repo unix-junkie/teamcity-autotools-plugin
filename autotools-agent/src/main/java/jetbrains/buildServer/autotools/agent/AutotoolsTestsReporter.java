@@ -1,8 +1,8 @@
 package jetbrains.buildServer.autotools.agent;
 
+import com.google.common.annotations.GwtCompatible;
 import java.io.*;
 import java.util.*;
-import javax.swing.text.StyledEditorKit;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
@@ -18,7 +18,7 @@ public final class AutotoolsTestsReporter {
   /**
    * Current buildLogger.
    */
-  private BuildProgressLogger myLogger;
+  private final BuildProgressLogger myLogger;
   /**
    * Time of current build runner start.
    */
@@ -32,6 +32,9 @@ public final class AutotoolsTestsReporter {
    */
   private final Map<String, File> myTestsTrsFiles;
 
+  /**
+   * .xml files with test results.
+   */
   private final List<File> myTestsXmlFiles;
   /**
    * Path of checkout directory.
@@ -49,6 +52,7 @@ public final class AutotoolsTestsReporter {
   /**
    * Constant array with values of success TestResults.
    */
+
   private final static String successTestResults[] = {"PASS", "XFAIL"};
 
   /**
@@ -128,7 +132,9 @@ public final class AutotoolsTestsReporter {
    * @param extension Extension with "."
    * @return true if this file has this extension, else false
    */
-  private static boolean isThisExtensionFile(@NotNull final File file, @NotNull final String extension){
+  @NotNull
+  @GwtCompatible
+  static boolean isThisExtensionFile(@NotNull final File file, @NotNull final String extension){
     final String fileName = file.getName();
     final int dotIdx = fileName.lastIndexOf(".");
     if (dotIdx == -1){

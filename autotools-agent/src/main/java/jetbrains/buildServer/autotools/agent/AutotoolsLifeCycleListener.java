@@ -1,5 +1,6 @@
 package jetbrains.buildServer.autotools.agent;
 
+import com.google.common.annotations.GwtCompatible;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import java.util.UUID;
 import java.util.regex.Matcher;
@@ -21,7 +22,7 @@ public class AutotoolsLifeCycleListener extends AgentLifeCycleAdapter {
    * Does autotools test report
    */
   private AutotoolsTestsReporter testReporter;
-  public AutotoolsLifeCycleListener(EventDispatcher<AgentLifeCycleListener> dispatcher) {
+  AutotoolsLifeCycleListener(EventDispatcher<AgentLifeCycleListener> dispatcher) {
     dispatcher.addListener(this);
   }
 
@@ -33,7 +34,8 @@ public class AutotoolsLifeCycleListener extends AgentLifeCycleAdapter {
    * @return true if version v1 < version, v2 else false
    */
   @NotNull
-  private static boolean compareVersions(@NotNull final String v1,@NotNull final String v2){
+  @GwtCompatible
+  static boolean compareVersions(@NotNull final String v1,@NotNull final String v2){
     final String[] v1mas = v1.split(".");
     final String[] v2mas = v2.split(".");
     for (int i = 0; i < Math.min(v1mas.length, v2mas.length); i++){
