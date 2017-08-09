@@ -1,0 +1,25 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="AutotoolsTests">
+
+  <test name="isThisExtention">
+    <classes>
+      <class name="jetbrains.buildServer.autotools.agent.AutotoolsAgentTest">
+      <methods>
+        <include name="isThisExtensionFileTest"/>
+      </methods>
+      </class>
+    </classes>
+  </test>
+
+  <test name="compareVersionsTest">
+    <classes>
+      <class name="jetbrains.buildServer.autotools.agent.AutotoolsAgentTest">
+        <methods>
+          <include name="compareVersionsTest"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+
+</suite>
