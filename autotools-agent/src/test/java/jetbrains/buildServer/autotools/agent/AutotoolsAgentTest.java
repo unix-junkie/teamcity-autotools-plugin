@@ -8,6 +8,7 @@ import jetbrains.buildServer.autotools.agent.AutotoolsTestsReporter;
 import jetbrains.buildServer.autotools.agent.AutotoolsLifeCycleListener;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.Assertion;
 
 
 /**
@@ -26,5 +27,11 @@ public class AutotoolsAgentTest {
   @Test
   public void compareVersionsTest(){
     Assert.assertFalse(AutotoolsLifeCycleListener.compareVersions("1.1", "1"));
+  }
+
+  @Test
+  public void getRelativePathTest(){
+   Assert.assertEquals(new AutotoolsTestsReporter("C:/Users/naduxa/someprojects/teamcity-autotools-plugin/autotools-agent/src/test").getRelativePath("C:/Users/naduxa/someprojects/teamcity-autotools-plugin/autotools-agent/src/test/resources/testng.xml"),
+                        "/resources/testng.xml");
   }
 }

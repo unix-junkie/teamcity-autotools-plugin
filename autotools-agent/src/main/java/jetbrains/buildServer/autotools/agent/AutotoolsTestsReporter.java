@@ -1,6 +1,6 @@
 package jetbrains.buildServer.autotools.agent;
 
-import com.google.common.annotations.GwtCompatible;
+import com.google.common.annotations.VisibleForTesting;
 import java.io.*;
 import java.util.*;
 import javax.xml.stream.XMLInputFactory;
@@ -39,7 +39,8 @@ public final class AutotoolsTestsReporter {
   /**
    * Path of checkout directory.
    */
-  private final String MySrcPath;
+
+  private final String mySrcPath;
   /**
    * Flag to know has Dejagnu test Framework.
    */
@@ -65,10 +66,21 @@ public final class AutotoolsTestsReporter {
   private final static String skipTestResults[] = {"SKIP", "UNTESTED",  "UNSUPPORTED", "WARNING", "NOTE"};
 
 
+  @VisibleForTesting
+  AutotoolsTestsReporter(@NotNull final String srcPath){
+    myTimeBeforeStart = 0;
+    myLogger = null;
+    mySrcPath = srcPath;
+    myNeedMakeXmlValid = false;
+    myTestsLogFiles = new HashMap<String, File>();
+    myTestsTrsFiles = new HashMap<String, File>();
+    myTestsXmlFiles = new ArrayList<File>();
+    hasDejagnu = false;
+  }
   public AutotoolsTestsReporter(@NotNull final long timeBeforeStart, @NotNull final BuildProgressLogger logger, @NotNull final String srcPath, @NotNull final Boolean needMakeXmlValid){
     myTimeBeforeStart = timeBeforeStart;
     myLogger = logger;
-    MySrcPath = srcPath;
+    mySrcPath = srcPath;
     myNeedMakeXmlValid = needMakeXmlValid;
     myTestsLogFiles = new HashMap<String, File>();
     myTestsTrsFiles = new HashMap<String, File>();
@@ -133,7 +145,7 @@ public final class AutotoolsTestsReporter {
    * @return true if this file has this extension, else false
    */
   @NotNull
-  @GwtCompatible
+  @VisibleForTesting
   static boolean isThisExtensionFile(@NotNull final File file, @NotNull final String extension){
     final String fileName = file.getName();
     final int dotIdx = fileName.lastIndexOf(".");
@@ -150,8 +162,9 @@ public final class AutotoolsTestsReporter {
    * @param srcDir Directory, where will search files
    */
   @NotNull
-  private String getRelativePath(@NotNull final String path){
-    return path.replaceFirst(MySrcPath, "");
+  @VisibleForTesting
+  String getRelativePath(@NotNull final String path){
+    return path.replaceFirst(mySrcPath, "");
   }
   void searchTestsFiles(@NotNull final File srcDir){
     for (final File file : srcDir.listFiles()){
@@ -169,7 +182,7 @@ public final class AutotoolsTestsReporter {
       }
 
       if (isThisExtensionFile(file, ".log")) {
-        final String testName = file.getAbsolutePath().replace(".log", "").replaceFirst(MySrcPath, "");
+        final String testName = file.getAbsolutePath().replace(".log", "").replaceFirst(mySrcPath, "");
         if (file.lastModified() >= myTimeBeforeStart) {
           myTestsLogFiles.put(testName, file);
         }

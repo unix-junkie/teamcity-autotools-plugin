@@ -1,6 +1,7 @@
 package jetbrains.buildServer.autotools.agent;
 
 import com.google.common.annotations.GwtCompatible;
+import com.google.common.annotations.VisibleForTesting;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import java.util.UUID;
 import java.util.regex.Matcher;
@@ -34,7 +35,7 @@ public class AutotoolsLifeCycleListener extends AgentLifeCycleAdapter {
    * @return true if version v1 < version, v2 else false
    */
   @NotNull
-  @GwtCompatible
+  @VisibleForTesting
   static boolean compareVersions(@NotNull final String v1,@NotNull final String v2){
     final String[] v1mas = v1.split(".");
     final String[] v2mas = v2.split(".");
@@ -50,7 +51,7 @@ public class AutotoolsLifeCycleListener extends AgentLifeCycleAdapter {
    * Find runtest tool
    * @param runner BuildRunnerContext
    */
-  private void findToolRuntest(@NotNull final BuildRunnerContext runner){
+  private static void findToolRuntest(@NotNull final BuildRunnerContext runner){
     final GeneralCommandLine commandLine = new GeneralCommandLine();
     commandLine.setExePath("runtest");
     commandLine.addParameter("--version");
@@ -69,6 +70,7 @@ public class AutotoolsLifeCycleListener extends AgentLifeCycleAdapter {
     runner.addRunnerParameter(HAS_RUNTEST_VAR, "1");
     runner.addRunnerParameter(RUNTEST_XML_FILE_VAR, Boolean.toString(compareVersions(version, "1.6")));
   }
+
   @Override
   public void beforeRunnerStart(@NotNull final BuildRunnerContext runner) {
     findToolRuntest(runner);

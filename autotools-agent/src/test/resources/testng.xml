@@ -22,4 +22,14 @@
     </classes>
   </test>
 
+  <test name="getRelativePathTest">
+    <classes>
+      <class name="jetbrains.buildServer.autotools.agent.AutotoolsAgentTest">
+        <methods>
+          <include name="getRelativePathTest"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+
 </suite>
