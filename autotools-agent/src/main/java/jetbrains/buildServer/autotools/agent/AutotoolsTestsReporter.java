@@ -182,7 +182,7 @@ public final class AutotoolsTestsReporter {
       }
 
       if (isThisExtensionFile(file, ".log")) {
-        final String testName = file.getAbsolutePath().replace(".log", "").replaceFirst(mySrcPath, "");
+        final String testName = getRelativePath(file.getAbsolutePath()).replace(".log", "");
         if (file.lastModified() >= myTimeBeforeStart) {
           myTestsLogFiles.put(testName, file);
         }
