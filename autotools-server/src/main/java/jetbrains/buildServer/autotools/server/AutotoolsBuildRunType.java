@@ -1,7 +1,8 @@
 package jetbrains.buildServer.autotools.server;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import jetbrains.buildServer.requirements.Requirement;
+import jetbrains.buildServer.requirements.RequirementType;
 import jetbrains.buildServer.serverSide.PropertiesProcessor;
 import jetbrains.buildServer.serverSide.RunType;
 import jetbrains.buildServer.serverSide.RunTypeRegistry;
@@ -26,8 +27,8 @@ public class AutotoolsBuildRunType extends RunType{
     myPluginDescriptor = descriptor;
   }
 
-  @NotNull
   @Override
+  @NotNull
   public String getType() {
     return TYPE;
   }
@@ -72,5 +73,16 @@ public class AutotoolsBuildRunType extends RunType{
     properties.put(UI_MAKE_CHECK, "check");
     properties.put(UI_NEED_DEJAGNU_VALID_XML, Boolean.toString(true));
     return properties;
+  }
+
+  @NotNull
+  @Override
+  public List<Requirement> getRunnerSpecificRequirements(@NotNull Map<String, String> runParameters) {
+    final List<Requirement> requirements = new LinkedList<>();
+    requirements.add(new Requirement(TOOL_AUTOCONF, null, RequirementType.EXISTS));
+    requirements.add(new Requirement(TOOL_MAKE, null, RequirementType.EXISTS));
+    requirements.add(new Requirement(TOOL_TAR, null, RequirementType.EXISTS));
+    requirements.add(new Requirement(TOOL_GZIP, null, RequirementType.EXISTS));
+    return requirements;
   }
 }
