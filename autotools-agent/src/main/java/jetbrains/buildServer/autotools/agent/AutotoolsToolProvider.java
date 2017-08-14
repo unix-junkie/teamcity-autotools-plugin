@@ -16,11 +16,15 @@ public class AutotoolsToolProvider extends AgentLifeCycleAdapter implements Tool
   /**
    * Tool Name
    */
-  private final String myToolName;
-  public AutotoolsToolProvider(ToolProvidersRegistry toolProvidersRegistry,
-                               EventDispatcher<AgentLifeCycleListener> eventDispatcher, String toolName){
+
+  protected final String myToolName;
+  protected final String myVersionArg;
+
+  public AutotoolsToolProvider(@NotNull ToolProvidersRegistry toolProvidersRegistry,
+                               @NotNull EventDispatcher<AgentLifeCycleListener> eventDispatcher,@NotNull String toolName, @NotNull String versionArg){
     toolProvidersRegistry.registerToolProvider(this);
     eventDispatcher.addListener(this);
+    myVersionArg = versionArg;
     myToolName = toolName;
   }
 
@@ -44,10 +48,11 @@ public class AutotoolsToolProvider extends AgentLifeCycleAdapter implements Tool
   public boolean isExistedTool(){
     final GeneralCommandLine commandLine = new GeneralCommandLine();
     commandLine.setExePath(myToolName);
-    commandLine.addParameter("--version");
+    commandLine.addParameter(myVersionArg);
     final ExecResult execResult = SimpleCommandLineProcessRunner.runCommand(commandLine, (byte[])null);
     return execResult.getExitCode() == 0;
   }
+
 
   @NotNull
   @Override
