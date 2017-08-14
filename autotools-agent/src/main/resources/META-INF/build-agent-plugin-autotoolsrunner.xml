@@ -26,20 +26,24 @@
     <constructor-arg name="toolName">
       <util:constant static-field="jetbrains.buildServer.autotools.common.AutotoolsBuildConstants.TOOL_AUTOCONF"/>
     </constructor-arg>
+    <constructor-arg name="versionArg" value="--version"/>
   </bean>
   <bean class="jetbrains.buildServer.autotools.agent.AutotoolsToolProvider">
     <constructor-arg name="toolName">
       <util:constant static-field="jetbrains.buildServer.autotools.common.AutotoolsBuildConstants.TOOL_MAKE"/>
     </constructor-arg>
+    <constructor-arg name="versionArg" value="--version"/>
   </bean>
   <bean class="jetbrains.buildServer.autotools.agent.AutotoolsToolProvider">
     <constructor-arg name="toolName">
       <util:constant static-field="jetbrains.buildServer.autotools.common.AutotoolsBuildConstants.TOOL_TAR"/>
     </constructor-arg>
+    <constructor-arg name="versionArg" value="--version"/>
   </bean>
   <bean class="jetbrains.buildServer.autotools.agent.AutotoolsToolProvider">
     <constructor-arg name="toolName">
       <util:constant static-field="jetbrains.buildServer.autotools.common.AutotoolsBuildConstants.TOOL_GZIP"/>
     </constructor-arg>
+    <constructor-arg name="versionArg" value="--version"/>
   </bean>
 </beans>
