@@ -1,6 +1,9 @@
 package jetbrains.buildServer.autotools.agent;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.intellij.execution.configurations.GeneralCommandLine;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import jetbrains.buildServer.ExecResult;
 import jetbrains.buildServer.SimpleCommandLineProcessRunner;
 import jetbrains.buildServer.agent.*;
@@ -17,8 +20,11 @@ public class AutotoolsToolProvider extends AgentLifeCycleAdapter implements Tool
    * Tool Name
    */
 
+  protected final static String regVersionNumer = "\\d+(?:\\.\\d+)+";
+  protected String myVersion;
   protected final String myToolName;
   protected final String myVersionArg;
+
 
   public AutotoolsToolProvider(@NotNull ToolProvidersRegistry toolProvidersRegistry,
                                @NotNull EventDispatcher<AgentLifeCycleListener> eventDispatcher,@NotNull String toolName, @NotNull String versionArg){
@@ -50,9 +56,23 @@ public class AutotoolsToolProvider extends AgentLifeCycleAdapter implements Tool
     commandLine.setExePath(myToolName);
     commandLine.addParameter(myVersionArg);
     final ExecResult execResult = SimpleCommandLineProcessRunner.runCommand(commandLine, (byte[])null);
+    if (execResult.getExitCode() == 0){
+      myVersion = findVersion(execResult.getOutLines().toString());
+    }
     return execResult.getExitCode() == 0;
   }
 
+  @NotNull
+  @VisibleForTesting
+  String findVersion(@NotNull final String text) {
+    final Pattern p = Pattern.compile(regVersionNumer);
+    final Matcher matcher = p.matcher(text);
+    return matcher.find() ? text.substring(matcher.start(), matcher.end()) : "";
+  }
+  @NotNull
+  public String getVersion(){
+    return myVersion;
+  }
 
   @NotNull
   @Override
