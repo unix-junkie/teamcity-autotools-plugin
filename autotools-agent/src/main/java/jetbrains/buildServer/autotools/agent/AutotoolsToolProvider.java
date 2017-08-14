@@ -25,6 +25,11 @@ public class AutotoolsToolProvider extends AgentLifeCycleAdapter implements Tool
   protected final String myToolName;
   protected final String myVersionArg;
 
+  @VisibleForTesting
+  public AutotoolsToolProvider(@NotNull String toolName, @NotNull String versionArg){
+    myToolName = toolName;
+    myVersionArg = versionArg;
+  }
 
   public AutotoolsToolProvider(@NotNull ToolProvidersRegistry toolProvidersRegistry,
                                @NotNull EventDispatcher<AgentLifeCycleListener> eventDispatcher,@NotNull String toolName, @NotNull String versionArg){

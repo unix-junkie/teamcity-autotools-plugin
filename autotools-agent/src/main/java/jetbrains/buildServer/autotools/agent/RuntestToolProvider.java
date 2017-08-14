@@ -14,6 +14,11 @@ import org.jetbrains.annotations.NotNull;
  */
 public class RuntestToolProvider extends AutotoolsToolProvider {
 
+
+  @VisibleForTesting
+  RuntestToolProvider(@NotNull String toolName, @NotNull String versionArg){
+    super(toolName, versionArg);
+  }
   public RuntestToolProvider(@NotNull final ToolProvidersRegistry toolProvidersRegistry, @NotNull final EventDispatcher<AgentLifeCycleListener> eventDispatcher, @NotNull final String toolName, @NotNull final String versionArg) {
     super(toolProvidersRegistry, eventDispatcher, toolName, versionArg);
   }
