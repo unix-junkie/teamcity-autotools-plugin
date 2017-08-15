@@ -27,7 +27,7 @@ public class RuntestToolProvider extends AutotoolsToolProvider {
   @VisibleForTesting
   @Override
   String findVersion(@NotNull final String text) {
-    final Pattern needVersion = Pattern.compile("(Dejagnu|Framework).+version.+" + regVersionNumer);
+    final Pattern needVersion = Pattern.compile("(DejaGnu|Framework).+version.+" + regVersionNumer);
     Matcher matcher = needVersion.matcher(text);
     if (!matcher.find()){
       return "";
