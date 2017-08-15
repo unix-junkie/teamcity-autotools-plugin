@@ -66,4 +66,16 @@ public class RuntestToolProvider extends AutotoolsToolProvider {
     params.add(new Pair<String, String>(MY_RUNTESTFLAGS, "RUNTESTFLAGS=--all --xml=\"testresults.xml\""));
     return params;
   }
+
+  /**
+   * set need for Dejagnu testing framework parameters
+   * @param runner
+   */
+  void setDejagnuParameters(@NotNull final BuildRunnerContext runner){
+    if (!isExistedTool()) return;
+    List<Pair<String, String>> params = getDejagnuParameters(myVersion);
+    for(final Pair<String, String> parameter : params){
+      runner.getBuild().addSharedEnvironmentVariable(parameter.first, parameter.second);
+    }
+  }
 }
