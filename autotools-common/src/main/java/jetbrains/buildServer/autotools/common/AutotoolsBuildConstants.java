@@ -51,11 +51,12 @@ public final class AutotoolsBuildConstants {
   public static final String UI_SOURCE_PATH = UI_PREFIX  + "source_path";
 
   public static final String HAS_RUNTEST_VAR = "HAS_RUNTEST";
-  public static final String RUNTEST_XML_FILE_VAR = "RUNTEST_XML_FILE";
+  public static final String MY_RUNTESTFLAGS = "MY_RUNTESTFLAGS";
   public static final String UI_MAKE_CHECK = "MAKE_CHECK";
   public static final String TOOL_MAKE = "make";
   public static final String TOOL_AUTOCONF = "autoconf";
   public static final String TOOL_TAR = "tar";
   public static final String TOOL_GZIP = "gzip";
+  public static final String TOOL_RUNTEST = "runtest";
 
 }
