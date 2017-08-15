@@ -1,12 +1,19 @@
 package jetbrains.buildServer.autotools.agent;
 
 import com.google.common.annotations.VisibleForTesting;
+import com.intellij.openapi.util.Pair;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import jetbrains.buildServer.agent.AgentLifeCycleListener;
+import jetbrains.buildServer.agent.BuildRunnerContext;
 import jetbrains.buildServer.agent.ToolProvidersRegistry;
 import jetbrains.buildServer.util.EventDispatcher;
+import jetbrains.buildServer.util.VersionComparatorUtil;
 import org.jetbrains.annotations.NotNull;
+
+import static jetbrains.buildServer.autotools.common.AutotoolsBuildConstants.*;
 
 /**
  * Created on 14.08.2017.
@@ -36,5 +43,27 @@ public class RuntestToolProvider extends AutotoolsToolProvider {
     final Pattern versionNumberOnly = Pattern.compile(regVersionNumer);
     matcher = versionNumberOnly.matcher(versionLine);
     return matcher.find() ? versionLine.substring(matcher.start(), matcher.end()) : "";
+  }
+
+  /**
+   * Returns need runner parameters dependence current version runtest
+   * @param version current version runtest
+   * @return list of need parameters
+   */
+  @NotNull
+  @VisibleForTesting
+  static List<Pair<String, String>> getDejagnuParameters(@NotNull final String version){
+    List<Pair<String, String>> params = new ArrayList<Pair<String, String>>();
+    params.add(new Pair<String, String>(HAS_RUNTEST_VAR, "1"));
+    if (VersionComparatorUtil.compare(version, "1.4.4") <= 0){
+      params.add(new Pair<String, String>(MY_RUNTESTFLAGS, "RUNTESTFLAGS=--all"));
+      return params;
+    }
+    if (VersionComparatorUtil.compare(version, "1.5.3") < 0){
+        params.add(new Pair<String, String>(MY_RUNTESTFLAGS, "RUNTESTFLAGS=--all --xml"));
+      return params;
+    }
+    params.add(new Pair<String, String>(MY_RUNTESTFLAGS, "RUNTESTFLAGS=--all --xml=\"testresults.xml\""));
+    return params;
   }
 }
