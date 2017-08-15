@@ -68,12 +68,11 @@ fi
 echo "##teamcity[compilationFinished compiler='CC']"
 
 
-echo $MAKE_CHECK
 if [ "$HAS_RUNTEST" = "" ]
 then
  make $MAKE_CHECK
 else
- make $MAKE_CHECK RUNTESTFLAGS="--all --xml"$RUNTEST_XML_FILE
+ make $MAKE_CHECK "$MY_RUNTESTFLAGS"
 fi
 
 code=$?
