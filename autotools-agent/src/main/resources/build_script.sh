@@ -59,7 +59,7 @@ fi
 if [ "$code" -ne 0 ]
 then
  echo "##teamcity[buildProblem description='make step failed.' identity='make']"
- find * -type f \( -name "Makefile.*" -o -name "configure.ac" -o -name "configure.in" \) | xargs  tar -cvf $TMP/makefiles.tar
+ find . -type f \( -name "Makefile.*" -o -name "configure.ac" -o -name "configure.in" \) | xargs  tar -cvf $TMP/makefiles.tar
  cd $TMP
  gzip -9 makefiles.tar
  echo "##teamcity[publishArtifacts '$TMPDIR/makefiles.tar.gz']"
@@ -73,6 +73,12 @@ then
  make $MAKE_CHECK
 else
  make $MAKE_CHECK "$MY_RUNTESTFLAGS"
+ if [ "$MY_RUNTESTFLAGS" = "RUNTESTFLAGS=--all" ]
+ then
+  find . -type f \( -path  "*/testsuite/*.log" -o -path  "*/testsuite/*.sum" \) | xargs  tar -cvf $TMP/dejagnulogs.tar
+  gzip -9 $TMP/dejagnulogs.tar
+  echo "##teamcity[publishArtifacts '$TMP/dejagnulogs.tar.gz']"
+ fi
 fi
 
 code=$?
