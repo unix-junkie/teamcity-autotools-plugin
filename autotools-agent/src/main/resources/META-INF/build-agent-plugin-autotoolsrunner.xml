@@ -46,4 +46,10 @@
     </constructor-arg>
     <constructor-arg name="versionArg" value="--version"/>
   </bean>
+  <bean class="jetbrains.buildServer.autotools.agent.RuntestToolProvider">
+    <constructor-arg name="toolName">
+      <util:constant static-field="jetbrains.buildServer.autotools.common.AutotoolsBuildConstants.TOOL_RUNTEST"/>
+    </constructor-arg>
+    <constructor-arg name="versionArg" value="--version"/>
+  </bean>
 </beans>
