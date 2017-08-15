@@ -183,12 +183,6 @@ public final class AutotoolsBuildCLBService extends BuildServiceAdapter {
     if (getRunnerParameters().get(UI_ADDITIONAL_MAKE_PARAMS) != null && !getRunnerParameters().get(UI_ADDITIONAL_MAKE_PARAMS).equalsIgnoreCase("")) {
       getBuild().addSharedEnvironmentVariable("MK_PARAMS", getRunnerParameters().get(UI_ADDITIONAL_MAKE_PARAMS));
     }
-    if (getRunnerParameters().get(HAS_RUNTEST_VAR) != null && getRunnerParameters().get(HAS_RUNTEST_VAR).equalsIgnoreCase("1")){
-      getBuild().addSharedEnvironmentVariable(HAS_RUNTEST_VAR, "1");
-      if (getRunnerParameters().get(RUNTEST_XML_FILE_VAR).equalsIgnoreCase("false")){
-        getBuild().addSharedEnvironmentVariable(RUNTEST_XML_FILE_VAR, "=\"testresults.xml\"");
-      }
-    }
   }
 
   /**
