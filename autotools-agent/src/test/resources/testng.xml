@@ -12,21 +12,41 @@
     </classes>
   </test>
 
-  <test name="compareVersionsTest">
-    <classes>
-      <class name="jetbrains.buildServer.autotools.agent.AutotoolsAgentTest">
-        <methods>
-          <include name="compareVersionsTest"/>
-        </methods>
-      </class>
-    </classes>
-  </test>
-
   <test name="getRelativePathTest">
     <classes>
       <class name="jetbrains.buildServer.autotools.agent.AutotoolsAgentTest">
         <methods>
           <include name="getRelativePathTest"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+
+  <test name="RuntestVersionTest">
+    <classes>
+      <class name="jetbrains.buildServer.autotools.agent.AutotoolsAgentTest">
+        <methods>
+          <include name="findVersionTest"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+
+  <test name="stringArrayToStringTest">
+    <classes>
+      <class name="jetbrains.buildServer.autotools.agent.AutotoolsAgentTest">
+        <methods>
+          <include name="stringArrayToStringTest"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+
+  <test name="getDejagnuParametersTest">
+    <classes>
+      <class name="jetbrains.buildServer.autotools.agent.AutotoolsAgentTest">
+        <methods>
+          <include name="getDejagnuParametersTest"/>
         </methods>
       </class>
     </classes>
