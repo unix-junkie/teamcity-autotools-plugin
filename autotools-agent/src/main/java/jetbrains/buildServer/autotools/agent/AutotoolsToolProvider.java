@@ -31,6 +31,25 @@ public class AutotoolsToolProvider extends AgentLifeCycleAdapter implements Tool
     myVersionArg = versionArg;
   }
 
+  /**
+   * Returns true if version v1 <= version v2.
+   * @param v1 first version
+   * @param v2 second version
+   * @return true if version v1 <= version, v2 else false
+   */
+  @NotNull
+  @VisibleForTesting
+  static boolean compareVersions(@NotNull final String v1,@NotNull final String v2){
+    final String[] v1mas = v1.split(".");
+    final String[] v2mas = v2.split(".");
+    for (int i = 0; i < Math.min(v1mas.length, v2mas.length); i++){
+      if (Integer.parseInt(v1mas[i]) != Integer.parseInt(v2mas[i])){
+        return Integer.parseInt(v1mas[i]) < Integer.parseInt(v2mas[i]);
+      }
+    }
+    return v1mas.length <= v2mas.length;
+  }
+
   public AutotoolsToolProvider(@NotNull ToolProvidersRegistry toolProvidersRegistry,
                                @NotNull EventDispatcher<AgentLifeCycleListener> eventDispatcher,@NotNull String toolName, @NotNull String versionArg){
     toolProvidersRegistry.registerToolProvider(this);
@@ -51,7 +70,23 @@ public class AutotoolsToolProvider extends AgentLifeCycleAdapter implements Tool
     Loggers.AGENT.info("AutotoolsToolProvider for tool " + myToolName + "did not find");
   }
 
-
+  /**
+   * Returns string from string array with splitter '\n'
+   * @param strArr array of strings
+   * @return string joined of strArr
+   */
+  @NotNull
+  @VisibleForTesting
+  static String stringArrayToString(String[] strArr){
+    if (strArr.length == 0) return "";
+    StringBuilder result = new StringBuilder();
+    result.append(strArr[0]);
+    for (int i = 1; i < strArr.length; i++){
+      result.append('\n');
+      result.append(strArr[i]);
+    }
+    return result.toString();
+  }
   /**
    * Returns True if Existed Tool myConfigName
    * @return
@@ -62,7 +97,7 @@ public class AutotoolsToolProvider extends AgentLifeCycleAdapter implements Tool
     commandLine.addParameter(myVersionArg);
     final ExecResult execResult = SimpleCommandLineProcessRunner.runCommand(commandLine, (byte[])null);
     if (execResult.getExitCode() == 0){
-      myVersion = findVersion(execResult.getOutLines().toString());
+      myVersion = findVersion(stringArrayToString(execResult.getOutLines()));
     }
     return execResult.getExitCode() == 0;
   }
@@ -82,7 +117,7 @@ public class AutotoolsToolProvider extends AgentLifeCycleAdapter implements Tool
   @NotNull
   @Override
   public boolean supports(@NotNull final String s) {
-    return myToolName.equals(s);
+    return myToolName.equals(s) && isExistedTool();
   }
 
   @NotNull
