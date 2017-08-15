@@ -3,6 +3,7 @@ package jetbrains.buildServer.autotools.agent;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.VisibleForTesting;
 import com.intellij.execution.configurations.GeneralCommandLine;
+import com.intellij.util.text.VersionComparatorUtil;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,20 +23,25 @@ public class AutotoolsLifeCycleListener extends AgentLifeCycleAdapter {
   /**
    * Does autotools test report
    */
-  private AutotoolsTestsReporter testReporter;
-  AutotoolsLifeCycleListener(EventDispatcher<AgentLifeCycleListener> dispatcher) {
+  RuntestToolProvider myRuntestToolProvider;
+  private AutotoolsTestsReporter myTestReporter;
+  private ToolProvidersRegistry myProvidersRegistry;
+  AutotoolsLifeCycleListener(EventDispatcher<AgentLifeCycleListener> dispatcher, ToolProvidersRegistry toolProvidersRegistry) {
     dispatcher.addListener(this);
-  }
-
-
+    myProvidersRegistry = toolProvidersRegistry;
   }
 
   @Override
   public void beforeRunnerStart(@NotNull final BuildRunnerContext runner) {
     myRuntestToolProvider = (RuntestToolProvider) myProvidersRegistry.findToolProvider(TOOL_RUNTEST);
+    if (myRuntestToolProvider != null){
+      myRuntestToolProvider.setDejagnuParameters(runner);
+    }
+    myTestReporter = new AutotoolsTestsReporter(System.currentTimeMillis(), runner.getBuild().getBuildLogger(),
                                               runner.getBuild().getCheckoutDirectory().getAbsolutePath() + "/",
                                               Boolean.parseBoolean(runner.getRunnerParameters().get(UI_NEED_DEJAGNU_VALID_XML)));
-    testReporter.findDejagnu(runner.getBuild().getCheckoutDirectory());
+
+    myTestReporter.findDejagnu(runner.getBuild().getCheckoutDirectory());
   }
 
 
@@ -43,7 +49,10 @@ public class AutotoolsLifeCycleListener extends AgentLifeCycleAdapter {
   @Override
   public void runnerFinished(@NotNull final BuildRunnerContext runner, @NotNull final BuildFinishedStatus status) {
     super.runnerFinished(runner, status);
-    testReporter.searchTestsFiles(runner.getBuild().getCheckoutDirectory());
-    testReporter.doTestsReport();
+    myTestReporter.searchTestsFiles(runner.getBuild().getCheckoutDirectory());
+    myTestReporter.doTestsReport();
+    if (myRuntestToolProvider != null && VersionComparatorUtil.compare(myRuntestToolProvider.getVersion(), ("1.4.4")) <= 0){
+      // public artifacts;
+    }
   }
 }
