@@ -56,11 +56,12 @@ then
  echo "##teamcity[buildProblem description='make not available.' identity='make']"
  exit
 fi
+
 if [ "$code" -ne 0 ]
 then
  echo "##teamcity[buildProblem description='make step failed.' identity='make']"
- find . -type f \( -name "Makefile.*" -o -name "configure.ac" -o -name "configure.in" \) | xargs  tar -cvf $TMP/makefiles.tar
- cd $TMP
+ find . -type f \( -name "Makefile.*" -o -name "configure.ac" -o -name "configure.in" \) | xargs  tar -cvf $TMPDIR/makefiles.tar
+ cd $TMPDIR
  gzip -9 makefiles.tar
  echo "##teamcity[publishArtifacts '$TMPDIR/makefiles.tar.gz']"
  exit
@@ -71,17 +72,18 @@ echo "##teamcity[compilationFinished compiler='CC']"
 if [ "$HAS_RUNTEST" = "" ]
 then
  make $MAKE_CHECK
+ code=$?
 else
  make $MAKE_CHECK "$MY_RUNTESTFLAGS"
+ code=$?
  if [ "$MY_RUNTESTFLAGS" = "RUNTESTFLAGS=--all" ]
  then
-  find . -type f \( -path  "*/testsuite/*.log" -o -path  "*/testsuite/*.sum" \) | xargs  tar -cvf $TMP/dejagnulogs.tar
-  gzip -9 $TMP/dejagnulogs.tar
-  echo "##teamcity[publishArtifacts '$TMP/dejagnulogs.tar.gz']"
+  find . -type f \( -path  "*/testsuite/*.log" -o -path  "*/testsuite/*.sum" \) | xargs  tar -cvf $TMPDIR/dejagnulogs.tar
+  gzip -9 $TMPDIR/dejagnulogs.tar
+  echo "##teamcity[publishArtifacts '$TMPDIR/dejagnulogs.tar.gz']"
  fi
 fi
 
-code=$?
 if [ "$code" -eq 127 ]
 then
  echo "##teamcity[buildProblem description='make not available.' identity='make']"
@@ -106,7 +108,7 @@ then
  exit
 fi
 
-cd $TMP/artifacts
+cd $TMPDIR/artifacts
 find * -type f -print > ../files.lst
 tar cvf  $ARTIFACT_NAME.tar `cat ../files.lst`
 code=$?
@@ -121,7 +123,8 @@ then
  exit
 fi
 
-gzip -9 $ARTIFACT_NAME.tar
+
+gzip -9 $TMPDIR/$ARTIFACT_NAME.tar
 code=$?
 if [ "$code" -eq 127 ]
 then
@@ -133,4 +136,5 @@ then
  echo "##teamcity[buildProblem description='gzip step failed.' identity='gzip']"
  exit
 fi
+
 echo "##teamcity[publishArtifacts '$TMPDIR/artifacts/$ARTIFACT_NAME.tar.gz']"
