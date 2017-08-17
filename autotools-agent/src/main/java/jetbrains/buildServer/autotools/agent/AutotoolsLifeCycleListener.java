@@ -51,8 +51,5 @@ public class AutotoolsLifeCycleListener extends AgentLifeCycleAdapter {
     super.runnerFinished(runner, status);
     myTestReporter.searchTestsFiles(runner.getBuild().getCheckoutDirectory());
     myTestReporter.doTestsReport();
-    if (myRuntestToolProvider != null && VersionComparatorUtil.compare(myRuntestToolProvider.getVersion(), ("1.4.4")) <= 0){
-      // public artifacts;
-    }
   }
 }
