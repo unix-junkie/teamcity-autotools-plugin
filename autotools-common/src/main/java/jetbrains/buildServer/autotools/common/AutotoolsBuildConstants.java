@@ -44,11 +44,14 @@ public final class AutotoolsBuildConstants {
    */
   public static final String UI_NEED_AUTORECONF = UI_PREFIX + "need_autoreconf";
 
-  public static final String UI_NEED_DEJAGNU_VALID_XML= UI_PREFIX + "need_xml_replaces";
+  public static final String UI_DEJAGNU_XML_REPLACE_AMP= UI_PREFIX + "dejagnu_xml_replace_apm";
+
+  public static final String UI_DEJAGNU_XML_REPLACE_CONTROLS= UI_PREFIX + "dejagnu_xml_replace_controls";
   /**
    *  This constant is for UI element name of source path.
    */
   public static final String UI_SOURCE_PATH = UI_PREFIX  + "source_path";
+
 
   public static final String HAS_RUNTEST_VAR = "HAS_RUNTEST";
   public static final String MY_RUNTESTFLAGS = "MY_RUNTESTFLAGS";

@@ -71,14 +71,15 @@ public class AutotoolsBuildRunType extends RunType{
     properties.put(UI_ADDITIONAL_MAKE_PARAMS, "all");
     properties.put(UI_ADDITIONAL_CONF_PARAMS, "");
     properties.put(UI_MAKE_CHECK, "check");
-    properties.put(UI_NEED_DEJAGNU_VALID_XML, Boolean.toString(true));
+    properties.put(UI_DEJAGNU_XML_REPLACE_AMP, Boolean.toString(false));
+    properties.put(UI_DEJAGNU_XML_REPLACE_CONTROLS, Boolean.toString(true));
     return properties;
   }
 
   @NotNull
   @Override
   public List<Requirement> getRunnerSpecificRequirements(@NotNull Map<String, String> runParameters) {
-    final List<Requirement> requirements = new LinkedList<>();
+    final List<Requirement> requirements = new ArrayList<>(4);
     requirements.add(new Requirement(TOOL_AUTOCONF, null, RequirementType.EXISTS));
     requirements.add(new Requirement(TOOL_MAKE, null, RequirementType.EXISTS));
     requirements.add(new Requirement(TOOL_TAR, null, RequirementType.EXISTS));

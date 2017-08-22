@@ -37,12 +37,22 @@ public final class AutotoolsBuildBean {
   }
 
   /**
-   * Return parameter name of flag needed make dejagnu xml valid
-   * @return parameter name of flag needed make dejagnu xml valid
+   * Return parameter name of flag needed dejagnu xml replaces &
+   * @return parameter name of flag needed dejagnu xml replaces &
    */
   @NotNull
-  public String getNeedMakeDejagnuXmlValid(){
-   return UI_NEED_DEJAGNU_VALID_XML;
+  public String getNeedDejagnuXmlReplaceAmp(){
+    return UI_DEJAGNU_XML_REPLACE_AMP;
+  }
+
+
+  /**
+   * Return parameter name of flag needed dejagnu xml replaces &
+   * @return parameter name of flag needed dejagnu xml replaces &
+   */
+  @NotNull
+  public String getNeedDejagnuXmlReplaceControls(){
+    return UI_DEJAGNU_XML_REPLACE_CONTROLS;
   }
 
   /**
