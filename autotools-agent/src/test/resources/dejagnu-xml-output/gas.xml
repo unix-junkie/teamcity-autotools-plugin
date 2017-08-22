@@ -1,0 +1,4186 @@
+<?xml version="1.0"?>
+<!DOCTYPE testsuite [
+<!-- testsuite.dtd -->
+<!ELEMENT testsuite (test | summary)+>
+<!ELEMENT test (input, output, result, name, prms_id )>
+  <!ELEMENT input              (#PCDATA)>
+  <!ELEMENT output             (#PCDATA)>
+  <!ELEMENT result             (#PCDATA)>
+  <!ELEMENT name               (#PCDATA)>
+  <!ELEMENT prms_id            (#PCDATA)>
+  <!ELEMENT summary 	(result, description, total)>
+  <!ELEMENT description        (#PCDATA)>
+  <!ELEMENT total              (#PCDATA)>
+]>
+<testsuite>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>pcrel values in assignment</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>simplifiable double subtraction</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>simplifiable double subtraction (-a)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>simple FP constants</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>difference of two undefined symbols</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.equiv for symbol already set to another one</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.equiv for symbol already set to an expression</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.equ for symbol already set</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.equ for symbol already set through .eqv</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.eqv support</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.eqv for symbol already set</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>== assignment support</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>== assignment for symbol already set</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>forward references</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>forward expression</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.equ redefinitions</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.equ redefinitions (2)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.equ redefinitions (3)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.set for symbol already used as label</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.set for symbol already defined through .comm</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>comment.s: comments in listings</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>general info section in listings</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>difference between forward references</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>struct</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>align</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>align2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>alternate macro syntax</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>alternate macro syntax (escape)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>evaluation of simple expressions</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>conditional listings</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>incbin</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>assignment tests</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.sleb128 tests</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.sleb128 tests (2)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.sleb128 tests (3)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.sleb128 tests (4)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.sleb128 tests (5)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.sleb128 tests (7)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.sleb128 tests (8)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>relax .uleb128</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.quad tests</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>octa bignum</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>weakref tests, relocations</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>weakref tests, global syms</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>weakref tests, local syms</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>weakref tests, strong undefined syms</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>weakref tests, weak undefined syms</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>e: would close weakref loop: e =&gt; a =&gt; b =&gt; c =&gt; d =&gt; e</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>a: would close weakref loop: a =&gt; b =&gt; c =&gt; d =&gt; e =&gt; a</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>is already defined</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.strings tests</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/all/none</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>quoted symbol names</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>all pr20312</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/all/err-1.s  (test for errors, line 3)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/all/err-1.s  (test for errors, line 4)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/all/err-1.s  (test for errors, line 5)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/all/err-1.s  (test for errors, line 6)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/all/err-1.s  (test for errors, line 7)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/all/err-1.s (test for excess errors)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/all/err-sizeof.s  (test for errors, line 3)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/all/err-sizeof.s  (test for errors, line 4)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/all/err-sizeof.s  (test for errors, line 5)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/all/err-sizeof.s  (test for errors, line 6)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/all/err-sizeof.s  (test for errors, line 9)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/all/err-sizeof.s  (test for errors, line 10)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/all/err-sizeof.s  (test for errors, line 3)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/all/err-sizeof.s junk (test for errors, line 4)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/all/err-sizeof.s junk (test for errors, line 5)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/all/err-sizeof.s junk (test for errors, line 6)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/all/err-sizeof.s missing (test for warnings, line 9)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/all/err-sizeof.s missing (test for warnings, line 10)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/all/err-sizeof.s (test for excess errors)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/all/warn-1.s  (test for warnings, line 3)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/all/warn-1.s  (test for errors, line 4)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/all/warn-1.s  (test for warnings, line 5)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/all/warn-1.s  (test for warnings, line 6)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/all/warn-1.s  (test for warnings, line 7)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/all/warn-1.s (test for excess errors)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.org test 1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.org test 2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.org test 3</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.org test 4</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.org test 5</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.org test 6</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>CFI on i386</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.cfi_label directive</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>cfi cfi-diag-1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>CFI common 1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>CFI common 2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>CFI common 3</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>CFI common 4</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>CFI common 5</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>CFI common 6</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>CFI common 7</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>CFI common 8</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>CFI common 9</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>elf ehopt0</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.file file names</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.file file names ordering</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>group section</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>group section</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>group section name</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>group section with multiple sections of same name</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>group section with multiple sections of same name</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>debug info in group section and non-group section with same name</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>automatic section group a</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>automatic section group b</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.equ redefinitions (ELF)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>elf equate relocs</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>Ill-formed directives</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>elf section0</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>elf section1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>elf section2 list</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>note section</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>label arithmetic with multiple same-name sections</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>elf section5 list</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>ELF struct</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.set with expression</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>ELF symbol versioning</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>unsupported .symver with common symbol</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.set with IFUNC</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>elf type list</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>elf section6</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>elf section7</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>section flags</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>section flags</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>numeric section flags and types</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>Disabling section padding</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>mbind sections</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>mbind section contents</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>mbind sections without SHF_ALLOC</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>DWARF2 1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>DWARF2 2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>DWARF2 3</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>DWARF2 4</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>good .bss / .struct data allocation directives</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>bad .bss / .struct data allocation directives</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>Check bad section flag</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>Check bad size directive</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>Check bad group</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>Multibyte symbol names</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>weak and common directives</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>common and weak directives</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/elf/common3a</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/elf/common3b</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/elf/common4a</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/elf/common4b</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.strtab section</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>bignum byte values</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/elf/warn-2.s  (test for warnings, line )</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/elf/warn-2.s (test for excess errors)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 float</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 general</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 inval</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 inval-16</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 segment</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 inval-seg</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 inval-reg</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 modrm</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 naked reg</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 opcodes</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 opcodes (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 opcodes (w/ suffix)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 intel</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 intel16</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 intelbad</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 intel-ok</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 prefix</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 amd</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 katmai</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 jump</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>x86 mov with zero-extend (32-bit object)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 relax 1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 relax 2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 ssemmx2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 sse2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 sub</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 SSE3</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 SIB</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 SIB (Intel mode)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 displacement</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 displacement (Intel mode)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 32bit displacement</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 VMX</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 VMFUNC</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 SMX</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 suffix</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 suffix (Intel mode)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 suffix-bad</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 immed</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 equates</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 divide</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 padlock</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 cr8+</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 cr-err</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 control/debug register with ignored MOD field</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>32-bit SVME</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 amdfam10</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 SSSE3</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 rep prefix</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 rep prefix (with suffixes)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 inval-rep</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 lockable insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 lockable insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 lockbad-1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 long insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 long insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 fp</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 nops</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 nops 16bit 1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 nops 1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 -mtune=i386 nops 1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 nops -march=i386 -mtune=i686 1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 -mtune=i686 nops 1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 -mtune=k8 nops 1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 -mtune=core2 nops 1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 nops 2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 nops -mtune=i386 2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 -march=i386 -mtune=core2 nops 2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 nops 3</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 nops -mtune=i386 3</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 -mtune=i686 nops 3</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 nops 4</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 nops -mtune=i386 4</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 -mtune=i686 nops 4</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 -march=i686+nop nops 4a</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 nops 5</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 -march=i686 nops 5</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 nops 6</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 16-bit addressing in 32-bit mode.</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 32-bit addressing in 16-bit mode.</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 SSE4.1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 SSE4.1 (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 SSE4.2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 SSE4.2 (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 crc32</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 crc32 (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 inval-crc32</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 SIMD</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 SIMD (Intel mode)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 SIMD (with suffixes)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 mem</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 mem (Intel mode)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 reg</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 reg (Intel mode)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 (Intel mode)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 float AT&amp;T mnemonic</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 float Intel mnemonic</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch 1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch 2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch 3</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch 4</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch 5</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch 6</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch 7</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch 9</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch 10</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch 10 (lzcnt)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch 10 (prefetchw)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch 10 (bdver1)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch 10 (bdver2)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch 10 (bdver3)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch 10 (bdver4)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch 13 (znver1)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch 10 (btver1)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch 10 (btver2)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch-10-1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch-10-2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch-10-3</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch-10-4</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch 11</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch 12</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch 13</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 8087</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 287</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 387 (cmdline)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 no87</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 no87-2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 no87-3</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 nommx-1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 nommx-2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 nommx-3</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 nosse-1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 nosse-2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 nosse-3</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 nosse-4</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 .nosse</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 noavx-1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 noavx-2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 noavx-3</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 .noavx</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 noavx512-1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 noavx512-2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 xsave</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 xsave (Intel mode)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AES</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AES (Intel mode)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 PCLMUL</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 PCLMUL (Intel mode)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX scalar insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX scalar insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 256bit integer AVX insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 256bit integer AVX insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX2 insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX2 insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX GATHER insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX GATHER insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512F insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512F insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512F opts insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512F opts insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512F insns with nondefault values in ignored bits</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512CD insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512CD insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512ER insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512ER insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512PF insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512PF insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512 lig256 insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512 lig512 insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512 lig256 insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512 lig512 insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512 wig insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512 wig insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 SSE with AVX encoding</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 inval-avx</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 inval-avx512f</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 SSE check (none)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 SSE check (.sse_check none)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 SSE check (warning)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 sse-check-error</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 vgather check (-moperand-check=none)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 vgather check (.operand_check none)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 vgather check (warning)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 vgather-check-error</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 SSE without AVX equivalent</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 movbe</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 movbe (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 inval-movbe</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 EPT</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 EPT (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 inval-ept</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 INVPCID insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 INVPCID insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 inval-invpcid</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch avx 1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch-avx-1-1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch-avx-1-2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch-avx-1-3</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch-avx-1-4</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch-avx-1-5</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 arch-avx-1-6</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>encoding option</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>encoding option (Intel mode)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>encoding option with -msse2avx</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>encoding option with -msse2avx (Intel mode)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 BMI2 insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 BMI2 insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 FMA</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 FMA (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 FMA scalar insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 FMA scalar insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 HLE insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 HLE insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 hlebad</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 RTM insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 RTM insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 FMA4</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 LWP</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 XOP</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 ignore rex_b in case of 32 bit decoding</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 BMI insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 BMI insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 TBM</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 TBM insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 F16C</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 F16C (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 FSGSBase</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 FSGSBase (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 RdRnd</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 RdRnd (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 .bundle_align_mode</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 .bundle_lock</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.bundle_align_mode diagnostics</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 ADX</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 ADX (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 RdSeed</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 RdSeed (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 prefetch</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 prefetch (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 SMAP</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 MPX</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 mpx-inval-1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 mpx-inval-2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>Check -madd-bnd-prefix</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 SHA</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 CLFLUSHOPT insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 CLFLUSHOPT insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 XSAVEC insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 XSAVEC insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 XSAVES insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 XSAVES insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 PREFETCHWT1 insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 PREFETCHWT1 insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 SE1 insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512F/VL insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512F/VL opts insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512F/VL opts insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512F/VL wig insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512F/VL wig insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512F/VL insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512CD/VL insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512CD/VL insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512BW insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512BW opts insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512BW opts insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512BW wig insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512BW wig insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512BW insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512BW/VL insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512BW/VL opts insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512BW/VL opts insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512BW/VL wig insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512BW/VL wig insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512BW/VL insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512DQ insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512DQ insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512DQ/VL insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512DQ/VL insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386  omit lock = yes</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386  omit lock = no</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386  fence as lock add = yes</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386  fence as lock add = no</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512DQ rcig insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512DQ rcig insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512DQ rcig insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512DQ rcig insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512DQ rcig insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512DQ rcig insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512DQ rcig insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512DQ rcig insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512ER rcig insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512ER rcig insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512ER rcig insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512ER rcig insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512ER rcig insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512ER rcig insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512ER rcig insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512ER rcig insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512F rcig insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512F rcig insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512F rcig insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512F rcig insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512F rcig insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512F rcig insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512F rcig insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512F rcig insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 CLWB insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 CLWB insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512IFMA insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512IFMA insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512IFMA/VL insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512IFMA/VL insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512VBMI insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512VBMI insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512VBMI/VL insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512VBMI/VL insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512/4FMAPS insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512/4FMAPS insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512/4FMAPS_VL insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512/4FMAPS_VL insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 avx512_4fmaps-warn</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 avx512_4fmaps_vl-warn</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512/4VNNIW insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512/4VNNIW insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512/4VNNIW_VL insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512/4VNNIW_VL insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512/VPOPCNTDQ insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AVX512/VPOPCNTDQ insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 CLZERO insn</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>opcodes with invalid modrm byte</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 monitorx and mwaitx insn</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 mwaitx-reg</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 OSPKE insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 RDPID insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 RDPID (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 PTWRITE insns</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 PTWRITE insns (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 avx512vl-1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 avx512vl-2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 fpu bad opcodes</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 CET</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 CET (Intel mode)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>pseudo prefxes</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 NOTRACK prefix</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 NOTRACK prefix (Intel disassembly)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 notrackbad</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 reloc</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 jump16</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 white</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 abs reloc</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 intelpic</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 pcrel ELF reloc</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 relax</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 gotpc</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 dynamic tls</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 pic tls</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 non-pic tls</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 .bss</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 relocs</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 reloc32</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>x86 mixed mode relocs (32-bit object)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 AT&amp;T register names</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 intel-got</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 Intel register names</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>x86 Intel movs (32-bit object)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 inval-equ-1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 inval-equ-2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 ifunc</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 ifunc-2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 ifunc 3</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 l1om-inval</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 k1om-inval</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 local PIC</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>DWARF2 debugging information 1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>DWARF2 debugging information 2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>DWARF2 debugging information 2 with SHF_COMPRESSED</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>Check bad size directive</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 size 1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 size 2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 size 3</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 size 4</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/i386/note</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/i386/relax-3</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/i386/relax-4</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/i386/got</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/i386/got-no-relax</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/i386/addend</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/i386/iamcu-1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/i386/iamcu-2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/i386/iamcu-3</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/i386/iamcu-4</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/i386/iamcu-5</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 iamcu-inval-1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 jump</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>x86 Intel expressions</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>string insn operands</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 string-bad</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 reg-bad</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 space1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/i386/rept</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/i386/pr19498</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 list-1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 list-2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>i386 list-3</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>DWARF2 debugging information 1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>DWARF2 debugging information 3 w/o STT_COMMON</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>DWARF2 debugging information 3 with STT_COMMON</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>DWARF2 debugging information 1 with SHF_COMPRESSED</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>DWARF2 debugging information 3 with SHF_COMPRESSED w/o STT_COMMON</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>DWARF2 debugging information 3 with SHF_COMPRESSED with STT_COMMON</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>lns lns-diag-1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>lns-duplicate</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>lns-common-1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>macro test 1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>macro test 2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>macro test 3</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>macro irp</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>macro rept</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>nested irp/irpc/rept</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>macro vararg</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>macro infinite recursion</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>logical and in macro definition</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>semi</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>strings</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>APP with macro without NO_APP</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>APP with macro then NO_APP</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>APP with macro then NO_APP then more code</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>included file with .if 0 wrapped in APP/NO_APP, no final NO_APP, macro in main file</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>macros badarg</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>macros dot</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>macros end</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>macros purge</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>macros redef</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gas/macros/paren</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>.exitm outside of a macro</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>symver symver0</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>symver symver1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>symver symver2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>symver symver3</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>symver symver6</name>
+    <prms_id>0</prms_id>
+  </test>
+  <summary>
+    <result>PASS</result>
+    <description># of expected passes</description>
+    <total>595</total>
+  </summary>
+</testsuite>

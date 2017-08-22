@@ -1,0 +1,1237 @@
+<?xml version="1.0"?>
+<!DOCTYPE testsuite [
+<!-- testsuite.dtd -->
+<!ELEMENT testsuite (test | summary)+>
+<!ELEMENT test (input, output, result, name, prms_id )>
+  <!ELEMENT input              (#PCDATA)>
+  <!ELEMENT output             (#PCDATA)>
+  <!ELEMENT result             (#PCDATA)>
+  <!ELEMENT name               (#PCDATA)>
+  <!ELEMENT prms_id            (#PCDATA)>
+  <!ELEMENT summary 	(result, description, total)>
+  <!ELEMENT description        (#PCDATA)>
+  <!ELEMENT total              (#PCDATA)>
+]>
+<testsuite>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>ar long file names</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>ar thin archive</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>ar thin archive with nested archive</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>ar symbol table</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>ar argument parsing</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>ar deterministic archive</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>ar deleting an element</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>ar moving an element</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>archive with empty element</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>ar unique symbol in archive</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy (objcopy compress debug sections)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy (objcopy decompress compressed debug sections)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy decompress debug sections in archive</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy compress debug sections in archive with zlib-gnu</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objdump compress debug sections</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objdump compress debug sections 3</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy (objcopy compress empty debug sections)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>Uncompressed .debug_str section starting with ZLIB</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>readelf -t zlib-gabi compress debug sections</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>readelf -S zlib-gabi compress debug sections</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy (objcopy compress debug sections with zlib-gabi)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy (objcopy decompress compressed debug sections with zlib-gabi)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy (objcopy zlib-gnu compress debug sections with zlib-gabi)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy (objcopy zlib-gabi compress debug sections with zlib-gnu)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy (objcopy compress debug sections 3 with zlib-gabi)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy (objcopy decompress compressed debug sections 3 with zlib-gabi)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy (objcopy zlib-gnu compress debug sections 3 with zlib-gabi)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy (objcopy zlib-gabi compress debug sections 3 with zlib-gnu)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy (objcopy zlib-gnu compress debug sections 3)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy (objcopy zlib-gnu compress debug sections 3)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy decompress debug sections in archive with zlib-gabi</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy compress debug sections in archive with zlib-gabi</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objdump compress debug sections 3 with zlib-gabi</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gnu-debuglink (objdump 1)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>gnu-debuglink (objdump 2)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>UNSUPPORTED</result>
+    <name>Update ELF header 1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>Update ELF header 2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>Update ELF header 3</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>UNSUPPORTED</result>
+    <name>Update ELF header 4</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>UNSUPPORTED</result>
+    <name>Update ELF header 5</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy on compressed debug sections</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>strip on uncompressed debug sections</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>strip on compressed debug sections</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>binutils-all/i386/empty</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>binutils-all/i386/ibt</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>binutils-all/i386/pr21231a</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>binutils-all/i386/pr21231b</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>binutils-all/i386/shstk</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>nm (no arguments)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>nm -g</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>nm -g on unique symbols</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>nm -P</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>nm --size-sort</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>nm --with-symbol-versions</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy (simple copy)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy --reverse-bytes</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy -i --interleave-width</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy -O srec</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy --set-start</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy --adjust-start</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy --adjust-vma</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy --adjust-section-vma +</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy --adjust-section-vma =</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>strip preserving OS/ABI</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>strip</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>strip with saving a symbol</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>simple objcopy of executable</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>run objcopy of executable</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>strip executable preserving OS/ABI</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>run stripped executable</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>run stripped executable with saving a symbol</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>keep only debug data</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>simple objcopy of debug data</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>NOBITS sections retain sh_link field</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>localize &apos;fo*&apos; but not &apos;foo&apos;</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>weaken &apos;fo*&apos; but not &apos;foo&apos;</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>weaken &apos;fo*&apos; but not &apos;foo&apos;, localize foo.</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>weaken &apos;*&apos; but not &apos;foo&apos; or &apos;bar&apos;</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>binutils-all/common-1a</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>binutils-all/common-1b</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>binutils-all/common-1c</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>binutils-all/common-1d</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>binutils-all/common-1e</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>binutils-all/common-1f</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>binutils-all/common-2a</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>binutils-all/common-2b</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>binutils-all/common-2c</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>binutils-all/common-2d</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>binutils-all/common-2e</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>binutils-all/common-2f</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy (ELF unknown section type)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy (ELF group)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy (ELF group)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy (ELF group)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy (ELF group)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy (GNU_MBIND section)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>copy removing group member</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>copy removing all group member</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>copy with setting section flags 1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>add notes section</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>merge notes section (32-bits)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>copy with setting section flags 2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>copy with setting section flags 3</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>strip --strip-unneeded on common symbol</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>binutils-all/pr19020a</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>binutils-all/pr19020b</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>strip with section group 1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>strip with section group 2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>strip empty file</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>strip with section group 4</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>strip with section group 5</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>strip with section group 6</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>strip with section group 7</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>strip with section group 8</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>strip with section group 9</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>binutils-all/strip-12</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>strip on STB_GNU_UNIQUE</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>strip -g empty file</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy keeps symbols needed by relocs</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>--localize-hidden test 1</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>unordered .debug_info references to .debug_ranges</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>UNSUPPORTED</result>
+    <name>unordered .debug_info references to .debug_ranges</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy add-section</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy add-symbol</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy add-empty-section</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy on sections with SHF_EXCLUDE</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>strip --strip-unneeded on sections with SHF_EXCLUDE</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>binutils-all/only-section-01</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>binutils-all/remove-section-01</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>binutils-all/remove-relocs-01</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>binutils-all/remove-relocs-02</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>binutils-all/remove-relocs-03</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>binutils-all/remove-relocs-04</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>binutils-all/remove-relocs-05</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>binutils-all/remove-relocs-06</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>--localize-hidden test 2</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>strip without global symbol </name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objdump -i</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objdump -f (tmpdir/bintest.o, tmpdir/bintest.o)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objdump -f (tmpdir/bintest.a, bintest2.o)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objdump -h (tmpdir/bintest.o, tmpdir/bintest.o)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objdump -h (tmpdir/bintest.a, bintest2.o)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objdump -t (tmpdir/bintest.o)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objdump -t (tmpdir/bintest.a)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objdump -r (tmpdir/bintest.o, tmpdir/bintest.o)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objdump -r (tmpdir/bintest.a, bintest2.o)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objdump -s (tmpdir/bintest.o, tmpdir/bintest.o)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objdump -s (tmpdir/bintest.a, bintest2.o)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objdump -s -j .zdebug_abbrev</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objdump -W</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objdump -WL</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objdump -W for debug_ranges</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>build-id-debuglink</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>finding out ELF size with readelf -h</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>readelf -h</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>readelf -S</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>readelf -s</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>readelf -r</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>readelf -wi</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>readelf -wa (compressed)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>readelf -p</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>readelf -n</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>readelf --debug-dump=loc</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>readelf --decompress --hex-dump .debug_loc</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>finding out ELF size with readelf -h</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>readelf -wiaoRlL</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>size (no arguments)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>size -A</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy (compare update-1.o update-2.o)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy (compare update-1.o update-3.o)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy (compare update-1.o update-4.o)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy (objcopy --update-section .bar=tmpdir/dumped-contents update-2.o)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>PASS</result>
+    <name>objcopy (objcopy --update-section .foo=tmpdir/dumped-contents  --remove-section .foo update-2.o)</name>
+    <prms_id>0</prms_id>
+  </test>
+  <summary>
+    <result>PASS</result>
+    <description># of expected passes</description>
+    <total>169</total>
+  </summary>
+  <summary>
+    <result>UNSUPPORTED</result>
+    <description># of unsupported tests</description>
+    <total>4</total>
+  </summary>
+</testsuite>

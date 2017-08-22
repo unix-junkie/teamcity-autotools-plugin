@@ -1,0 +1,86 @@
+<?xml version="1.1"?>
+<!DOCTYPE testsuite [
+<!-- testsuite.dtd -->
+<!ELEMENT testsuite (test | summary)+>
+<!ELEMENT test (input, output, result, name, prms_id )>
+  <!ELEMENT input              (#PCDATA)>
+  <!ELEMENT output             (#PCDATA)>
+  <!ELEMENT result             (#PCDATA)>
+  <!ELEMENT name               (#PCDATA)>
+  <!ELEMENT prms_id            (#PCDATA)>
+  <!ELEMENT summary 	(result, description, total)>
+  <!ELEMENT description        (#PCDATA)>
+  <!ELEMENT total              (#PCDATA)>
+]>
+<testsuite>
+  <test>
+    <input></input>
+    <output></output>
+    <result>UNSUPPORTED</result>
+    <name>gdb.ada/O2_float_param.exp: compilation foo.adb</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>UNSUPPORTED</result>
+    <name>gdb.ada/access_to_packed_array.exp: compilation foo.adb</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>UNSUPPORTED</result>
+    <name>gdb.ada/addr_arith.exp: compilation foo_na07_019.adb</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>UNSUPPORTED</result>
+    <name>gdb.ada/aliased_array.exp: compilation foo.adb</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>UNSUPPORTED</result>
+    <name>gdb.ada/arr_arr.exp: compilation foo.adb</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>UNSUPPORTED</result>
+    <name>gdb.ada/array_bounds.exp: compilation bar.adb</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>UNSUPPORTED</result>
+    <name>gdb.ada/array_char_idx.exp: compilation foo.adb</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>UNSUPPORTED</result>
+    <name>gdb.ada/array_of_variable_length.exp: compilation foo.adb</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>UNSUPPORTED</result>
+    <name>gdb.ada/array_ptr_renaming.exp: compilation foo.adb</name>
+    <prms_id>0</prms_id>
+  </test>
+  <test>
+    <input></input>
+    <output></output>
+    <result>UNSUPPORTED</result>
+    <name>gdb.ada/array_return.exp: compilation p.adb</name>
+    <prms_id>0</prms_id>
+  </test>
+</testsuite>
