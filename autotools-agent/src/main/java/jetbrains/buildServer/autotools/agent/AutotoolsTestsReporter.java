@@ -3,13 +3,8 @@ package jetbrains.buildServer.autotools.agent;
 import com.google.common.annotations.VisibleForTesting;
 import java.io.*;
 import java.util.*;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
 import jetbrains.buildServer.agent.BuildProgressLogger;
 import jetbrains.buildServer.log.Loggers;
-import org.apache.xerces.impl.io.UTF8Reader;
-import org.apache.xpath.operations.Bool;
 import org.jetbrains.annotations.NotNull;
 
 /**

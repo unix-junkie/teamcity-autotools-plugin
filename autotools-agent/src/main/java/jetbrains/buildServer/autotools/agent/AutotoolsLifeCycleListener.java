@@ -1,6 +1,5 @@
 package jetbrains.buildServer.autotools.agent;
 
-import java.io.IOException;
 import jetbrains.buildServer.agent.*;
 import jetbrains.buildServer.util.EventDispatcher;
 import org.jetbrains.annotations.NotNull;

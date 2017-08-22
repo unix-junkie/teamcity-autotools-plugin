@@ -3,7 +3,6 @@ package jetbrains.buildServer.autotools.agent;
 import com.google.common.annotations.VisibleForTesting;
 import java.io.*;
 import java.util.Scanner;
-import javax.xml.bind.Marshaller;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
