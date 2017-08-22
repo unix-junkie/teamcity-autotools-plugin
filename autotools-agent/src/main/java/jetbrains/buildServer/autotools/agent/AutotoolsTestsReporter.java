@@ -8,6 +8,8 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import jetbrains.buildServer.agent.BuildProgressLogger;
 import jetbrains.buildServer.log.Loggers;
+import org.apache.xerces.impl.io.UTF8Reader;
+import org.apache.xpath.operations.Bool;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -47,9 +49,9 @@ public final class AutotoolsTestsReporter {
   private Boolean hasDejagnu;
 
   /**
-   * Flag to know need to make xml valid.
+   * Dejagnu Tests Xml Parser
    */
-  private Boolean myNeedMakeXmlValid;
+  private DejagnuTestsXMLParser myXmlParser;
   /**
    * Constant array with values of success TestResults.
    */
@@ -61,66 +63,51 @@ public final class AutotoolsTestsReporter {
    */
   private final static String failTestResults[] = {"XPASS", "FAIL", "ERROR", "UNRESOLVED"};
   /**
-   *Constant array with values of skip TestResults.
+   * Constant array with values of skip TestResults.
    */
-  private final static String skipTestResults[] = {"SKIP", "UNTESTED",  "UNSUPPORTED", "WARNING", "NOTE"};
-
+  private final static String skipTestResults[] = {"SKIP", "UNTESTED", "UNSUPPORTED", "WARNING", "NOTE"};
 
   @VisibleForTesting
-  AutotoolsTestsReporter(@NotNull final String srcPath){
+  AutotoolsTestsReporter(@NotNull final String srcPath) {
     myTimeBeforeStart = 0;
     myLogger = null;
     mySrcPath = srcPath;
-    myNeedMakeXmlValid = false;
     myTestsLogFiles = new HashMap<String, File>();
     myTestsTrsFiles = new HashMap<String, File>();
     myTestsXmlFiles = new ArrayList<File>();
     hasDejagnu = false;
   }
-  public AutotoolsTestsReporter(@NotNull final long timeBeforeStart, @NotNull final BuildProgressLogger logger, @NotNull final String srcPath, @NotNull final Boolean needMakeXmlValid){
+
+
+  public AutotoolsTestsReporter(@NotNull final long timeBeforeStart, @NotNull final BuildProgressLogger logger,
+                                @NotNull final String srcPath, @NotNull final Boolean needReplaceAmp,
+                                @NotNull final Boolean needReplaceControls) {
     myTimeBeforeStart = timeBeforeStart;
     myLogger = logger;
     mySrcPath = srcPath;
-    myNeedMakeXmlValid = needMakeXmlValid;
     myTestsLogFiles = new HashMap<String, File>();
     myTestsTrsFiles = new HashMap<String, File>();
     myTestsXmlFiles = new ArrayList<File>();
     hasDejagnu = false;
+    myXmlParser = new DejagnuTestsXMLParser(this, needReplaceAmp, needReplaceControls);
   }
 
   /**
    * Returns True if project has Dejagnu options
+   *
    * @param srcDir Source directory
    * @return true if project has Dejagnu options
    */
   @NotNull
-  private boolean hasDejagnuOpt(@NotNull final File srcDir){
+  private boolean hasDejagnuOpt(@NotNull final File srcDir) {
     try {
       final String entireFileText = new Scanner(srcDir).useDelimiter("\\A").next();
       return entireFileText.contains("dejagnu") || entireFileText.contains("DEJATOOL") || entireFileText.contains("DEJAGNU");
-    }
-    catch (IOException e){
+    } catch (IOException e) {
       return false;
     }
   }
 
-  /**
-   * Get string from xmlFile and replace invalid charecters.
-   * @param xmlFile File with Xml
-   * @return string with update xml data
-   */
-  @NotNull
-  private String makeXmlValid(@NotNull final File xmlFile){
-   try {
-      final String entireFileText = new Scanner(xmlFile).useDelimiter("\\A").next();
-      return entireFileText.replaceAll("&[^;]", "&amp;");
-    }
-    catch (IOException e){
-      myLogger.warning("AutotoolsTestRepoter: makeXmlValid exception " + e.getMessage());
-      Loggers.AGENT.warn("AutotoolsTestRepoter: makeXmlValid exception " + e.getMessage());
-      return "";
-    }
-  }
 
   /**
    *
@@ -202,9 +189,8 @@ public final class AutotoolsTestsReporter {
     for (final Map.Entry<String, File> entry : myTestsTrsFiles.entrySet()){
       parseTrsTestResults(entry.getKey(), entry.getValue());
     }
-
     for (final File file : myTestsXmlFiles){
-      parseXmlTestResults(file);
+      myXmlParser.handleXmlResults(file);
     }
   }
 
@@ -213,7 +199,6 @@ public final class AutotoolsTestsReporter {
    * Parse results test testName what is readed from trsFile.
    * @param testName name of test
    * @param trsFile test result file
-   * @throws IOException
    */
   private void  parseTrsTestResults(@NotNull final String testName, @NotNull final File trsFile){
     try {
@@ -258,78 +243,15 @@ public final class AutotoolsTestsReporter {
    *  Parse results tests what is readed from xmlFile.
    * @param xmlFile
    */
-  private void parseXmlTestResults(@NotNull final File xmlFile){
-    Boolean isTestXml = false;
-    final String testSuiteName = getRelativePath(xmlFile.getAbsolutePath());
-    try {
-      final XMLInputFactory f = XMLInputFactory.newInstance();
-      final XMLStreamReader reader = myNeedMakeXmlValid ? f.createXMLStreamReader(new StringReader(makeXmlValid(xmlFile))) : f.createXMLStreamReader(new FileReader(xmlFile));
 
-      String testResult = null;
-      String testName = null;
-      String tempTag = "";
-      String testOutput = "";
-      while (reader.hasNext()){
-        if (!isTestXml && reader.hasName()){
-          if (!reader.getLocalName().equalsIgnoreCase("testsuite")){
-            break;
-          }
-          isTestXml = true;
-          myLogger.logSuiteStarted(testSuiteName);
-        }
-        if (reader.isStartElement() && reader.hasName() && reader.getLocalName().equalsIgnoreCase("test")){
-          testResult = null;
-          testName = null;
-        }
-        if (reader.isEndElement() && reader.hasName() && reader.getLocalName().equalsIgnoreCase("test")){
-          if (testResult != null && testName != null){
-            publicTestCaseInfo(testName, testResult, testOutput);
-          }
-        }
-
-        if (reader.hasName()){
-          tempTag = reader.getLocalName();
-        }
-        if (reader.hasText()){
-          if (tempTag.equalsIgnoreCase("result")){
-            testResult = reader.getText();
-          }
-          else {
-            if (tempTag.equalsIgnoreCase("name")) {
-              testName = reader.getText();
-            } else if (tempTag.equalsIgnoreCase("output")) {
-              testOutput = reader.getText();
-            }
-          }
-        }
-        reader.next();
-      }
-     // myLogger.message("Finished parse " + xmlFile.getName());
-      reader.close();
-    } catch (FileNotFoundException e) {
-      myLogger.warning("AutotoolsTestRepoter: parseXmlTestsResults exception " + e.getMessage());
-      Loggers.AGENT.warn("AutotoolsTestRepoter: parseXmlTestsResults exception " + e.getMessage());
-    } catch (XMLStreamException e) {
-      myLogger.warning("AutotoolsTestRepoter: parseXmlTestsResults exception " + e.getMessage());
-      Loggers.AGENT.warn("AutotoolsTestRepoter: parseXmlTestsResults exception " + e.getMessage());
-    }
-    catch (Exception e){
-      myLogger.warning("AutotoolsTestRepoter: parseXmlTestsResults exception " + e.getMessage());
-      Loggers.AGENT.warn("AutotoolsTestRepoter: parseXmlTestsResults exception " + e.getMessage());
-    }
-    finally {
-      if (isTestXml){
-        myLogger.logSuiteFinished(testSuiteName);
-      }
-    }
-  }
 
   /**
    * Public result of testcase on test testName
    * @param testName name of test
    * @param result result of test
    */
-  private void publicTestCaseInfo(@NotNull final String testName,@NotNull final String result, @NotNull final String stdOut){
+  void publicTestCaseInfo(@NotNull final String testName,@NotNull final String result, @NotNull final String stdOut){
+    if (myLogger == null) return;
     myLogger.logTestStarted(testName);
     if (Arrays.asList(failTestResults).contains(result)){
       myLogger.logTestFailed(testName, "Failed", result);
@@ -340,5 +262,16 @@ public final class AutotoolsTestsReporter {
       }
     if (stdOut != "") myLogger.logTestStdOut(testName, stdOut);
     myLogger.logTestFinished(testName);
+  }
+
+  void publicTestSuiteStarted(@NotNull final String testSuiteName){
+    myLogger.logSuiteStarted(getRelativePath(testSuiteName));
+  }
+
+  void publicTestSuiteFinished(@NotNull final String testSuiteName){
+    myLogger.logSuiteFinished(getRelativePath(testSuiteName));
+  }
+  void reportWarning(@NotNull final String warn){
+    myLogger.warning(warn);
   }
 }
