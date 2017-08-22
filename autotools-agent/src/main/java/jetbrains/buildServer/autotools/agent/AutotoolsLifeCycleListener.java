@@ -1,14 +1,6 @@
 package jetbrains.buildServer.autotools.agent;
 
-import com.google.common.annotations.GwtCompatible;
-import com.google.common.annotations.VisibleForTesting;
-import com.intellij.execution.configurations.GeneralCommandLine;
-import com.intellij.util.text.VersionComparatorUtil;
-import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import jetbrains.buildServer.ExecResult;
-import jetbrains.buildServer.SimpleCommandLineProcessRunner;
+import java.io.IOException;
 import jetbrains.buildServer.agent.*;
 import jetbrains.buildServer.util.EventDispatcher;
 import org.jetbrains.annotations.NotNull;
@@ -39,7 +31,8 @@ public class AutotoolsLifeCycleListener extends AgentLifeCycleAdapter {
     }
     myTestReporter = new AutotoolsTestsReporter(System.currentTimeMillis(), runner.getBuild().getBuildLogger(),
                                               runner.getBuild().getCheckoutDirectory().getAbsolutePath() + "/",
-                                              Boolean.parseBoolean(runner.getRunnerParameters().get(UI_NEED_DEJAGNU_VALID_XML)));
+                                              Boolean.parseBoolean(runner.getRunnerParameters().get(UI_DEJAGNU_XML_REPLACE_AMP)),
+                                                Boolean.parseBoolean(runner.getRunnerParameters().get(UI_DEJAGNU_XML_REPLACE_CONTROLS)));
 
     myTestReporter.findDejagnu(runner.getBuild().getCheckoutDirectory());
   }
