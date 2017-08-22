@@ -51,5 +51,15 @@
       </class>
     </classes>
   </test>
+  <test name="DejagnuXmlParsingTest">
+    <classes>
+      <class name="jetbrains.buildServer.autotools.agent.AutotoolsAgentTest">
+        <methods>
+          <include name="DejagnuXmlPasringTest"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+
 
 </suite>
