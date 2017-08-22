@@ -124,7 +124,7 @@ then
 fi
 
 
-gzip -9 $TMPDIR/$ARTIFACT_NAME.tar
+gzip -9 $ARTIFACT_NAME.tar
 code=$?
 if [ "$code" -eq 127 ]
 then
