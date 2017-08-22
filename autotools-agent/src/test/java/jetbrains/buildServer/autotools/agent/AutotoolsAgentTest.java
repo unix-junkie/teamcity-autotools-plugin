@@ -5,8 +5,12 @@ package jetbrains.buildServer.autotools.agent; /**
 
 import com.intellij.openapi.util.Pair;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import javax.persistence.criteria.CriteriaBuilder;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import static jetbrains.buildServer.autotools.common.AutotoolsBuildConstants.*;
@@ -79,5 +83,28 @@ public class AutotoolsAgentTest {
            "Expect version  5.45\n" +
            "Tcl version     8.6";
     Assert.assertEquals(AutotoolsToolProvider.stringArrayToString(text.split("\n")), text);
+  }
+
+  @Test
+  public void DejagnuXmlPasringTest() throws IOException {
+    File dejgnuOutput =  new File(getClass().getClassLoader().getResource("dejagnu-xml-output").getFile());
+    if (!dejgnuOutput.isDirectory()){
+      Assert.fail();
+    }
+    Map<String, Integer> testCount = new HashMap<String, Integer>();
+    testCount.put("binutils.xml", 173);
+    testCount.put("correctResults.xml", 10);
+    testCount.put("gas.xml", 595);
+    testCount.put("ld.xml", 1698);
+    for (File xmlFile : dejgnuOutput.listFiles()){
+      if (testCount.containsKey(xmlFile.getName())){
+        Assert.assertEquals(new DejagnuTestsXMLParser(null, true, true).handleXmlResults(xmlFile),
+                            (int)testCount.get(xmlFile.getName()), "test for file " + xmlFile.getName());
+      }
+      else{
+        Assert.assertTrue(new DejagnuTestsXMLParser(null, true, true).handleXmlResults(xmlFile) > 1000,
+                          "test for file " + xmlFile.getName());
+      }
+    }
   }
 }
