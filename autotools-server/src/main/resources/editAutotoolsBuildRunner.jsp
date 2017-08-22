@@ -53,8 +53,16 @@
 
 <tr class="parameter">
   <td>
-    <props:checkboxProperty name="${bean.needMakeDejagnuXmlValid}" value="${propertiesBean.defaultProperties[bean.needMakeDejagnuXmlValid]}" />
-    <label for="${bean.needMakeDejagnuXmlValid}">Make Dejagnu xml </label>
+    <props:checkboxProperty name="${bean.needDejagnuXmlReplaceAmp}" value="${propertiesBean.defaultProperties[bean.needDejagnuXmlReplaceAmp]}" />
+    <label for="${bean.needDejagnuXmlReplaceAmp}">Replace & in Dejagnu Xml testresult files</label>
+    <br/>
+  </td>
+</tr>
+
+<tr class="parameter">
+  <td>
+    <props:checkboxProperty name="${bean.needDejagnuXmlReplaceControls}" value="${propertiesBean.defaultProperties[bean.needDejagnuXmlReplaceAmp]}" />
+    <label for="${bean.needDejagnuXmlReplaceControls}">Replace controls charecters in Dejagnu Xml testresult files</label>
     <br/>
   </td>
 </tr>
