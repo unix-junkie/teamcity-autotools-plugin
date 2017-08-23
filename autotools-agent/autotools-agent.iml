@@ -3,8 +3,8 @@
   <component name="FacetManager">
     <facet type="Spring" name="Spring">
       <configuration>
-        <fileset id="fileset" name="Spring Application Context" removed="false">
-          <file>file://$MODULE_DIR$/src/main/java/META_INF/build-agent-plugin-autotoolsrunner.xml</file>
+        <fileset id="fileset2" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/src/main/resources/META-INF/build-agent-plugin-autotoolsrunner.xml</file>
         </fileset>
       </configuration>
     </facet>
