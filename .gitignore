@@ -3,3 +3,4 @@
 .idea/kotlinc.xml
 **/target/
 /out/
+.idea/dictionaries/*
