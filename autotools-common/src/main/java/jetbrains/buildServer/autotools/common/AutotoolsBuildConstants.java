@@ -8,6 +8,7 @@ public final class AutotoolsBuildConstants {
    * This private constuctor is needed for an instance of a class can not be created.
    */
   private AutotoolsBuildConstants(){
+    assert false;
   }
 
   /**
