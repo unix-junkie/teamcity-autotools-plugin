@@ -27,6 +27,9 @@
                         <includes>
                             <include>*</include>
                         </includes>
+                        <excludes>
+                            <exclude>com.google.guava:guava:jar:*</exclude>
+                        </excludes>
                     </dependencySet>
                 </dependencySets>
             </binaries>
