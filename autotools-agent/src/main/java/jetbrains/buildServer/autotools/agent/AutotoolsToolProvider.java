@@ -2,6 +2,7 @@ package jetbrains.buildServer.autotools.agent;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.intellij.execution.configurations.GeneralCommandLine;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import jetbrains.buildServer.ExecResult;
@@ -20,6 +21,7 @@ public class AutotoolsToolProvider extends AgentLifeCycleAdapter implements Tool
    * Tool Name
    */
 
+  protected String myCygwinPath;
   protected final static String regVersionNumer = "\\d+(?:\\.\\d+)+";
   protected String myVersion;
   protected final String myToolName;
@@ -41,13 +43,15 @@ public class AutotoolsToolProvider extends AgentLifeCycleAdapter implements Tool
 
 
   @Override
-  public void beforeAgentConfigurationLoaded(@NotNull BuildAgent agent) {
+  public void beforeAgentConfigurationLoaded(@NotNull final BuildAgent agent) {
+    myCygwinPath = (agent.getConfiguration().getSystemInfo().isWindows()
+                   && agent.getConfiguration().getBuildParameters().getEnvironmentVariables().containsKey("CYGWIN_PATH"))
+                   ? agent.getConfiguration().getBuildParameters().getEnvironmentVariables().get("CYGWIN_PATH") + "\\sh -li ": "";
     if (isExistedTool()){
       Loggers.AGENT.info("AutotoolsToolProvider for tool " + myToolName + " found");
       agent.getConfiguration().addConfigurationParameter(myToolName, myToolName);
       return;
     }
-
     Loggers.AGENT.info("AutotoolsToolProvider for tool " + myToolName + "did not find");
   }
 
@@ -74,8 +78,9 @@ public class AutotoolsToolProvider extends AgentLifeCycleAdapter implements Tool
    */
   public boolean isExistedTool(){
     final GeneralCommandLine commandLine = new GeneralCommandLine();
-    commandLine.setExePath(myToolName);
+    commandLine.setExePath(myCygwinPath + myToolName);
     commandLine.addParameter(myVersionArg);
+    Loggers.AGENT.info("XXX: " + commandLine.getCommandLineString());
     final ExecResult execResult = SimpleCommandLineProcessRunner.runCommand(commandLine, (byte[])null);
     if (execResult.getExitCode() == 0){
       myVersion = findVersion(stringArrayToString(execResult.getOutLines()));

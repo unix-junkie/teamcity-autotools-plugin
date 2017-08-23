@@ -20,7 +20,7 @@ public final class AutotoolsBuildCLBServiceFactory implements CommandLineBuildSe
 
   @Override
   public boolean canRun(@NotNull  final BuildAgentConfiguration buildAgentConfiguration) {
-    return buildAgentConfiguration.getSystemInfo().isUnix();
+    return buildAgentConfiguration.getSystemInfo().isUnix() || buildAgentConfiguration.getSystemInfo().isWindows();
   }
 
   @Override

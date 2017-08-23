@@ -6,5 +6,5 @@
     <version>1.0.0</version>
 
   </info>
-  <deployment use-separate-classloader="true" /> <!-- load server plugin's classes in separate classloader-->
+  <plugin-deployment use-separate-classloader="true"/>
 </teamcity-plugin>

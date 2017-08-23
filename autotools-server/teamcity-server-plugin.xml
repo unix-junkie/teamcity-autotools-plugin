@@ -4,7 +4,6 @@
     <name>autotools-runner</name> <!-- the name of plugin used in teamcity -->
     <display-name>GNU autotools support</display-name>
     <version>1.0.0</version>
-
   </info>
   <deployment use-separate-classloader="true" /> <!-- load server plugin's classes in separate classloader-->
 </teamcity-plugin>

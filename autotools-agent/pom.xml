@@ -40,6 +40,16 @@
       <artifactId>google-collections</artifactId>
       <version>1.0</version>
     </dependency>
+    <dependency>
+      <groupId>org.jetbrains.teamcity</groupId>
+      <artifactId>common-api</artifactId>
+      <version>2017.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jetbrains</groupId>
+      <artifactId>annotations-java5</artifactId>
+      <version>15.0</version>
+    </dependency>
   </dependencies>
 
 
