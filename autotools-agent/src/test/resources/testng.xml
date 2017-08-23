@@ -4,60 +4,36 @@
 
   <test name="isThisExtention">
     <classes>
-      <class name="jetbrains.buildServer.autotools.agent.AutotoolsAgentTest">
-      <methods>
-        <include name="isThisExtensionFileTest"/>
-      </methods>
-      </class>
+      <class name="jetbrains.buildServer.autotools.agent.AutotoolsAgentTest"/>
     </classes>
   </test>
 
   <test name="getRelativePathTest">
     <classes>
-      <class name="jetbrains.buildServer.autotools.agent.AutotoolsAgentTest">
-        <methods>
-          <include name="getRelativePathTest"/>
-        </methods>
-      </class>
+      <class name="jetbrains.buildServer.autotools.agent.AutotoolsAgentTest"/>
     </classes>
   </test>
 
   <test name="RuntestVersionTest">
     <classes>
-      <class name="jetbrains.buildServer.autotools.agent.AutotoolsAgentTest">
-        <methods>
-          <include name="findVersionTest"/>
-        </methods>
-      </class>
+      <class name="jetbrains.buildServer.autotools.agent.AutotoolsAgentTest"/>
     </classes>
   </test>
 
   <test name="stringArrayToStringTest">
     <classes>
-      <class name="jetbrains.buildServer.autotools.agent.AutotoolsAgentTest">
-        <methods>
-          <include name="stringArrayToStringTest"/>
-        </methods>
-      </class>
+      <class name="jetbrains.buildServer.autotools.agent.AutotoolsAgentTest"/>
     </classes>
   </test>
 
   <test name="getDejagnuParametersTest">
     <classes>
-      <class name="jetbrains.buildServer.autotools.agent.AutotoolsAgentTest">
-        <methods>
-          <include name="getDejagnuParametersTest"/>
-        </methods>
-      </class>
+      <class name="jetbrains.buildServer.autotools.agent.AutotoolsAgentTest"/>
     </classes>
   </test>
   <test name="DejagnuXmlParsingTest">
     <classes>
-      <class name="jetbrains.buildServer.autotools.agent.AutotoolsAgentTest">
-        <methods>
-          <include name="DejagnuXmlPasringTest"/>
-        </methods>
-      </class>
+      <class name="jetbrains.buildServer.autotools.agent.AutotoolsAgentTest"/>
     </classes>
   </test>
 
