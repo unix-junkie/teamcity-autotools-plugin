@@ -29,10 +29,11 @@
       <version>${teamcity-version}</version>
       <scope>provided</scope>
     </dependency>
+    <!-- TestNG 6.8.21 is the last version which supports Java 1.6 -->
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
-      <version>6.8</version>
+      <version>[6.8.21]</version>
       <scope>test</scope>
     </dependency>
     <!-- Guava 20.0 is the last version which supports Java 1.6 -->
