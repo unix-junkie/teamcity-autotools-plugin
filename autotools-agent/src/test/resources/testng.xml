@@ -1,41 +1,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="AutotoolsTests">
-
-  <test name="isThisExtention">
+  <test name="AutotoolsTests">
     <classes>
       <class name="jetbrains.buildServer.autotools.agent.AutotoolsAgentTest"/>
     </classes>
   </test>
-
-  <test name="getRelativePathTest">
-    <classes>
-      <class name="jetbrains.buildServer.autotools.agent.AutotoolsAgentTest"/>
-    </classes>
-  </test>
-
-  <test name="RuntestVersionTest">
-    <classes>
-      <class name="jetbrains.buildServer.autotools.agent.AutotoolsAgentTest"/>
-    </classes>
-  </test>
-
-  <test name="stringArrayToStringTest">
-    <classes>
-      <class name="jetbrains.buildServer.autotools.agent.AutotoolsAgentTest"/>
-    </classes>
-  </test>
-
-  <test name="getDejagnuParametersTest">
-    <classes>
-      <class name="jetbrains.buildServer.autotools.agent.AutotoolsAgentTest"/>
-    </classes>
-  </test>
-  <test name="DejagnuXmlParsingTest">
-    <classes>
-      <class name="jetbrains.buildServer.autotools.agent.AutotoolsAgentTest"/>
-    </classes>
-  </test>
-
-
 </suite>
