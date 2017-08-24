@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
  * Created on 12.07.2017.
  * @author     : Nadezhda Demina
  */
-public final class AutotoolsBuildCLBService extends BuildServiceAdapter {
+final class AutotoolsBuildCLBService extends BuildServiceAdapter {
   /**
    * Collection of work files be deleted in the end.
    */
@@ -71,7 +71,7 @@ public final class AutotoolsBuildCLBService extends BuildServiceAdapter {
       }
       return "";
     }
-    catch (final Exception e){
+    catch (final Exception ignored){
       return "";
     }
   }
@@ -82,7 +82,7 @@ public final class AutotoolsBuildCLBService extends BuildServiceAdapter {
    */
   @NotNull
   private String getArtifactName() {
-    return getBuild().getProjectName().replace(' ', '_') + "_" + getVersion().replace(' ', '_');
+    return getBuild().getProjectName().replace(' ', '_') + '_' + getVersion().replace(' ', '_');
   }
 
   /**
@@ -98,7 +98,7 @@ public final class AutotoolsBuildCLBService extends BuildServiceAdapter {
   }
 
   /**
-   * Set executable attribute for file
+   * Set executable attribute for file.
    * @param filePath File to be setted executable attribute
    * @param baseDir Directory to be setted Work Directory
    */
@@ -108,7 +108,7 @@ public final class AutotoolsBuildCLBService extends BuildServiceAdapter {
     commandLine.addParameter("+x");
     commandLine.addParameter(filePath);
     commandLine.setWorkDirectory(baseDir);
-    final ExecResult execResult = SimpleCommandLineProcessRunner.runCommand(commandLine, (byte[])null);
+    final ExecResult execResult = SimpleCommandLineProcessRunner.runCommand(commandLine, null);
     if(execResult.getExitCode() != 0) {
       Loggers.AGENT.warn("Failed to set executable attribute for " + filePath + ": chmod +x exit code is " + execResult.getExitCode());
     }
@@ -136,7 +136,7 @@ public final class AutotoolsBuildCLBService extends BuildServiceAdapter {
 
 
   /**
-   * It identifies the need  to execute autoreconf
+   * It identifies the need  to execute autoreconf.
    * @return true, if it is needed to execute autoreconf
    */
   @NotNull
@@ -156,7 +156,9 @@ public final class AutotoolsBuildCLBService extends BuildServiceAdapter {
    */
   private void addMyEnviroventVariblies(){
     String sourcePath = getRunnerParameters().get(UI_SOURCE_PATH) == null ? "" : getRunnerParameters().get(UI_SOURCE_PATH);
-    sourcePath = sourcePath != "" && sourcePath.charAt(0) != '/' ? "/" + sourcePath : sourcePath;
+    sourcePath = !sourcePath.isEmpty() && sourcePath.charAt(0) != '/'
+                 ? '/' + sourcePath
+                 : sourcePath;
     getBuild().addSharedEnvironmentVariable("SOURCE_PATH", getBuild().getCheckoutDirectory().getAbsolutePath() + sourcePath);
     getBuild().addSharedEnvironmentVariable("ARTIFACT_NAME", getArtifactName());
     getBuild().addSharedEnvironmentVariable("LAST_STEP", "9");
@@ -186,6 +188,8 @@ public final class AutotoolsBuildCLBService extends BuildServiceAdapter {
   /**
    * Returns  content of script for build steps (autoreconf, ./configure, make, make install),
    * @return content of script
+   * @throws RunBuildException if an {@link IOException} is thrown when reading
+   *         the build script.
    */
   @SuppressWarnings("NestedAssignment")
   @NotNull
@@ -196,9 +200,9 @@ public final class AutotoolsBuildCLBService extends BuildServiceAdapter {
     try {
       bufferead = new BufferedReader(
         new InputStreamReader(getClass().getResourceAsStream("/build_script.sh"), Charset.forName("UTF-8")));
-      String str = "";
+      String str;
       while ((str = bufferead.readLine()) != null) {
-        script.append(str + '\n');
+        script.append(str).append('\n');
       }
     }
     catch (final IOException e){
@@ -236,8 +240,8 @@ public final class AutotoolsBuildCLBService extends BuildServiceAdapter {
   }
 
   /**
-   * Returns extension of srcipt
-   * @return
+   * Returns extension of script.
+   * @return the extension of the build shell script.
    */
   @NotNull
   private static String getScriptExtension() {

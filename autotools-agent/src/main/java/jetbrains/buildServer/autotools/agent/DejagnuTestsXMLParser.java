@@ -1,39 +1,42 @@
 package jetbrains.buildServer.autotools.agent;
 
-import com.google.common.annotations.VisibleForTesting;
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.StringReader;
 import java.util.Scanner;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
- * Created on 18.08.2017.
- * Author     : Nadezhda Demina
+ * @author Nadezhda Demina
  */
-public class DejagnuTestsXMLParser {
+final class DejagnuTestsXMLParser {
   /**
-   * Flag to need replace &[^;] to &amp in xml
+   * Flag to need replace &[^;] to &amp in xml.
    */
   private final boolean myNeedReplaceApm;
   private int myTestsCount;
   /**
-   * Flag to replace Controls charecters;
+   * Flag to replace Controls charecters;.
    */
   private final boolean myNeedToReplaceControls;
 
+  @Nullable
   private final AutotoolsTestsReporter myTestsReporter;
 
-  public DejagnuTestsXMLParser(final AutotoolsTestsReporter testsReporter, final Boolean needReplaceApm,final Boolean needToReplaceControls){
+  DejagnuTestsXMLParser(@Nullable final AutotoolsTestsReporter testsReporter, final Boolean needReplaceApm, final Boolean needToReplaceControls){
     myTestsReporter = testsReporter;
     myNeedReplaceApm = needReplaceApm;
     myNeedToReplaceControls = needToReplaceControls;
   }
 
   /**
-   * Handles Xml file and public dejagnu test results from this
-   *  @param xmlFile file with test results
+   * Handles Xml file and public dejagnu test results from this.
+   *
+   * @param xmlFile file with test results
    * @return count of public xmlFile has been handled
    */
   int handleXmlResults(@NotNull final File xmlFile){
@@ -49,7 +52,7 @@ public class DejagnuTestsXMLParser {
       parseXmlTestResults(xmlEntry, xmlFile.getAbsolutePath());
       return myTestsCount;
     }
-    catch (final FileNotFoundException e){
+    catch (final FileNotFoundException ignored){
       //e.getMessage();
       return 0;
     }
@@ -61,14 +64,14 @@ public class DejagnuTestsXMLParser {
    * @return new string after replacing
    */
   @NotNull
-  private String replaceControlChars(@NotNull final String xmlEntry) {
+  private static String replaceControlChars(@NotNull final String xmlEntry) {
     final StringBuilder tempEntry = new StringBuilder();
     for (int i = 0; i < xmlEntry.length(); i++){
       if ((xmlEntry.charAt(i) >= 0x0000 && xmlEntry.charAt(i) <= 0x001f ||
           xmlEntry.charAt(i) >= 0xc2a0 && xmlEntry.charAt(i) <= 0x001f) &&
           xmlEntry.charAt(i) != 0x000a && xmlEntry.charAt(i) != 0x0009 && xmlEntry.charAt(i) != 0x000d &&
           xmlEntry.charAt(i) != 0x0085 && xmlEntry.charAt(i) != 0x2028) {
-          tempEntry.append("&#x" + Integer.toHexString( (int)xmlEntry.charAt(i)) + ";");
+          tempEntry.append("&#x").append(Integer.toHexString(xmlEntry.charAt(i))).append(';');
 
       }
       else{
@@ -79,13 +82,11 @@ public class DejagnuTestsXMLParser {
   }
 
   /**
-   * Parses Xml file entry and public test results
+   * Parses Xml file entry and public test results.
    * @param xmlEntry Xml file entry
    * @param testSuiteName name of test suite
-   * @return true if was success parsing
    */
-  @VisibleForTesting
-  void parseXmlTestResults(@NotNull final String xmlEntry, @NotNull final String testSuiteName){
+  private void parseXmlTestResults(@NotNull final String xmlEntry, @NotNull final String testSuiteName){
     Boolean isTestXml = false;
     try {
       final XMLInputFactory f = XMLInputFactory.newInstance();
@@ -152,11 +153,11 @@ public class DejagnuTestsXMLParser {
   /**
    * Get string from xmlFile and replace invalid charecters.
    *
-   * @param xmlFile File with Xml
+   * @param xmlEntry File with Xml
    * @return string with update xml data
    */
   @NotNull
-  private String replaceAmp(@NotNull final String xmlEntry) {
+  private static String replaceAmp(@NotNull final String xmlEntry) {
     return xmlEntry.replaceAll("&[^;]", "&#x26;");
   }
 }

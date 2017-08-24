@@ -1,21 +1,24 @@
-package jetbrains.buildServer.autotools.agent; /**
- * Created on 08.08.2017.
- * Author     : Nadezhda Demina
- */
+package jetbrains.buildServer.autotools.agent;
 
 import com.intellij.openapi.util.Pair;
 import java.io.File;
-import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import static jetbrains.buildServer.autotools.common.AutotoolsBuildConstants.*;
+
+import static jetbrains.buildServer.autotools.common.AutotoolsBuildConstants.HAS_RUNTEST_VAR;
+import static jetbrains.buildServer.autotools.common.AutotoolsBuildConstants.MY_RUNTESTFLAGS;
 
 
 /**
- * Test Class for jetbrains.buildServer.autotools.agent package
+ * <p>Test Class for jetbrains.buildServer.autotools.agent package.</p>
+ *
+ * @author Nadezhda Demina
  */
-public class AutotoolsAgentTest {
+public final class AutotoolsAgentTest {
 
   @Test
   public void isThisExtensionFileTest(){
@@ -82,7 +85,7 @@ public class AutotoolsAgentTest {
   }
 
   @Test
-  public void DejagnuXmlPasringTest() throws IOException {
+  public void DejagnuXmlPasringTest() {
     final File dejgnuOutput =  new File(getClass().getClassLoader().getResource("dejagnu-xml-output").getFile());
     if (!dejgnuOutput.isDirectory()){
       Assert.fail("DejagnuXmlPasringTest: Not found dejagnu-xml-output folder");

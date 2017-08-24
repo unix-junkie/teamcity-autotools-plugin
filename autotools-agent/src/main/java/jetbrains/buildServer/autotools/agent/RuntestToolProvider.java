@@ -16,8 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import static jetbrains.buildServer.autotools.common.AutotoolsBuildConstants.*;
 
 /**
- * Created on 14.08.2017.
- * Author     : Nadezhda Demina
+ * @author Nadezhda Demina
  */
 public class RuntestToolProvider extends AutotoolsToolProvider {
 
@@ -46,7 +45,7 @@ public class RuntestToolProvider extends AutotoolsToolProvider {
   }
 
   /**
-   * Returns need runner parameters dependence current version runtest
+   * Returns need runner parameters dependence current version runtest.
    * @param version current version runtest
    * @return list of need parameters
    */
@@ -68,7 +67,7 @@ public class RuntestToolProvider extends AutotoolsToolProvider {
   }
 
   /**
-   * set need for Dejagnu testing framework parameters
+   * set need for Dejagnu testing framework parameters.
    * @param runner
    */
   void setDejagnuParameters(@NotNull final BuildRunnerContext runner){

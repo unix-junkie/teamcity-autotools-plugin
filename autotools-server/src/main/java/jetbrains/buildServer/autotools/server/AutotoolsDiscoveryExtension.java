@@ -22,7 +22,7 @@ public final class AutotoolsDiscoveryExtension extends BreadthFirstRunnerDiscove
   private static final String CONFIGURESCR_NAME = "configure";
 
   @Override
-  protected List<DiscoveredObject> discoverRunnersInDirectory(final @NotNull Element element, final @NotNull List<Element>  filesList) {
+  protected @NotNull List<DiscoveredObject> discoverRunnersInDirectory(final @NotNull Element element, final @NotNull List<Element>  filesList) {
     final List<DiscoveredObject> discovered = new ArrayList<>();
 
     for (final Element file: filesList){

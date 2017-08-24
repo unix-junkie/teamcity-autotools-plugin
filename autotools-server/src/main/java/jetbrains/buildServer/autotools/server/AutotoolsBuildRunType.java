@@ -19,7 +19,7 @@ import static jetbrains.buildServer.autotools.common.AutotoolsBuildConstants.*;
 public class AutotoolsBuildRunType extends RunType{
 
   /**
-   * Descriptor for AutotoolsRunnerPlugin
+   * Descriptor for AutotoolsRunnerPlugin.
    */
   private final PluginDescriptor myPluginDescriptor;
   public AutotoolsBuildRunType(final @NotNull RunTypeRegistry runTypeRegistry, final @NotNull PluginDescriptor descriptor) {

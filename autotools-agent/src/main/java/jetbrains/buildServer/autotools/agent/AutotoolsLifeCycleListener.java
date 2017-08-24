@@ -6,17 +6,13 @@ import org.jetbrains.annotations.NotNull;
 import static jetbrains.buildServer.autotools.common.AutotoolsBuildConstants.*;
 
 /**
- * Created on 26.07.2017.
- * Author     : Nadezhda Demina
+ * @author Nadezhda Demina
  */
-public class AutotoolsLifeCycleListener extends AgentLifeCycleAdapter {
-
-  /**
-   * Does autotools test report
-   */
-  RuntestToolProvider myRuntestToolProvider;
+public final class AutotoolsLifeCycleListener extends AgentLifeCycleAdapter {
   private AutotoolsTestsReporter myTestReporter;
+
   private final ToolProvidersRegistry myProvidersRegistry;
+
   AutotoolsLifeCycleListener(final EventDispatcher<AgentLifeCycleListener> dispatcher, final ToolProvidersRegistry toolProvidersRegistry) {
     dispatcher.addListener(this);
     myProvidersRegistry = toolProvidersRegistry;
@@ -24,12 +20,12 @@ public class AutotoolsLifeCycleListener extends AgentLifeCycleAdapter {
 
   @Override
   public void beforeRunnerStart(@NotNull final BuildRunnerContext runner) {
-    myRuntestToolProvider = (RuntestToolProvider) myProvidersRegistry.findToolProvider(TOOL_RUNTEST);
-    if (myRuntestToolProvider != null){
-      myRuntestToolProvider.setDejagnuParameters(runner);
+    final RuntestToolProvider runtestToolProvider = (RuntestToolProvider) myProvidersRegistry.findToolProvider(TOOL_RUNTEST);
+    if (runtestToolProvider != null){
+      runtestToolProvider.setDejagnuParameters(runner);
     }
     myTestReporter = new AutotoolsTestsReporter(System.currentTimeMillis(), runner.getBuild().getBuildLogger(),
-                                              runner.getBuild().getCheckoutDirectory().getAbsolutePath() + "/",
+                                                runner.getBuild().getCheckoutDirectory().getAbsolutePath() + '/',
                                               Boolean.parseBoolean(runner.getRunnerParameters().get(UI_DEJAGNU_XML_REPLACE_AMP)),
                                                 Boolean.parseBoolean(runner.getRunnerParameters().get(UI_DEJAGNU_XML_REPLACE_CONTROLS)));
 

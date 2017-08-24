@@ -1,8 +1,7 @@
 package jetbrains.buildServer.autotools.common;
 
 /**
- * Created on 11.07.2017.
- * Author     : Nadezhda Demina
+ * @author Nadezhda Demina
  */
 public final class AutotoolsBuildConstants {
   /**
@@ -30,7 +29,7 @@ public final class AutotoolsBuildConstants {
   /**
    * This constant is for prefix UI elements plugin names.
    */
-  private static final String UI_PREFIX = "ui-" + TYPE + "-";
+  private static final String UI_PREFIX = "ui-" + TYPE + '-';
 
   /**
    * This constant is for UI element name of configure script arguments.

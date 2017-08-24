@@ -7,16 +7,16 @@ import java.util.Map.Entry;
 import jetbrains.buildServer.agent.BuildProgressLogger;
 import jetbrains.buildServer.log.Loggers;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
- * Created on 02.08.2017.
- * Author     : Nadezhda Demina
+ * @author Nadezhda Demina
  */
-public final class AutotoolsTestsReporter {
+final class AutotoolsTestsReporter {
   /**
    * Current buildLogger.
    */
-  @NotNull
+  @Nullable
   private final BuildProgressLogger myLogger;
   /**
    * Time of current build runner start.
@@ -46,23 +46,23 @@ public final class AutotoolsTestsReporter {
   private Boolean hasDejagnu;
 
   /**
-   * Dejagnu Tests Xml Parser
+   * Dejagnu Tests Xml Parser.
    */
   private DejagnuTestsXMLParser myXmlParser;
   /**
    * Constant array with values of success TestResults.
    */
 
-  private static final String successTestResults[] = {"PASS", "XFAIL"};
+  private static final String SUCCESS_TEST_RESULTS[] = {"PASS", "XFAIL"};
 
   /**
    * Constant array with values of fail TestResults.
    */
-  private static final String failTestResults[] = {"XPASS", "FAIL", "ERROR", "UNRESOLVED"};
+  private static final String FAIL_TEST_RESULTS[] = {"XPASS", "FAIL", "ERROR", "UNRESOLVED"};
   /**
    * Constant array with values of skip TestResults.
    */
-  private static final String skipTestResults[] = {"SKIP", "UNTESTED", "UNSUPPORTED", "WARNING", "NOTE"};
+  private static final String SKIP_TEST_RESULTS[] = {"SKIP", "UNTESTED", "UNSUPPORTED", "WARNING", "NOTE"};
 
   @VisibleForTesting
   AutotoolsTestsReporter(@NotNull final String srcPath) {
@@ -76,7 +76,7 @@ public final class AutotoolsTestsReporter {
   }
 
 
-  public AutotoolsTestsReporter(@NotNull final long timeBeforeStart, @NotNull final BuildProgressLogger logger,
+  AutotoolsTestsReporter(final long timeBeforeStart, @NotNull final BuildProgressLogger logger,
                                 @NotNull final String srcPath, @NotNull final Boolean needReplaceAmp,
                                 @NotNull final Boolean needReplaceControls) {
     myTimeBeforeStart = timeBeforeStart;
@@ -90,24 +90,22 @@ public final class AutotoolsTestsReporter {
   }
 
   /**
-   * Returns True if project has Dejagnu options
+   * Returns True if project has Dejagnu options.
    *
    * @param srcDir Source directory
    * @return true if project has Dejagnu options
    */
-  @NotNull
-  private boolean hasDejagnuOpt(@NotNull final File srcDir) {
+  private static boolean hasDejagnuOpt(@NotNull final File srcDir) {
     try {
       final String entireFileText = new Scanner(srcDir).useDelimiter("\\A").next();
       return entireFileText.contains("dejagnu") || entireFileText.contains("DEJATOOL") || entireFileText.contains("DEJAGNU");
-    } catch (final IOException e) {
+    } catch (final IOException ignored) {
       return false;
     }
   }
 
 
   /**
-   *
    * @param srcDir
    */
   void findDejagnu(@NotNull final File srcDir){
@@ -130,11 +128,10 @@ public final class AutotoolsTestsReporter {
    * @param extension Extension with "."
    * @return true if this file has this extension, else false
    */
-  @NotNull
   @VisibleForTesting
   static boolean isThisExtensionFile(@NotNull final File file, @NotNull final String extension){
     final String fileName = file.getName();
-    final int dotIdx = fileName.lastIndexOf(".");
+    final int dotIdx = fileName.lastIndexOf('.');
     if (dotIdx == -1){
       return false;
     }
@@ -143,15 +140,16 @@ public final class AutotoolsTestsReporter {
   }
 
 
-  /**
-   * Finds files, created after execution test, and contains test-results and put their in maps.
-   * @param srcDir Directory, where will search files
-   */
   @NotNull
   @VisibleForTesting
   String getRelativePath(@NotNull final String path){
     return path.replaceFirst(mySrcPath, "");
   }
+
+  /**
+   * Finds files, created after execution test, and contains test-results and put their in maps.
+   * @param srcDir Directory, where will search files
+   */
   void searchTestsFiles(@NotNull final File srcDir){
     for (final File file : srcDir.listFiles()){
       if (file.isDirectory()){
@@ -200,7 +198,7 @@ public final class AutotoolsTestsReporter {
    * @param trsFile test result file
    */
   private void  parseTrsTestResults(@NotNull final String testName, @NotNull final File trsFile){
-    BufferedReader bufferead = null;
+    final BufferedReader bufferead;
     try {
       bufferead = new BufferedReader(new FileReader(trsFile));
     }
@@ -222,7 +220,7 @@ public final class AutotoolsTestsReporter {
         containsIdx += ":test-result:".length() + 1;
         final String res = containsIdx + 5 <= str.length() && Character.isLetter(str.charAt(containsIdx + 4)) ? str.substring(containsIdx, containsIdx + 5) : str.substring(containsIdx, containsIdx + 4);
         publicTestCaseInfo(testName, res, "");
-        if (Arrays.asList(failTestResults).contains(res)) {
+        if (Arrays.asList(FAIL_TEST_RESULTS).contains(res)) {
           testFailed = true;
         }
       }
@@ -243,35 +241,28 @@ public final class AutotoolsTestsReporter {
     }
   }
 
-
   /**
-   *  Parse results tests what is readed from xmlFile.
-   * @param xmlFile
-   */
-
-
-  /**
-   * Public result of testcase on test testName
+   * Public result of testcase on test testName.
    * @param testName name of test
    * @param result result of test
    */
   void publicTestCaseInfo(@NotNull final String testName,@NotNull final String result, @NotNull final String stdOut){
     myLogger.logTestStarted(testName);
-    if (Arrays.asList(failTestResults).contains(result)){
+    if (Arrays.asList(FAIL_TEST_RESULTS).contains(result)){
       myLogger.logTestFailed(testName, "Failed", result);
     }
     else
-      if (!Arrays.asList(successTestResults).contains(result)){
+      if (!Arrays.asList(SUCCESS_TEST_RESULTS).contains(result)){
         myLogger.logTestIgnored(testName, result);
       }
-    if (stdOut != ""){
+    if (!stdOut.isEmpty()){
         myLogger.logTestStdOut(testName, stdOut);
     }
     myLogger.logTestFinished(testName);
   }
 
   /**
-   * Publicates test suite start
+   * Publicates test suite start.
    * @param testSuiteName name of test suite
    */
   void publicTestSuiteStarted(@NotNull final String testSuiteName){
@@ -279,7 +270,7 @@ public final class AutotoolsTestsReporter {
   }
 
   /**
-   * Publicates test suite finish
+   * Publicates test suite finish.
    * @param testSuiteName name of test suite
    */
   void publicTestSuiteFinished(@NotNull final String testSuiteName){
@@ -287,7 +278,7 @@ public final class AutotoolsTestsReporter {
   }
 
   /**
-   * Report warning
+   * Report warning.
    * @param warn warning message
    */
   void reportWarning(@NotNull final String warn){
