@@ -16,8 +16,8 @@ public class AutotoolsLifeCycleListener extends AgentLifeCycleAdapter {
    */
   RuntestToolProvider myRuntestToolProvider;
   private AutotoolsTestsReporter myTestReporter;
-  private ToolProvidersRegistry myProvidersRegistry;
-  AutotoolsLifeCycleListener(EventDispatcher<AgentLifeCycleListener> dispatcher, ToolProvidersRegistry toolProvidersRegistry) {
+  private final ToolProvidersRegistry myProvidersRegistry;
+  AutotoolsLifeCycleListener(final EventDispatcher<AgentLifeCycleListener> dispatcher, final ToolProvidersRegistry toolProvidersRegistry) {
     dispatcher.addListener(this);
     myProvidersRegistry = toolProvidersRegistry;
   }

@@ -78,7 +78,7 @@ public class AutotoolsBuildRunType extends RunType{
 
   @NotNull
   @Override
-  public List<Requirement> getRunnerSpecificRequirements(@NotNull Map<String, String> runParameters) {
+  public List<Requirement> getRunnerSpecificRequirements(@NotNull final Map<String, String> runParameters) {
     final List<Requirement> requirements = new ArrayList<>(4);
     requirements.add(new Requirement(TOOL_AUTOCONF, null, RequirementType.EXISTS));
     requirements.add(new Requirement(TOOL_MAKE, null, RequirementType.EXISTS));

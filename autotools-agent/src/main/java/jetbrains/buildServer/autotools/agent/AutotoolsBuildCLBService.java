@@ -56,13 +56,14 @@ public final class AutotoolsBuildCLBService extends BuildServiceAdapter {
           continue;
         }
         idx += 7;
-        int idx2 = line.indexOf(")");
+        int idx2 = line.indexOf(')');
         final String ac_init = line.substring(idx, idx2);
         final String[] params = ac_init.split(",");
         if (params.length < 2) {
           break;
         }
-        idx = params[1].indexOf("["); idx2 = params[1].indexOf("]");
+        idx = params[1].indexOf('[');
+        idx2 = params[1].indexOf(']');
         if (idx == -1 || idx2 == -1) {
           break;
         }
@@ -81,8 +82,7 @@ public final class AutotoolsBuildCLBService extends BuildServiceAdapter {
    */
   @NotNull
   private String getArtifactName() {
-    final String artifactName = getBuild().getProjectName().replace(' ', '_') + "_" + getVersion().replace(' ', '_');
-    return artifactName;
+    return getBuild().getProjectName().replace(' ', '_') + "_" + getVersion().replace(' ', '_');
   }
 
   /**
@@ -122,20 +122,16 @@ public final class AutotoolsBuildCLBService extends BuildServiceAdapter {
   @NotNull
   private String getScript() throws RunBuildException {
     final String scriptContent = getScriptContent();
-
-    final String var10000;
     try {
       final File scriptFile = File.createTempFile("build_script", getScriptExtension(), getAgentTempDirectory());
       FileUtil.writeFile(scriptFile, scriptContent, Charset.defaultCharset().name());
       myFilesToDelete.add(scriptFile);
-      var10000 = scriptFile.getAbsolutePath();
+      return scriptFile.getAbsolutePath();
     } catch (final IOException var4) {
-        final RunBuildException exception = new RunBuildException("Failed to create temporary build script file in directory '" + getAgentTempDirectory() + "': " + var4.toString(), var4);
+        final RunBuildException exception = new RunBuildException("Failed to create temporary build script file in directory '" + getAgentTempDirectory() + "': " + var4, var4);
         exception.setLogStacktrace(false);
         throw exception;
     }
-
-    return var10000;
   }
 
 
@@ -160,7 +156,7 @@ public final class AutotoolsBuildCLBService extends BuildServiceAdapter {
    */
   private void addMyEnviroventVariblies(){
     String sourcePath = getRunnerParameters().get(UI_SOURCE_PATH) == null ? "" : getRunnerParameters().get(UI_SOURCE_PATH);
-    sourcePath = (sourcePath != "" && sourcePath.charAt(0) != '/') ? "/" + sourcePath : sourcePath;
+    sourcePath = sourcePath != "" && sourcePath.charAt(0) != '/' ? "/" + sourcePath : sourcePath;
     getBuild().addSharedEnvironmentVariable("SOURCE_PATH", getBuild().getCheckoutDirectory().getAbsolutePath() + sourcePath);
     getBuild().addSharedEnvironmentVariable("ARTIFACT_NAME", getArtifactName());
     getBuild().addSharedEnvironmentVariable("LAST_STEP", "9");
@@ -168,8 +164,9 @@ public final class AutotoolsBuildCLBService extends BuildServiceAdapter {
     if (!getRunnerParameters().containsKey(UI_MAKE_CHECK) || getRunnerParameters().get(UI_MAKE_CHECK) == null){
       getBuild().addSharedEnvironmentVariable(UI_MAKE_CHECK, "check");
     }
-    else
+    else {
       getBuild().addSharedEnvironmentVariable(UI_MAKE_CHECK, getRunnerParameters().get(UI_MAKE_CHECK));
+    }
 
     if (isNeededAutoreconf()) {
       getBuild().addSharedEnvironmentVariable("NEED_AUTORECONF", "1");
@@ -177,6 +174,7 @@ public final class AutotoolsBuildCLBService extends BuildServiceAdapter {
     else{
       getBuild().addSharedEnvironmentVariable("NEED_AUTORECONF", "0");
     }
+
     if (getRunnerParameters().get(UI_ADDITIONAL_CONF_PARAMS) != null && !getRunnerParameters().get(UI_ADDITIONAL_CONF_PARAMS).equalsIgnoreCase("")) {
       getBuild().addSharedEnvironmentVariable("CONF_PARAMS", getRunnerParameters().get(UI_ADDITIONAL_CONF_PARAMS));
     }
@@ -189,25 +187,31 @@ public final class AutotoolsBuildCLBService extends BuildServiceAdapter {
    * Returns  content of script for build steps (autoreconf, ./configure, make, make install),
    * @return content of script
    */
+  @SuppressWarnings("NestedAssignment")
   @NotNull
   private String getScriptContent() throws RunBuildException {
     addMyEnviroventVariblies();
-    String script = "";
+    final StringBuilder script = new StringBuilder();
+    BufferedReader bufferead = null;
     try {
-      final BufferedReader bufferead = new BufferedReader(
+      bufferead = new BufferedReader(
         new InputStreamReader(getClass().getResourceAsStream("/build_script.sh"), Charset.forName("UTF-8")));
       String str = "";
       while ((str = bufferead.readLine()) != null) {
-        script += str + "\n";
+        script.append(str + '\n');
       }
-      bufferead.close();
     }
-    catch (IOException e){
-      final RunBuildException exception = new RunBuildException("Failed to read temporary build script file in plugin resources.");
-      exception.setLogStacktrace(false);
-      throw exception;
+    catch (final IOException e){
+     throw new RunBuildException(e);
     }
-    return script;
+    finally {
+        try {
+          bufferead.close();
+        } catch (final IOException e) {
+          throw new RunBuildException(e);
+        }
+    }
+    return script.toString();
   }
 
   /**

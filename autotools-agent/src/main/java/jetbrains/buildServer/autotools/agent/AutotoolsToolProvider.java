@@ -15,24 +15,25 @@ import org.jetbrains.annotations.NotNull;
  * Created on 10.08.2017.
  * Author     : Nadezhda Demina
  */
+@SuppressWarnings("ALL")
 public class AutotoolsToolProvider extends AgentLifeCycleAdapter implements ToolProvider {
   /**
    * Tool Name
    */
 
-  protected final static String regVersionNumer = "\\d+(?:\\.\\d+)+";
+  protected static final String regVersionNumer = "\\d+(?:\\.\\d+)+";
   protected String myVersion;
   protected final String myToolName;
   protected final String myVersionArg;
 
   @VisibleForTesting
-  public AutotoolsToolProvider(@NotNull String toolName, @NotNull String versionArg){
+  public AutotoolsToolProvider(@NotNull final String toolName, @NotNull final String versionArg){
     myToolName = toolName;
     myVersionArg = versionArg;
   }
 
-  public AutotoolsToolProvider(@NotNull ToolProvidersRegistry toolProvidersRegistry,
-                               @NotNull EventDispatcher<AgentLifeCycleListener> eventDispatcher,@NotNull String toolName, @NotNull String versionArg){
+  public AutotoolsToolProvider(@NotNull final ToolProvidersRegistry toolProvidersRegistry,
+                               @NotNull final EventDispatcher<AgentLifeCycleListener> eventDispatcher, @NotNull final String toolName, @NotNull final String versionArg){
     toolProvidersRegistry.registerToolProvider(this);
     eventDispatcher.addListener(this);
     myVersionArg = versionArg;
@@ -41,7 +42,7 @@ public class AutotoolsToolProvider extends AgentLifeCycleAdapter implements Tool
 
 
   @Override
-  public void beforeAgentConfigurationLoaded(@NotNull BuildAgent agent) {
+  public void beforeAgentConfigurationLoaded(@NotNull final BuildAgent agent) {
     if (isExistedTool()){
       Loggers.AGENT.info("AutotoolsToolProvider for tool " + myToolName + " found");
       agent.getConfiguration().addConfigurationParameter(myToolName, myToolName);
@@ -58,9 +59,11 @@ public class AutotoolsToolProvider extends AgentLifeCycleAdapter implements Tool
    */
   @NotNull
   @VisibleForTesting
-  static String stringArrayToString(String[] strArr){
-    if (strArr.length == 0) return "";
-    StringBuilder result = new StringBuilder();
+  static String stringArrayToString(final String[] strArr){
+    if (strArr.length == 0){
+      return "";
+    }
+    final StringBuilder result = new StringBuilder();
     result.append(strArr[0]);
     for (int i = 1; i < strArr.length; i++){
       result.append('\n');

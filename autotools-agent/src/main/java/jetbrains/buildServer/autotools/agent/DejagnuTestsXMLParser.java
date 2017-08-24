@@ -16,14 +16,14 @@ public class DejagnuTestsXMLParser {
   /**
    * Flag to need replace &[^;] to &amp in xml
    */
-  private boolean myNeedReplaceApm;
+  private final boolean myNeedReplaceApm;
   private int myTestsCount;
   /**
    * Flag to replace Controls charecters;
    */
-  private boolean myNeedToReplaceControls;
+  private final boolean myNeedToReplaceControls;
 
-  private AutotoolsTestsReporter myTestsReporter;
+  private final AutotoolsTestsReporter myTestsReporter;
 
   public DejagnuTestsXMLParser(final AutotoolsTestsReporter testsReporter, final Boolean needReplaceApm,final Boolean needToReplaceControls){
     myTestsReporter = testsReporter;
@@ -49,7 +49,7 @@ public class DejagnuTestsXMLParser {
       parseXmlTestResults(xmlEntry, xmlFile.getAbsolutePath());
       return myTestsCount;
     }
-    catch (FileNotFoundException e){
+    catch (final FileNotFoundException e){
       //e.getMessage();
       return 0;
     }
@@ -62,7 +62,7 @@ public class DejagnuTestsXMLParser {
    */
   @NotNull
   private String replaceControlChars(@NotNull final String xmlEntry) {
-    StringBuilder tempEntry = new StringBuilder();
+    final StringBuilder tempEntry = new StringBuilder();
     for (int i = 0; i < xmlEntry.length(); i++){
       if ((xmlEntry.charAt(i) >= 0x0000 && xmlEntry.charAt(i) <= 0x001f ||
           xmlEntry.charAt(i) >= 0xc2a0 && xmlEntry.charAt(i) <= 0x001f) &&
@@ -100,15 +100,16 @@ public class DejagnuTestsXMLParser {
             break;
           }
           isTestXml = true;
-          if (myTestsReporter != null)
+          if (myTestsReporter != null) {
             myTestsReporter.publicTestSuiteStarted(testSuiteName);
+          }
         }
         if (reader.isStartElement() && reader.hasName() && reader.getLocalName().equalsIgnoreCase("test")){
           testResult = null;
           testName = null;
         }
         if (reader.isEndElement() && reader.hasName() && reader.getLocalName().equalsIgnoreCase("test")){
-          myTestsCount += (testResult != null && testName != null)?1:0;
+          myTestsCount += testResult != null && testName != null ? 1 : 0;
           if (myTestsReporter != null && testResult != null && testName != null){
             myTestsReporter.publicTestCaseInfo(testName, testResult, testOutput);
           }
@@ -132,7 +133,7 @@ public class DejagnuTestsXMLParser {
         reader.next();
       }
       reader.close();
-    } catch (XMLStreamException e) {
+    } catch (final XMLStreamException e) {
       myTestsCount = 0;
       if (myTestsReporter != null) {
         myTestsReporter.reportWarning("DejagnuTestsXMLParser:" + e.getMessage());

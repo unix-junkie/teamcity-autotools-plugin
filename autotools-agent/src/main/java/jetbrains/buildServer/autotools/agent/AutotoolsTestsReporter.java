@@ -3,6 +3,7 @@ package jetbrains.buildServer.autotools.agent;
 import com.google.common.annotations.VisibleForTesting;
 import java.io.*;
 import java.util.*;
+import java.util.Map.Entry;
 import jetbrains.buildServer.agent.BuildProgressLogger;
 import jetbrains.buildServer.log.Loggers;
 import org.jetbrains.annotations.NotNull;
@@ -15,6 +16,7 @@ public final class AutotoolsTestsReporter {
   /**
    * Current buildLogger.
    */
+  @NotNull
   private final BuildProgressLogger myLogger;
   /**
    * Time of current build runner start.
@@ -51,16 +53,16 @@ public final class AutotoolsTestsReporter {
    * Constant array with values of success TestResults.
    */
 
-  private final static String successTestResults[] = {"PASS", "XFAIL"};
+  private static final String successTestResults[] = {"PASS", "XFAIL"};
 
   /**
    * Constant array with values of fail TestResults.
    */
-  private final static String failTestResults[] = {"XPASS", "FAIL", "ERROR", "UNRESOLVED"};
+  private static final String failTestResults[] = {"XPASS", "FAIL", "ERROR", "UNRESOLVED"};
   /**
    * Constant array with values of skip TestResults.
    */
-  private final static String skipTestResults[] = {"SKIP", "UNTESTED", "UNSUPPORTED", "WARNING", "NOTE"};
+  private static final String skipTestResults[] = {"SKIP", "UNTESTED", "UNSUPPORTED", "WARNING", "NOTE"};
 
   @VisibleForTesting
   AutotoolsTestsReporter(@NotNull final String srcPath) {
@@ -98,7 +100,7 @@ public final class AutotoolsTestsReporter {
     try {
       final String entireFileText = new Scanner(srcDir).useDelimiter("\\A").next();
       return entireFileText.contains("dejagnu") || entireFileText.contains("DEJATOOL") || entireFileText.contains("DEJAGNU");
-    } catch (IOException e) {
+    } catch (final IOException e) {
       return false;
     }
   }
@@ -109,7 +111,9 @@ public final class AutotoolsTestsReporter {
    * @param srcDir
    */
   void findDejagnu(@NotNull final File srcDir){
-    if (hasDejagnu) return;
+    if (hasDejagnu){
+      return;
+    }
     for (final File f : srcDir.listFiles()){
       if (f.isDirectory()){
         findDejagnu(f);
@@ -181,7 +185,7 @@ public final class AutotoolsTestsReporter {
    * Handles all tests results files.
    */
   void doTestsReport(){
-    for (final Map.Entry<String, File> entry : myTestsTrsFiles.entrySet()){
+    for (final Entry<String, File> entry : myTestsTrsFiles.entrySet()){
       parseTrsTestResults(entry.getKey(), entry.getValue());
     }
     for (final File file : myTestsXmlFiles){
@@ -196,28 +200,27 @@ public final class AutotoolsTestsReporter {
    * @param trsFile test result file
    */
   private void  parseTrsTestResults(@NotNull final String testName, @NotNull final File trsFile){
+    BufferedReader bufferead = null;
     try {
-      final BufferedReader bufferead = new BufferedReader(new FileReader(trsFile));
+      bufferead = new BufferedReader(new FileReader(trsFile));
+    }
+    catch (final IOException e){
+      Loggers.AGENT.warn("AutotoolsLifeCycleListener: parseTrsTestResults:" + e.getMessage());
+      return;
+    }
+    try {
       String str;
       boolean testFailed = false;
 
       // Parse each string in result file
+      //noinspection NestedAssignment
       while ((str = bufferead.readLine()) != null) {
         int containsIdx = str.indexOf(":test-result:");
         if (containsIdx == -1) {
           continue;
         }
         containsIdx += ":test-result:".length() + 1;
-        String res = "";
-
-        // if result of test length 5 such as XPASS XFAIL ERROR if-expression resurns true
-        if (containsIdx + 5 <= str.length() && Character.isLetter(str.charAt(containsIdx + 4))) {
-          res = str.substring(containsIdx, containsIdx + 5);
-        }
-        // else result of test length 4 sush as PASS FAIL SKIP
-        else {
-          res = str.substring(containsIdx, containsIdx + 4);
-        }
+        final String res = containsIdx + 5 <= str.length() && Character.isLetter(str.charAt(containsIdx + 4)) ? str.substring(containsIdx, containsIdx + 5) : str.substring(containsIdx, containsIdx + 4);
         publicTestCaseInfo(testName, res, "");
         if (Arrays.asList(failTestResults).contains(res)) {
           testFailed = true;
@@ -228,8 +231,15 @@ public final class AutotoolsTestsReporter {
         myLogger.message("##teamcity[publishArtifacts '" + myTestsLogFiles.get(testName) + "']");
       }
     }
-    catch (IOException e){
+    catch (final IOException e){
       Loggers.AGENT.warn("AutotoolsLifeCycleListener: In doTestReport method can't read test result file " + trsFile.getAbsolutePath() + ". " + e.getMessage());
+    }
+    finally {
+      try {
+        bufferead.close();
+      } catch (final IOException e) {
+        Loggers.AGENT.warn("AutotoolsLifeCycleListener: parseTrsTestResults:" + e.getMessage());
+      }
     }
   }
 
@@ -246,7 +256,6 @@ public final class AutotoolsTestsReporter {
    * @param result result of test
    */
   void publicTestCaseInfo(@NotNull final String testName,@NotNull final String result, @NotNull final String stdOut){
-    if (myLogger == null) return;
     myLogger.logTestStarted(testName);
     if (Arrays.asList(failTestResults).contains(result)){
       myLogger.logTestFailed(testName, "Failed", result);
@@ -255,17 +264,32 @@ public final class AutotoolsTestsReporter {
       if (!Arrays.asList(successTestResults).contains(result)){
         myLogger.logTestIgnored(testName, result);
       }
-    if (stdOut != "") myLogger.logTestStdOut(testName, stdOut);
+    if (stdOut != ""){
+        myLogger.logTestStdOut(testName, stdOut);
+    }
     myLogger.logTestFinished(testName);
   }
 
+  /**
+   * Publicates test suite start
+   * @param testSuiteName name of test suite
+   */
   void publicTestSuiteStarted(@NotNull final String testSuiteName){
     myLogger.logSuiteStarted(getRelativePath(testSuiteName));
   }
 
+  /**
+   * Publicates test suite finish
+   * @param testSuiteName name of test suite
+   */
   void publicTestSuiteFinished(@NotNull final String testSuiteName){
     myLogger.logSuiteFinished(getRelativePath(testSuiteName));
   }
+
+  /**
+   * Report warning
+   * @param warn warning message
+   */
   void reportWarning(@NotNull final String warn){
     myLogger.warning(warn);
   }

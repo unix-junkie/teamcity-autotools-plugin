@@ -23,7 +23,7 @@ public class RuntestToolProvider extends AutotoolsToolProvider {
 
 
   @VisibleForTesting
-  RuntestToolProvider(@NotNull String toolName, @NotNull String versionArg){
+  RuntestToolProvider(@NotNull final String toolName, @NotNull final String versionArg){
     super(toolName, versionArg);
   }
   public RuntestToolProvider(@NotNull final ToolProvidersRegistry toolProvidersRegistry, @NotNull final EventDispatcher<AgentLifeCycleListener> eventDispatcher, @NotNull final String toolName, @NotNull final String versionArg) {
@@ -53,7 +53,7 @@ public class RuntestToolProvider extends AutotoolsToolProvider {
   @NotNull
   @VisibleForTesting
   static List<Pair<String, String>> getDejagnuParameters(@NotNull final String version){
-    List<Pair<String, String>> params = new ArrayList<Pair<String, String>>();
+    final List<Pair<String, String>> params = new ArrayList<Pair<String, String>>();
     params.add(new Pair<String, String>(HAS_RUNTEST_VAR, "1"));
     if (VersionComparatorUtil.compare(version, "1.4.4") <= 0){
       params.add(new Pair<String, String>(MY_RUNTESTFLAGS, "RUNTESTFLAGS=--all"));
@@ -72,8 +72,10 @@ public class RuntestToolProvider extends AutotoolsToolProvider {
    * @param runner
    */
   void setDejagnuParameters(@NotNull final BuildRunnerContext runner){
-    if (!isExistedTool()) return;
-    List<Pair<String, String>> params = getDejagnuParameters(myVersion);
+    if (!isExistedTool()){
+      return;
+    }
+    final List<Pair<String, String>> params = getDejagnuParameters(myVersion);
     for(final Pair<String, String> parameter : params){
       runner.getBuild().addSharedEnvironmentVariable(parameter.first, parameter.second);
     }

@@ -1,7 +1,8 @@
 package jetbrains.buildServer.autotools.common;
 
 /**
- * Created by naduxa on 11.07.2017.
+ * Created on 11.07.2017.
+ * Author     : Nadezhda Demina
  */
 public final class AutotoolsBuildConstants {
   /**
