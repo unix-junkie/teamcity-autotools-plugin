@@ -25,6 +25,10 @@
         <artifactId>server</artifactId>
       </dependency>
   </dependencies>
+  <properties>
+    <timestamp>${maven.build.timestamp}</timestamp>
+    <maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format>
+  </properties>
   <build>
     <plugins>
         <plugin>
@@ -50,6 +54,7 @@
                 </replacements>                        
             </configuration>
         </plugin>
+
         <plugin>
             <artifactId>maven-assembly-plugin</artifactId>
             <version>2.4</version>
@@ -75,7 +80,7 @@
                   <goal>single</goal>
                 </goals>
                 <configuration>
-                  <finalName>teamcity-autotools-plugin</finalName>
+                  <finalName>teamcity-autotools-plugin_${project.version}_${maven.build.timestamp}</finalName>
                   <outputDirectory>${project.parent.build.directory}</outputDirectory>
                   <appendAssemblyId>false</appendAssemblyId>
                   <descriptors>
