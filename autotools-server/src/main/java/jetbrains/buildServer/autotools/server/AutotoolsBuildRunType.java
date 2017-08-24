@@ -22,32 +22,28 @@ public class AutotoolsBuildRunType extends RunType{
    * Descriptor for AutotoolsRunnerPlugin
    */
   private final PluginDescriptor myPluginDescriptor;
-  public AutotoolsBuildRunType(@NotNull final RunTypeRegistry runTypeRegistry, @NotNull final PluginDescriptor descriptor) {
+  public AutotoolsBuildRunType(final @NotNull RunTypeRegistry runTypeRegistry, final @NotNull PluginDescriptor descriptor) {
     runTypeRegistry.registerRunType(this);
     myPluginDescriptor = descriptor;
   }
 
   @Override
-  @NotNull
-  public String getType() {
+  public @NotNull String getType() {
     return TYPE;
   }
 
-  @NotNull
   @Override
-  public String getDisplayName() {
+  public @NotNull String getDisplayName() {
     return DISPLAY_NAME;
   }
 
-  @NotNull
   @Override
-  public String getDescription() {
+  public @NotNull String getDescription() {
     return DESCRIPTION;
   }
 
-  @Nullable
   @Override
-  public PropertiesProcessor getRunnerPropertiesProcessor() {
+  public @Nullable PropertiesProcessor getRunnerPropertiesProcessor() {
     return null;
   }
 
@@ -62,9 +58,8 @@ public class AutotoolsBuildRunType extends RunType{
     return myPluginDescriptor.getPluginResourcesPath("viewAutotoolsBuildRunner.jsp");
   }
 
-  @NotNull
   @Override
-  public Map<String, String> getDefaultRunnerProperties() {
+  public @NotNull Map<String, String> getDefaultRunnerProperties() {
 
     final Map<String, String> properties = new HashMap<>();
     properties.put(UI_NEED_AUTORECONF, Boolean.toString(true));
@@ -76,9 +71,8 @@ public class AutotoolsBuildRunType extends RunType{
     return properties;
   }
 
-  @NotNull
   @Override
-  public List<Requirement> getRunnerSpecificRequirements(@NotNull final Map<String, String> runParameters) {
+  public @NotNull List<Requirement> getRunnerSpecificRequirements(final @NotNull Map<String, String> runParameters) {
     final List<Requirement> requirements = new ArrayList<>(4);
     requirements.add(new Requirement(TOOL_AUTOCONF, null, RequirementType.EXISTS));
     requirements.add(new Requirement(TOOL_MAKE, null, RequirementType.EXISTS));

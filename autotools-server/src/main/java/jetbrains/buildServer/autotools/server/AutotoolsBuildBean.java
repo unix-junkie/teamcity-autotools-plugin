@@ -13,8 +13,7 @@ public final class AutotoolsBuildBean {
    * Returns parameter name of ./configure parameters and flags.
    * @return parameter name of ./configure parameters
    */
-  @NotNull
-  public String getAdditionalConfigurateParamsKey() {
+  public @NotNull String getAdditionalConfigurateParamsKey() {
     return UI_ADDITIONAL_CONF_PARAMS;
   }
 
@@ -22,8 +21,7 @@ public final class AutotoolsBuildBean {
    * Returns parameter name of make parameters and flags.
    * @return parameter name of make parameters
    */
-  @NotNull
-  public String getAdditionalMakeParamsKey() {
+  public @NotNull String getAdditionalMakeParamsKey() {
     return UI_ADDITIONAL_MAKE_PARAMS;
   }
 
@@ -31,8 +29,7 @@ public final class AutotoolsBuildBean {
    * Return parameter name of flag needed autoreconf.
    * @return parameter name of flag needed autoreconf
    */
-  @NotNull
-  public String getNeedAutoreconf() {
+  public @NotNull String getNeedAutoreconf() {
     return UI_NEED_AUTORECONF;
   }
 
@@ -40,8 +37,7 @@ public final class AutotoolsBuildBean {
    * Return parameter name of flag needed dejagnu xml replaces &
    * @return parameter name of flag needed dejagnu xml replaces &
    */
-  @NotNull
-  public String getNeedDejagnuXmlReplaceAmp(){
+  public @NotNull String getNeedDejagnuXmlReplaceAmp(){
     return UI_DEJAGNU_XML_REPLACE_AMP;
   }
 
@@ -50,8 +46,7 @@ public final class AutotoolsBuildBean {
    * Return parameter name of flag needed dejagnu xml replaces &
    * @return parameter name of flag needed dejagnu xml replaces &
    */
-  @NotNull
-  public String getNeedDejagnuXmlReplaceControls(){
+  public @NotNull String getNeedDejagnuXmlReplaceControls(){
     return UI_DEJAGNU_XML_REPLACE_CONTROLS;
   }
 
@@ -59,8 +54,7 @@ public final class AutotoolsBuildBean {
    * Returns parameter name of path to source directory
    * @return
    */
-  @NotNull
-  public String getSourcePath(){
+  public @NotNull String getSourcePath(){
     return UI_SOURCE_PATH;
   }
 
@@ -68,8 +62,7 @@ public final class AutotoolsBuildBean {
    * Returns parameter name of make check parameters and flags
    * @return
    */
-  @NotNull
-  public String getMakeCheckParam(){
+  public @NotNull String getMakeCheckParam(){
     return UI_MAKE_CHECK;
   }
 }
