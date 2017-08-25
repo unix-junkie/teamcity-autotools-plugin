@@ -23,10 +23,15 @@ public final class AutotoolsBuildCLBService extends BuildServiceAdapter {
   /**
    * Collection of work files be deleted in the end.
    */
+
+  String myCygwinPath;
   private final Collection<File> myFilesToDelete = new HashSet<File>();
   @Override
   @NotNull
   public ProgramCommandLine makeProgramCommandLine() throws RunBuildException {
+    myCygwinPath = getAgentConfiguration().getSystemInfo().isWindows()
+                            && getBuildParameters().getEnvironmentVariables().containsKey("CYGWIN_PATH")
+                          ? getBuildParameters().getEnvironmentVariables().get("CYGWIN_PATH") : "";
     return makeCommandLineForScript();
   }
 
@@ -94,7 +99,7 @@ public final class AutotoolsBuildCLBService extends BuildServiceAdapter {
   private ProgramCommandLine makeCommandLineForScript() throws RunBuildException {
     final String script = getScript();
     enableExecution(script, getWorkingDirectory().getAbsolutePath());
-    return createCommandLine(script, Collections.<String>emptyList());
+    return createCommandLine(script, new ArrayList<String>());
   }
 
   /**
@@ -102,13 +107,15 @@ public final class AutotoolsBuildCLBService extends BuildServiceAdapter {
    * @param filePath File to be setted executable attribute
    * @param baseDir Directory to be setted Work Directory
    */
-  private static void enableExecution(@NotNull final String filePath, @NotNull final String baseDir) {
+  private void enableExecution(@NotNull final String filePath, @NotNull final String baseDir) {
     final GeneralCommandLine commandLine = new GeneralCommandLine();
-    commandLine.setExePath("chmod");
+    Loggers.AGENT.info("XXX: enableExecution start");
+    commandLine.setExePath(myCygwinPath + "\\chmod");
     commandLine.addParameter("+x");
     commandLine.addParameter(filePath);
     commandLine.setWorkDirectory(baseDir);
     final ExecResult execResult = SimpleCommandLineProcessRunner.runCommand(commandLine, (byte[])null);
+    Loggers.AGENT.info("XXX: enableExecution finish");
     if(execResult.getExitCode() != 0) {
       Loggers.AGENT.warn("Failed to set executable attribute for " + filePath + ": chmod +x exit code is " + execResult.getExitCode());
     }
@@ -218,6 +225,11 @@ public final class AutotoolsBuildCLBService extends BuildServiceAdapter {
    */
   @NotNull
   private ProgramCommandLine createCommandLine(@NotNull final String exePath, @NotNull final List<String> arguments) {
+    if (getAgentConfiguration().getSystemInfo().isWindows()){
+      arguments.add("-li");
+      arguments.add(exePath);
+      return new SimpleProgramCommandLine(getRunnerContext(), myCygwinPath + "\\sh",  arguments);
+    }
     return new SimpleProgramCommandLine(getRunnerContext(), exePath, arguments);
   }
 
