@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 import jetbrains.buildServer.ExecResult;
 import jetbrains.buildServer.SimpleCommandLineProcessRunner;
 import jetbrains.buildServer.agent.*;
+import jetbrains.buildServer.autotools.common.AutotoolsBuildConstants;
 import jetbrains.buildServer.log.Loggers;
 import jetbrains.buildServer.util.EventDispatcher;
 import org.jetbrains.annotations.NotNull;
@@ -46,7 +47,7 @@ public class AutotoolsToolProvider extends AgentLifeCycleAdapter implements Tool
   public void beforeAgentConfigurationLoaded(@NotNull final BuildAgent agent) {
     myCygwinPath = (agent.getConfiguration().getSystemInfo().isWindows()
                    && agent.getConfiguration().getBuildParameters().getEnvironmentVariables().containsKey("CYGWIN_PATH"))
-                   ? agent.getConfiguration().getBuildParameters().getEnvironmentVariables().get("CYGWIN_PATH") + "\\sh -li ": "";
+                   ? agent.getConfiguration().getBuildParameters().getEnvironmentVariables().get("CYGWIN_PATH") : "";
     if (isExistedTool()){
       Loggers.AGENT.info("AutotoolsToolProvider for tool " + myToolName + " found");
       agent.getConfiguration().addConfigurationParameter(myToolName, myToolName);
@@ -63,6 +64,7 @@ public class AutotoolsToolProvider extends AgentLifeCycleAdapter implements Tool
   @NotNull
   @VisibleForTesting
   static String stringArrayToString(String[] strArr){
+    if (strArr == null) return "";
     if (strArr.length == 0) return "";
     StringBuilder result = new StringBuilder();
     result.append(strArr[0]);
@@ -78,13 +80,32 @@ public class AutotoolsToolProvider extends AgentLifeCycleAdapter implements Tool
    */
   public boolean isExistedTool(){
     final GeneralCommandLine commandLine = new GeneralCommandLine();
-    commandLine.setExePath(myCygwinPath + myToolName);
+
+    if (!myCygwinPath.isEmpty()){
+      if (myToolName.equals(AutotoolsBuildConstants.TOOL_AUTOCONF)){
+        commandLine.setExePath(myCygwinPath + "\\sh");
+        commandLine.addParameter("-li");
+        commandLine.addParameter(myToolName);
+      }
+      else{
+        commandLine.setExePath(myCygwinPath + "\\" + myToolName);
+      }
+
+    }
+    else{
+      commandLine.setExePath(myToolName);
+    }
+
     commandLine.addParameter(myVersionArg);
     Loggers.AGENT.info("XXX: " + commandLine.getCommandLineString());
     final ExecResult execResult = SimpleCommandLineProcessRunner.runCommand(commandLine, (byte[])null);
     if (execResult.getExitCode() == 0){
       myVersion = findVersion(stringArrayToString(execResult.getOutLines()));
     }
+    Loggers.AGENT.info("XXX: " + execResult.getExitCode());
+    Loggers.AGENT.info("XXX: " + execResult.getStderr());
+    Loggers.AGENT.info("XXX: " + stringArrayToString(execResult.getOutLines()));
+
     return execResult.getExitCode() == 0;
   }
 
