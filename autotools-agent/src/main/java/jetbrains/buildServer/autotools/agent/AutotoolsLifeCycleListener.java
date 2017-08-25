@@ -34,6 +34,7 @@ public class AutotoolsLifeCycleListener extends AgentLifeCycleAdapter {
                                                 Boolean.parseBoolean(runner.getRunnerParameters().get(UI_DEJAGNU_XML_REPLACE_CONTROLS)));
 
     myTestReporter.findDejagnu(runner.getBuild().getCheckoutDirectory());
+    runner.getBuild().getBuildLogger().message("XXX: beforre");
   }
 
 
@@ -41,6 +42,7 @@ public class AutotoolsLifeCycleListener extends AgentLifeCycleAdapter {
   @Override
   public void runnerFinished(@NotNull final BuildRunnerContext runner, @NotNull final BuildFinishedStatus status) {
     super.runnerFinished(runner, status);
+    runner.getBuild().getBuildLogger().message("XXX I was this " + runner.getBuild().getCheckoutDirectory());
     myTestReporter.searchTestsFiles(runner.getBuild().getCheckoutDirectory());
     myTestReporter.doTestsReport();
   }

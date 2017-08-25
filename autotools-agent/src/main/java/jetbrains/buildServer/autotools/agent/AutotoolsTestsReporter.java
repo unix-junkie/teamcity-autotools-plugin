@@ -149,6 +149,7 @@ public final class AutotoolsTestsReporter {
     return path.replaceFirst(mySrcPath, "");
   }
   void searchTestsFiles(@NotNull final File srcDir){
+    myLogger.message("XXX: " + srcDir.getName());
     for (final File file : srcDir.listFiles()){
       if (file.isDirectory()){
         searchTestsFiles(file);
