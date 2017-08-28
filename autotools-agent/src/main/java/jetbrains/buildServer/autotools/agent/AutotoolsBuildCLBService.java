@@ -62,12 +62,12 @@ final class AutotoolsBuildCLBService extends BuildServiceAdapter {
         if (params.length < 2) {
           break;
         }
-        idx = params[1].indexOf('[');
-        idx2 = params[1].indexOf(']');
-        if (idx == -1 || idx2 == -1) {
+        final int openBracketsIdx = params[1].indexOf('[');
+        final int closeBracketsIdx = params[1].indexOf(']');
+        if (openBracketsIdx == -1 || closeBracketsIdx == -1) {
           break;
         }
-        return params[1].substring(idx + 1, idx2);
+        return params[1].substring(openBracketsIdx + 1, closeBracketsIdx);
       }
       return "";
     }
@@ -92,6 +92,7 @@ final class AutotoolsBuildCLBService extends BuildServiceAdapter {
    */
   @NotNull
   private ProgramCommandLine makeCommandLineForScript() throws RunBuildException {
+    addMyEnviroventVariblies();
     final String script = getScript();
     enableExecution(script, getWorkingDirectory().getAbsolutePath());
     return createCommandLine(script, Collections.<String>emptyList());
@@ -191,32 +192,33 @@ final class AutotoolsBuildCLBService extends BuildServiceAdapter {
    * @throws RunBuildException if an {@link IOException} is thrown when reading
    *         the build script.
    */
+  private String getScriptContent() throws RunBuildException{
+    try{
+      return getScriptContent0();
+    }
+    catch (final IOException e){
+      throw new RunBuildException(e);
+    }
+  }
+
   @SuppressWarnings("NestedAssignment")
   @NotNull
-  private String getScriptContent() throws RunBuildException {
-    addMyEnviroventVariblies();
-    final StringBuilder script = new StringBuilder();
-    BufferedReader bufferead = null;
+  private String getScriptContent0() throws IOException {
+    final BufferedReader bufferead = new BufferedReader(
+      new InputStreamReader(getClass().getResourceAsStream("/build_script.sh"), Charset.forName("UTF-8")));;
     try {
-      bufferead = new BufferedReader(
-        new InputStreamReader(getClass().getResourceAsStream("/build_script.sh"), Charset.forName("UTF-8")));
+      final StringBuilder script = new StringBuilder();
       String str;
       while ((str = bufferead.readLine()) != null) {
         script.append(str).append('\n');
       }
-    }
-    catch (final IOException e){
-     throw new RunBuildException(e);
+      return script.toString();
     }
     finally {
-        try {
-          bufferead.close();
-        } catch (final IOException e) {
-          throw new RunBuildException(e);
-        }
+        bufferead.close();
     }
-    return script.toString();
   }
+
 
   /**
    * Creates command Line with content exePath and list of arguments.
