@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.StringReader;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
@@ -18,6 +20,7 @@ final class DejagnuTestsXMLParser {
    * Flag to need replace &[^;] to &amp in xml.
    */
   private final boolean myNeedReplaceApm;
+  private static final Pattern XML_HEADER_PATTERN = Pattern.compile("(\\<\\?xml\\s+version\\s*\\=\\s*\\\")(1\\.0)(\\\".+)", Pattern.DOTALL);
   private int myTestsCount;
   /**
    * Flag to replace Controls charecters;.
@@ -33,6 +36,9 @@ final class DejagnuTestsXMLParser {
     myNeedToReplaceControls = needToReplaceControls;
   }
 
+
+
+
   /**
    * Handles Xml file and public dejagnu test results from this.
    *
@@ -44,7 +50,7 @@ final class DejagnuTestsXMLParser {
     try {
       String xmlEntry = new Scanner(xmlFile, "UTF-8").useDelimiter("\\A").next();
       if (myNeedReplaceApm){
-        xmlEntry = replaceAmp(xmlEntry.replaceFirst("<\\?xml version=\"1.0\"", "<?xml version=\"1.1\""));
+        xmlEntry = replaceAmp(replaceXmlHeaderVersion(xmlEntry));
       }
       if (myNeedToReplaceControls){
         xmlEntry = replaceControlChars(xmlEntry);
@@ -58,6 +64,18 @@ final class DejagnuTestsXMLParser {
     }
   }
 
+  /**
+   * Replace header with xml version 1.0 to version 1.1.
+   * @param xmlEntry string for replacing
+   * @return new string after replacing
+   */
+  @NotNull static String replaceXmlHeaderVersion(@NotNull final String xmlEntry){
+    final Matcher matcher = XML_HEADER_PATTERN.matcher(xmlEntry);
+    if (matcher.find()) {
+      return matcher.replaceFirst(matcher.group(1) + "1.1" + matcher.group(3));
+    }
+    return xmlEntry;
+  }
   /**
    * Replace control charecrters in string and return new string.
    * @param xmlEntry string for replacing
