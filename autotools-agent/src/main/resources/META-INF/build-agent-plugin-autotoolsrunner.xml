@@ -21,7 +21,7 @@
        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd"
        default-autowire = "constructor">
   <bean class="jetbrains.buildServer.autotools.agent.AutotoolsBuildCLBServiceFactory"/>
-  <bean class="jetbrains.buildServer.autotools.agent.AutotoolsLifeCycleListener"/>
+  <bean class="jetbrains.buildServer.autotools.agent.AutotoolsLifeCycleListener" factory-method="getInstance"/>
   <bean class="jetbrains.buildServer.autotools.agent.AutotoolsToolProvider">
     <constructor-arg name="toolName">
       <util:constant static-field="jetbrains.buildServer.autotools.common.AutotoolsBuildConstants.TOOL_AUTOCONF"/>
