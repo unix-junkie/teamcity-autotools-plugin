@@ -52,6 +52,15 @@ public final class AutotoolsAgentTest {
   }
 
   @Test
+  public void replaceXmlHeaderVersionTest(){
+    Assert.assertEquals(DejagnuTestsXMLParser.replaceXmlHeaderVersion("<?xml version=\"1.0\"?>"), "<?xml version=\"1.1\"?>");
+    Assert.assertEquals(DejagnuTestsXMLParser.replaceXmlHeaderVersion("<?xml\n version=\"1.0\"?>"), "<?xml\n version=\"1.1\"?>");
+    Assert.assertEquals(DejagnuTestsXMLParser.replaceXmlHeaderVersion("<?xml version=\"1.0\"        ?>"), "<?xml version=\"1.1\"        ?>");
+    Assert.assertEquals(DejagnuTestsXMLParser.replaceXmlHeaderVersion("<?xml version=\"1.0\"\n\n?>"), "<?xml version=\"1.1\"\n\n?>");
+    Assert.assertEquals(DejagnuTestsXMLParser.replaceXmlHeaderVersion("<?xml version=\"1.0\"encoding=\"utf-8\"?>\n"), "<?xml version=\"1.1\"encoding=\"utf-8\"?>\n");
+
+  }
+  @Test
   public void getDejagnuParametersTest(){
     final Collection<Pair<String, String>> answer = new ArrayList<Pair<String, String>>();
     answer.add(new Pair<String, String>(HAS_RUNTEST_VAR, "1"));
