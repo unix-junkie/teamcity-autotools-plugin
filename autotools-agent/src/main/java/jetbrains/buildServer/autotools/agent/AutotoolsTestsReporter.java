@@ -4,15 +4,37 @@ import com.google.common.annotations.VisibleForTesting;
 import java.io.*;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import jetbrains.buildServer.agent.BuildProgressLogger;
 import jetbrains.buildServer.log.Loggers;
+import org.aspectj.weaver.ast.Test;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Nadezhda Demina
  */
+
+
 final class AutotoolsTestsReporter {
+  /**
+   * Test Results Enum
+   */
+  enum TestStatus{
+    XPASS, FAIL, ERROR, UNRESOLVED,
+    PASS, XFAIL,
+    SKIP, UNTESTED, UNSUPPORTED, WARNING, NOTE, FAKE;
+    public static TestStatus safeValueOf(String name){
+      try{
+        return valueOf(name);
+      }
+      catch (final IllegalArgumentException e){
+        return FAKE;
+      }
+    }
+  }
+
   /**
    * Current buildLogger.
    */
@@ -50,20 +72,25 @@ final class AutotoolsTestsReporter {
    */
   private DejagnuTestsXMLParser myXmlParser;
   /**
-   * Constant array with values of success TestResults.
+   * Constant enumSet with values of success TestResults.
    */
 
-  private static final String SUCCESS_TEST_RESULTS[] = {"PASS", "XFAIL"};
+  private static final EnumSet<TestStatus> SUCCESS_TEST_RESULTS_SET = EnumSet.of(TestStatus.PASS, TestStatus.XFAIL);
+
 
   /**
-   * Constant array with values of fail TestResults.
+   * Constant enumSet with values of fail TestResults.
    */
-  private static final String FAIL_TEST_RESULTS[] = {"XPASS", "FAIL", "ERROR", "UNRESOLVED"};
+  private static final EnumSet<TestStatus> FAIL_TEST_RESULTS_SET = EnumSet.of(TestStatus.ERROR, TestStatus.FAIL, TestStatus.UNRESOLVED, TestStatus.XPASS);
+  //private static final String FAIL_TEST_RESULTS[] = {"XPASS", "FAIL", "ERROR", "UNRESOLVED"};
   /**
-   * Constant array with values of skip TestResults.
+   * Constant enumSet with values of skip TestResults.
    */
-  private static final String SKIP_TEST_RESULTS[] = {"SKIP", "UNTESTED", "UNSUPPORTED", "WARNING", "NOTE"};
+  private static final EnumSet<TestStatus> SKIP_TEST_RESULTS_SET = EnumSet.of(TestStatus.SKIP, TestStatus.WARNING, TestStatus.NOTE, TestStatus.UNSUPPORTED, TestStatus.UNTESTED);
 
+  private static final  Pattern TRS_PATTERN = Pattern.compile("\\.trs$");
+  private static final Pattern LOG_PATTERN = Pattern.compile("\\.log$");
+  private static final Pattern TEST_RESULT_PATTERN = Pattern.compile("\\:test\\-result\\:\\s*(PASS|FAIL|SKIP|ERROR)");
   @VisibleForTesting
   AutotoolsTestsReporter(@NotNull final String srcPath) {
     myTimeBeforeStart = 0;
@@ -76,9 +103,8 @@ final class AutotoolsTestsReporter {
   }
 
 
-  AutotoolsTestsReporter(final long timeBeforeStart, @NotNull final BuildProgressLogger logger,
-                                @NotNull final String srcPath, @NotNull final Boolean needReplaceAmp,
-                                @NotNull final Boolean needReplaceControls) {
+  private AutotoolsTestsReporter(final long timeBeforeStart, @NotNull final BuildProgressLogger logger,
+                                @NotNull final String srcPath) {
     myTimeBeforeStart = timeBeforeStart;
     myLogger = logger;
     mySrcPath = srcPath;
@@ -86,9 +112,16 @@ final class AutotoolsTestsReporter {
     myTestsTrsFiles = new HashMap<String, File>();
     myTestsXmlFiles = new ArrayList<File>();
     hasDejagnu = false;
-    myXmlParser = new DejagnuTestsXMLParser(this, needReplaceAmp, needReplaceControls);
+
   }
 
+  public static AutotoolsTestsReporter getInstance(final long timeBeforeStart, @NotNull final BuildProgressLogger logger,
+                                                   @NotNull final String srcPath, @NotNull final Boolean needReplaceAmp,
+                                                   @NotNull final Boolean needReplaceControls){
+    final  AutotoolsTestsReporter autotoolsTestsReporter = new AutotoolsTestsReporter(timeBeforeStart, logger, srcPath);
+    autotoolsTestsReporter.myXmlParser = new DejagnuTestsXMLParser(autotoolsTestsReporter, needReplaceAmp, needReplaceControls);
+    return autotoolsTestsReporter;
+  }
   /**
    * Returns True if project has Dejagnu options.
    *
@@ -151,12 +184,14 @@ final class AutotoolsTestsReporter {
    * @param srcDir Directory, where will search files
    */
   void searchTestsFiles(@NotNull final File srcDir){
+    myLogger.message("I was this!");
+    if (srcDir.listFiles() == null) return;
     for (final File file : srcDir.listFiles()){
       if (file.isDirectory()){
         searchTestsFiles(file);
       }
       if (isThisExtensionFile(file, ".trs")){
-        final String testName = getRelativePath(file.getAbsolutePath()).replace(".trs", "");
+        final String testName = TRS_PATTERN.matcher(getRelativePath(file.getAbsolutePath())).replaceFirst("");
         if (file.lastModified() >= myTimeBeforeStart) {
           myTestsTrsFiles.put(testName, file);
         }
@@ -166,7 +201,7 @@ final class AutotoolsTestsReporter {
       }
 
       if (isThisExtensionFile(file, ".log")) {
-        final String testName = getRelativePath(file.getAbsolutePath()).replace(".log", "");
+        final String testName = LOG_PATTERN.matcher(getRelativePath(file.getAbsolutePath())).replaceFirst("");
         if (file.lastModified() >= myTimeBeforeStart) {
           myTestsLogFiles.put(testName, file);
         }
@@ -211,17 +246,14 @@ final class AutotoolsTestsReporter {
       boolean testFailed = false;
 
       // Parse each string in result file
-      //noinspection NestedAssignment
       while ((str = bufferead.readLine()) != null) {
-        int containsIdx = str.indexOf(":test-result:");
-        if (containsIdx == -1) {
-          continue;
-        }
-        containsIdx += ":test-result:".length() + 1;
-        final String res = containsIdx + 5 <= str.length() && Character.isLetter(str.charAt(containsIdx + 4)) ? str.substring(containsIdx, containsIdx + 5) : str.substring(containsIdx, containsIdx + 4);
-        publicTestCaseInfo(testName, res, "");
-        if (Arrays.asList(FAIL_TEST_RESULTS).contains(res)) {
-          testFailed = true;
+        final Matcher matcher = TEST_RESULT_PATTERN.matcher(str);
+        if (matcher.find()) {
+          final String res = matcher.group(1);
+          publicTestCaseInfo(testName, res, "");
+          if (FAIL_TEST_RESULTS_SET.contains(TestStatus.safeValueOf(res))) {
+            testFailed = true;
+          }
         }
       }
 
@@ -229,7 +261,7 @@ final class AutotoolsTestsReporter {
         myLogger.message("##teamcity[publishArtifacts '" + myTestsLogFiles.get(testName) + "']");
       }
     }
-    catch (final IOException e){
+    catch (final Exception e){
       Loggers.AGENT.warn("AutotoolsLifeCycleListener: In doTestReport method can't read test result file " + trsFile.getAbsolutePath() + ". " + e.getMessage());
     }
     finally {
@@ -248,12 +280,17 @@ final class AutotoolsTestsReporter {
    */
   void publicTestCaseInfo(@NotNull final String testName,@NotNull final String result, @NotNull final String stdOut){
     myLogger.logTestStarted(testName);
-    if (Arrays.asList(FAIL_TEST_RESULTS).contains(result)){
+    if (FAIL_TEST_RESULTS_SET.contains(TestStatus.safeValueOf(result))){
       myLogger.logTestFailed(testName, "Failed", result);
     }
     else
-      if (!Arrays.asList(SUCCESS_TEST_RESULTS).contains(result)){
+      if (SUCCESS_TEST_RESULTS_SET.contains(TestStatus.safeValueOf(result))){
         myLogger.logTestIgnored(testName, result);
+      }
+      else{
+        if (!SKIP_TEST_RESULTS_SET.contains(TestStatus.safeValueOf(result))){
+          myLogger.warning("Unknown test result " + result + " of test " + testName);
+        }
       }
     if (!stdOut.isEmpty()){
         myLogger.logTestStdOut(testName, stdOut);
