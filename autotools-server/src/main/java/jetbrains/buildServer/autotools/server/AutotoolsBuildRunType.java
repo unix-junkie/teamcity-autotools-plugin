@@ -16,17 +16,22 @@ import static jetbrains.buildServer.autotools.common.AutotoolsBuildConstants.*;
  * Created on 12.07.2017.
  * @author     : Nadezhda Demina
  */
-public class AutotoolsBuildRunType extends RunType{
+final public class AutotoolsBuildRunType extends RunType{
 
   /**
    * Descriptor for AutotoolsRunnerPlugin.
    */
   private final PluginDescriptor myPluginDescriptor;
-  public AutotoolsBuildRunType(final @NotNull RunTypeRegistry runTypeRegistry, final @NotNull PluginDescriptor descriptor) {
-    runTypeRegistry.registerRunType(this);
+  private AutotoolsBuildRunType(final @NotNull PluginDescriptor descriptor) {
     myPluginDescriptor = descriptor;
   }
 
+  @NotNull
+  public static RunType getInstance(final @NotNull RunTypeRegistry runTypeRegistry, final @NotNull PluginDescriptor descriptor){
+    final RunType runType = new AutotoolsBuildRunType(descriptor);
+    runTypeRegistry.registerRunType(runType);
+    return runType;
+  }
   @Override
   public @NotNull String getType() {
     return TYPE;
