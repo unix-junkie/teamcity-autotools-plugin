@@ -8,14 +8,20 @@ import static jetbrains.buildServer.autotools.common.AutotoolsBuildConstants.*;
 /**
  * @author Nadezhda Demina
  */
-public final class AutotoolsLifeCycleListener extends AgentLifeCycleAdapter {
+public final class AutotoolsLifeCycleListener extends AgentLifeCycleAdapter{
   private AutotoolsTestsReporter myTestReporter;
 
   private final ToolProvidersRegistry myProvidersRegistry;
 
-  AutotoolsLifeCycleListener(final EventDispatcher<AgentLifeCycleListener> dispatcher, final ToolProvidersRegistry toolProvidersRegistry) {
-    dispatcher.addListener(this);
+  private AutotoolsLifeCycleListener(final ToolProvidersRegistry toolProvidersRegistry) {
     myProvidersRegistry = toolProvidersRegistry;
+  }
+
+  @NotNull
+  public static AutotoolsLifeCycleListener getInstance(final EventDispatcher<AgentLifeCycleListener> dispatcher, final ToolProvidersRegistry toolProvidersRegistry){
+    final AutotoolsLifeCycleListener autotoolsLifeCycleListener = new AutotoolsLifeCycleListener(toolProvidersRegistry);
+    dispatcher.addListener(autotoolsLifeCycleListener);
+    return autotoolsLifeCycleListener;
   }
 
   @Override
@@ -24,7 +30,7 @@ public final class AutotoolsLifeCycleListener extends AgentLifeCycleAdapter {
     if (runtestToolProvider != null){
       runtestToolProvider.setDejagnuParameters(runner);
     }
-    myTestReporter = new AutotoolsTestsReporter(System.currentTimeMillis(), runner.getBuild().getBuildLogger(),
+    myTestReporter = AutotoolsTestsReporter.getInstance(System.currentTimeMillis(), runner.getBuild().getBuildLogger(),
                                                 runner.getBuild().getCheckoutDirectory().getAbsolutePath() + '/',
                                               Boolean.parseBoolean(runner.getRunnerParameters().get(UI_DEJAGNU_XML_REPLACE_AMP)),
                                                 Boolean.parseBoolean(runner.getRunnerParameters().get(UI_DEJAGNU_XML_REPLACE_CONTROLS)));
