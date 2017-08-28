@@ -34,14 +34,14 @@ public class RuntestToolProvider extends AutotoolsToolProvider {
   @Override
   String findVersion(@NotNull final String text) {
     final Pattern needVersion = Pattern.compile("(DejaGnu|Framework).+version.+" + regVersionNumer);
-    Matcher matcher = needVersion.matcher(text);
-    if (!matcher.find()){
+    final Matcher textMatcher = needVersion.matcher(text);
+    if (!textMatcher.find()){
       return "";
     }
-    final String versionLine = text.substring(matcher.start(), matcher.end());
+    final String versionLine = text.substring(textMatcher.start(), textMatcher.end());
     final Pattern versionNumberOnly = Pattern.compile(regVersionNumer);
-    matcher = versionNumberOnly.matcher(versionLine);
-    return matcher.find() ? versionLine.substring(matcher.start(), matcher.end()) : "";
+    final Matcher versionMatcher = versionNumberOnly.matcher(versionLine);
+    return versionMatcher.find() ? versionLine.substring(versionMatcher.start(), versionMatcher.end()) : "";
   }
 
   /**
