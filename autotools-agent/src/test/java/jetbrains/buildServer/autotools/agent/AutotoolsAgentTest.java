@@ -29,25 +29,25 @@ public final class AutotoolsAgentTest {
 
   @Test
   public void findVersionTest(){
-    String text = "Expect version is       5.45\n" +
+    final String text1 = "Expect version is       5.45\n" +
                   "Tcl version is          8.5\n" +
                   "Framework version is    1.4.4";
-    Assert.assertEquals(new RuntestToolProvider("runtest", "--version").findVersion(text), "1.4.4", "text message: " + text);
+    Assert.assertEquals(new RuntestToolProvider("runtest", "--version").findVersion(text1), "1.4.4", "text message: " + text1);
 
-    text = "Expect version is       5.45\n" +
+    final String text2 = "Expect version is       5.45\n" +
            "Tcl version is          8.6\n" +
            "Framework version is    1.5.1";
-    Assert.assertEquals(new RuntestToolProvider("runtest", "--version").findVersion(text), "1.5.1", "text message: " + text);
+    Assert.assertEquals(new RuntestToolProvider("runtest", "--version").findVersion(text2), "1.5.1", "text message: " + text2);
 
-    text = "Expect version is       5.45\n" +
+    final String text3 = "Expect version is       5.45\n" +
            "Tcl version is          8.6\n" +
            "Framework version is    1.5.3";
-    Assert.assertEquals(new RuntestToolProvider("runtest", "--version").findVersion(text), "1.5.3", "text message: " + text);
+    Assert.assertEquals(new RuntestToolProvider("runtest", "--version").findVersion(text3), "1.5.3", "text message: " + text3);
 
-    text = "DejaGnu version 1.6\n" +
+    final String text4 = "DejaGnu version 1.6\n" +
            "Expect version  5.45\n" +
            "Tcl version     8.6";
-    Assert.assertEquals(new RuntestToolProvider("runtest", "--version").findVersion(text), "1.6", "text message: " + text);
+    Assert.assertEquals(new RuntestToolProvider("runtest", "--version").findVersion(text4), "1.6", "text message: " + text4);
 
   }
 
@@ -86,26 +86,32 @@ public final class AutotoolsAgentTest {
 
   @Test
   public void DejagnuXmlPasringTest() {
-    final File dejgnuOutput =  new File(getClass().getClassLoader().getResource("dejagnu-xml-output").getFile());
-    if (!dejgnuOutput.isDirectory()){
-      Assert.fail("DejagnuXmlPasringTest: Not found dejagnu-xml-output folder");
-    }
-    final Map<String, Integer> testCount = new HashMap<String, Integer>();
-    testCount.put("binutils.xml", 173);
-    testCount.put("correctResults.xml", 10);
-    testCount.put("gas.xml", 595);
-    testCount.put("ld.xml", 1698);
-    if (dejgnuOutput.listFiles() == null){
-      return;
-    }
-    for (final File xmlFile : dejgnuOutput.listFiles()) {
-      if (testCount.containsKey(xmlFile.getName())) {
-        Assert.assertEquals(new DejagnuTestsXMLParser(null, true, true).handleXmlResults(xmlFile),
-                            testCount.get(xmlFile.getName()).intValue(), "test for file " + xmlFile.getName());
-      } else {
-        Assert.assertTrue(new DejagnuTestsXMLParser(null, true, true).handleXmlResults(xmlFile) > 1000,
-                          "test for file " + xmlFile.getName());
+    try {
+      final File dejgnuOutput = new File(getClass().getClassLoader().getResource("dejagnu-xml-output").getFile());
+
+      if (!dejgnuOutput.isDirectory()){
+        Assert.fail("DejagnuXmlPasringTest: Not found dejagnu-xml-output folder");
       }
+      final Map<String, Integer> testCount = new HashMap<String, Integer>();
+      testCount.put("binutils.xml", 173);
+      testCount.put("correctResults.xml", 10);
+      testCount.put("gas.xml", 595);
+      testCount.put("ld.xml", 1698);
+      if (dejgnuOutput.listFiles() == null){
+        return;
+      }
+      for (final File xmlFile : dejgnuOutput.listFiles()) {
+        if (testCount.containsKey(xmlFile.getName())) {
+          Assert.assertEquals(new DejagnuTestsXMLParser(null, true, true).handleXmlResults(xmlFile),
+                              testCount.get(xmlFile.getName()).intValue(), "test for file " + xmlFile.getName());
+        } else {
+          Assert.assertTrue(new DejagnuTestsXMLParser(null, true, true).handleXmlResults(xmlFile) > 1000,
+                            "test for file " + xmlFile.getName());
+        }
+      }
+    }
+    catch (final NullPointerException e){
+      Assert.fail("DejagnuXmlParsingTest: " + e.getMessage());
     }
   }
 }
