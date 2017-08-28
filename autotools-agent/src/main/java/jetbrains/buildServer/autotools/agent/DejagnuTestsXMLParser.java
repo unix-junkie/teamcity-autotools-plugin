@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+import org.apache.xpath.SourceTree;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -20,7 +21,7 @@ final class DejagnuTestsXMLParser {
    * Flag to need replace &[^;] to &amp in xml.
    */
   private final boolean myNeedReplaceApm;
-  private static final Pattern XML_HEADER_PATTERN = Pattern.compile("(\\<\\?xml\\s+version\\s*\\=\\s*\\\")(1\\.0)(\\\".+)", Pattern.DOTALL);
+  private static final Pattern XML_HEADER_PATTERN = Pattern.compile("(\\<\\?xml\\s+version\\s*\\=\\s*\\\")(1\\.0)(\\\")", Pattern.DOTALL);
   private int myTestsCount;
   /**
    * Flag to replace Controls charecters;.
