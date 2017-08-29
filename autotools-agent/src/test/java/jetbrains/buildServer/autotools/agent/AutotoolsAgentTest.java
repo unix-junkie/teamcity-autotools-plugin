@@ -92,6 +92,14 @@ public final class AutotoolsAgentTest {
   }
 
   @Test
+  public void replaceAmpTest(){
+    Assert.assertEquals(DejagnuTestsXMLParser.replaceAmp("Punch &"), "Punch &#x26;");
+    Assert.assertEquals(DejagnuTestsXMLParser.replaceAmp("Punch & Judy"), "Punch &#x26; Judy");
+    Assert.assertEquals(DejagnuTestsXMLParser.replaceAmp("Punch &amp; Judy"), "Punch &amp; Judy");
+    Assert.assertEquals(DejagnuTestsXMLParser.replaceAmp("Punch &#x26; Judy"), "Punch &#x26; Judy");
+  }
+
+  @Test
   public void stringArrayToStringTest(){
     final String text = "DejaGnu version 1.6\n" +
            "Expect version  5.45\n" +
@@ -100,7 +108,7 @@ public final class AutotoolsAgentTest {
   }
 
   @Test
-  public void DejagnuXmlPasringTest() {
+  public void dejagnuXmlPasringTest() {
     final URL resource = getClass().getClassLoader().getResource("dejagnu-xml-output");
     if (resource == null){
       Assert.fail("DejagnuXmlPasringTest: Not found dejagnu-xml-output folder");
