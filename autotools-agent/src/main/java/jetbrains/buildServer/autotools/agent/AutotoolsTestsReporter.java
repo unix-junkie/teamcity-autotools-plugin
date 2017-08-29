@@ -24,13 +24,15 @@ final class AutotoolsTestsReporter {
   enum TestStatus{
     XPASS, FAIL, ERROR, UNRESOLVED,
     PASS, XFAIL,
-    SKIP, UNTESTED, UNSUPPORTED, WARNING, NOTE, FAKE;
-    public static TestStatus safeValueOf(String name){
+    SKIP, UNTESTED, UNSUPPORTED, WARNING, NOTE;
+
+    @Nullable
+    public static TestStatus safeValueOf(final String name){
       try{
         return valueOf(name);
       }
       catch (final IllegalArgumentException e){
-        return FAKE;
+        return null;
       }
     }
   }
