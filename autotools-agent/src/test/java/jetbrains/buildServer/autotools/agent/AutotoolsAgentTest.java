@@ -2,6 +2,7 @@ package jetbrains.buildServer.autotools.agent;
 
 import com.intellij.openapi.util.Pair;
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -95,32 +96,35 @@ public final class AutotoolsAgentTest {
 
   @Test
   public void DejagnuXmlPasringTest() {
-    try {
-      final File dejgnuOutput = new File(getClass().getClassLoader().getResource("dejagnu-xml-output").getFile());
-
-      if (!dejgnuOutput.isDirectory()){
-        Assert.fail("DejagnuXmlPasringTest: Not found dejagnu-xml-output folder");
-      }
-      final Map<String, Integer> testCount = new HashMap<String, Integer>();
-      testCount.put("binutils.xml", 173);
-      testCount.put("correctResults.xml", 10);
-      testCount.put("gas.xml", 595);
-      testCount.put("ld.xml", 1698);
-      if (dejgnuOutput.listFiles() == null){
-        return;
-      }
-      for (final File xmlFile : dejgnuOutput.listFiles()) {
-        if (testCount.containsKey(xmlFile.getName())) {
-          Assert.assertEquals(new DejagnuTestsXMLParser(null, true, true).handleXmlResults(xmlFile),
-                              testCount.get(xmlFile.getName()).intValue(), "test for file " + xmlFile.getName());
-        } else {
-          Assert.assertTrue(new DejagnuTestsXMLParser(null, true, true).handleXmlResults(xmlFile) > 1000,
-                            "test for file " + xmlFile.getName());
-        }
-      }
+    final URL resource = getClass().getClassLoader().getResource("dejagnu-xml-output");
+    if (resource == null){
+      Assert.fail("DejagnuXmlPasringTest: Not found dejagnu-xml-output folder");
     }
-    catch (final NullPointerException e){
-      Assert.fail("DejagnuXmlParsingTest: " + e.getMessage());
+    final String file = resource.getFile();
+    if (file == null){
+      Assert.fail("DejagnuXmlPasringTest: Not found dejagnu-xml-output folder");
+    }
+    final File dejgnuOutput = new File(file);
+    if (!dejgnuOutput.isDirectory()){
+      Assert.fail("DejagnuXmlPasringTest: Not found dejagnu-xml-output folder");
+    }
+    final Map<String, Integer> testCount = new HashMap<String, Integer>();
+    testCount.put("binutils.xml", 173);
+    testCount.put("correctResults.xml", 10);
+    testCount.put("gas.xml", 595);
+    testCount.put("ld.xml", 1698);
+    final File[] files = dejgnuOutput.listFiles();
+    if (files == null){
+      return;
+    }
+    for (final File xmlFile : files) {
+      if (testCount.containsKey(xmlFile.getName())) {
+        Assert.assertEquals(new DejagnuTestsXMLParser(null, true, true).handleXmlResults(xmlFile),
+                            testCount.get(xmlFile.getName()).intValue(), "test for file " + xmlFile.getName());
+      } else {
+        Assert.assertTrue(new DejagnuTestsXMLParser(null, true, true).handleXmlResults(xmlFile) > 1000,
+                          "test for file " + xmlFile.getName());
+      }
     }
   }
 }
