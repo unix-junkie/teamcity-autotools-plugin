@@ -1,5 +1,6 @@
 package jetbrains.buildServer.autotools.agent;
 
+import com.google.common.annotations.VisibleForTesting;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.StringReader;
@@ -19,6 +20,7 @@ final class DejagnuTestsXMLParser {
   /**
    * Flag to need replace &[^;] to &amp in xml.
    */
+  private static final Pattern AMP_PATTERN = Pattern.compile("&(?!(amp|#x26);)");
   private final boolean myNeedReplaceApm;
   private static final Pattern XML_HEADER_PATTERN = Pattern.compile("(\\<\\?xml\\s+version\\s*\\=\\s*\\\")(1\\.0)(\\\")", Pattern.DOTALL);
   private int myTestsCount;
@@ -175,7 +177,8 @@ final class DejagnuTestsXMLParser {
    * @return string with update xml data
    */
   @NotNull
-  private static String replaceAmp(@NotNull final String xmlEntry) {
-    return xmlEntry.replaceAll("&[^;]", "&#x26;");
+  @VisibleForTesting
+  static String replaceAmp(@NotNull final String xmlEntry) {
+    return AMP_PATTERN.matcher(xmlEntry).replaceAll("&#x26;");
   }
 }
