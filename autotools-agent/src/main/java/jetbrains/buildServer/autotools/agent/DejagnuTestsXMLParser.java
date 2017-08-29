@@ -82,7 +82,7 @@ final class DejagnuTestsXMLParser {
    * @return new string after replacing
    */
   @NotNull
-  private static String replaceControlChars(@NotNull final String xmlEntry) {
+  private static String replaceControlChars(@NotNull final CharSequence xmlEntry) {
     final StringBuilder tempEntry = new StringBuilder();
     for (int i = 0; i < xmlEntry.length(); i++){
       if ((xmlEntry.charAt(i) >= 0x0000 && xmlEntry.charAt(i) <= 0x001f ||
@@ -169,7 +169,7 @@ final class DejagnuTestsXMLParser {
   }
 
   /**
-   * Get string from xmlFile and replace invalid charecters.
+   * Get string from xmlFile and replace invalid characters.
    *
    * @param xmlEntry File with Xml
    * @return string with update xml data

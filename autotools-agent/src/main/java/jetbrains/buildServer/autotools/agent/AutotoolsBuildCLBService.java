@@ -214,7 +214,7 @@ final class AutotoolsBuildCLBService extends BuildServiceAdapter {
   @NotNull
   private String getScriptContent0() throws IOException {
     final BufferedReader bufferead = new BufferedReader(
-      new InputStreamReader(getClass().getResourceAsStream("/build_script.sh"), Charset.forName("UTF-8")));;
+      new InputStreamReader(getClass().getResourceAsStream("/build_script.sh"), Charset.forName("UTF-8")));
     try {
       final StringBuilder script = new StringBuilder();
       String str;

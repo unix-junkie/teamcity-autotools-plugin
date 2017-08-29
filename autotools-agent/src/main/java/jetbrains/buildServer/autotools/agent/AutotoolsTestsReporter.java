@@ -30,7 +30,7 @@ final class AutotoolsTestsReporter {
       try{
         return valueOf(name);
       }
-      catch (final IllegalArgumentException e){
+      catch (final IllegalArgumentException ignored){
         return null;
       }
     }
