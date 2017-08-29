@@ -149,7 +149,11 @@ final class AutotoolsTestsReporter {
     if (hasDejagnu){
       return;
     }
-    for (final File f : srcDir.listFiles()){
+    final File[] listFiles = srcDir.listFiles();
+    if (listFiles == null) {
+      return;
+    }
+    for (final File f : listFiles){
       if (f.isDirectory()){
         findDejagnu(f);
       }
@@ -188,9 +192,15 @@ final class AutotoolsTestsReporter {
    * @param srcDir Directory, where will search files
    */
   void searchTestsFiles(@NotNull final File srcDir){
+    if (myLogger == null) {
+      return;
+    }
     myLogger.message("I was this!");
-    if (srcDir.listFiles() == null) return;
-    for (final File file : srcDir.listFiles()){
+    final File[] files = srcDir.listFiles();
+    if (files == null) {
+      return;
+    }
+    for (final File file : files){
       if (file.isDirectory()){
         searchTestsFiles(file);
       }
@@ -262,7 +272,9 @@ final class AutotoolsTestsReporter {
       }
 
       if (testFailed && myTestsLogFiles.containsKey(testName)) {
-        myLogger.message("##teamcity[publishArtifacts '" + myTestsLogFiles.get(testName) + "']");
+        if (myLogger != null) {
+          myLogger.message("##teamcity[publishArtifacts '" + myTestsLogFiles.get(testName) + "']");
+        }
       }
     }
     catch (final Exception e){
@@ -283,12 +295,15 @@ final class AutotoolsTestsReporter {
    * @param result result of test
    */
   void publicTestCaseInfo(@NotNull final String testName,@NotNull final String result, @NotNull final String stdOut){
+    if (myLogger == null){
+      return;
+    }
     myLogger.logTestStarted(testName);
     if (FAIL_TEST_RESULTS_SET.contains(TestStatus.safeValueOf(result))){
       myLogger.logTestFailed(testName, "Failed", result);
     }
     else
-      if (SUCCESS_TEST_RESULTS_SET.contains(TestStatus.safeValueOf(result))){
+      if (!SUCCESS_TEST_RESULTS_SET.contains(TestStatus.safeValueOf(result))){
         myLogger.logTestIgnored(testName, result);
       }
       else{
@@ -307,7 +322,10 @@ final class AutotoolsTestsReporter {
    * @param testSuiteName name of test suite
    */
   void publicTestSuiteStarted(@NotNull final String testSuiteName){
-    myLogger.logSuiteStarted(getRelativePath(testSuiteName));
+    if (myLogger != null) {
+      myLogger.logSuiteStarted(getRelativePath(testSuiteName));
+    }
+
   }
 
   /**
@@ -315,7 +333,9 @@ final class AutotoolsTestsReporter {
    * @param testSuiteName name of test suite
    */
   void publicTestSuiteFinished(@NotNull final String testSuiteName){
-    myLogger.logSuiteFinished(getRelativePath(testSuiteName));
+    if (myLogger != null) {
+      myLogger.logSuiteFinished(getRelativePath(testSuiteName));
+    }
   }
 
   /**
@@ -323,6 +343,8 @@ final class AutotoolsTestsReporter {
    * @param warn warning message
    */
   void reportWarning(@NotNull final String warn){
-    myLogger.warning(warn);
+    if (myLogger != null){
+      myLogger.warning(warn);
+    }
   }
 }
