@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import jetbrains.buildServer.agent.BuildProgressLogger;
+import org.jmock.Mockery;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -82,7 +84,10 @@ public final class AutotoolsAgentTest {
   }
   @Test
   public void getRelativePathTest(){
-   Assert.assertEquals(new AutotoolsTestsReporter("C:/Users/naduxa/someprojects/teamcity-autotools-plugin/autotools-agent/src/test").getRelativePath("C:/Users/naduxa/someprojects/teamcity-autotools-plugin/autotools-agent/src/test/resources/testng.xml"),
+    final Mockery mockery = new Mockery();
+    final BuildProgressLogger logger = mockery.mock(BuildProgressLogger.class);
+    final AutotoolsTestsReporter testReporter = new AutotoolsTestsReporter(logger, "C:/Users/naduxa/someprojects/teamcity-autotools-plugin/autotools-agent/src/test");
+   Assert.assertEquals(testReporter.getRelativePath("C:/Users/naduxa/someprojects/teamcity-autotools-plugin/autotools-agent/src/test/resources/testng.xml"),
                         "/resources/testng.xml");
   }
 
