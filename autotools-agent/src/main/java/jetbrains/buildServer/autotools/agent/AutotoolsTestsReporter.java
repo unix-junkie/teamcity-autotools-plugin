@@ -39,7 +39,7 @@ final class AutotoolsTestsReporter {
   /**
    * Current buildLogger.
    */
-  @Nullable
+  @NotNull
   private final BuildProgressLogger myLogger;
   /**
    * Time of current build runner start.
@@ -186,10 +186,6 @@ final class AutotoolsTestsReporter {
    * @param srcDir Directory, where will search files
    */
   void searchTestsFiles(@NotNull final File srcDir){
-    if (myLogger == null) {
-      return;
-    }
-    myLogger.message("I was this!");
     final File[] files = srcDir.listFiles();
     if (files == null) {
       return;
@@ -266,9 +262,7 @@ final class AutotoolsTestsReporter {
       }
 
       if (testFailed && myTestsLogFiles.containsKey(testName)) {
-        if (myLogger != null) {
-          myLogger.message("##teamcity[publishArtifacts '" + myTestsLogFiles.get(testName) + "']");
-        }
+        myLogger.message("##teamcity[publishArtifacts '" + myTestsLogFiles.get(testName) + "']");
       }
     }
     catch (final Exception e){
@@ -289,9 +283,6 @@ final class AutotoolsTestsReporter {
    * @param result result of test
    */
   void publicTestCaseInfo(@NotNull final String testName,@NotNull final String result, @NotNull final String stdOut){
-    if (myLogger == null){
-      return;
-    }
     myLogger.logTestStarted(testName);
     if (FAIL_TEST_RESULTS_SET.contains(TestStatus.safeValueOf(result))){
       myLogger.logTestFailed(testName, "Failed", result);
@@ -314,10 +305,7 @@ final class AutotoolsTestsReporter {
    * @param testSuiteName name of test suite
    */
   void publicTestSuiteStarted(@NotNull final String testSuiteName){
-    if (myLogger != null) {
-      myLogger.logSuiteStarted(getRelativePath(testSuiteName));
-    }
-
+    myLogger.logSuiteStarted(getRelativePath(testSuiteName));
   }
 
   /**
@@ -325,9 +313,7 @@ final class AutotoolsTestsReporter {
    * @param testSuiteName name of test suite
    */
   void publicTestSuiteFinished(@NotNull final String testSuiteName){
-    if (myLogger != null) {
-      myLogger.logSuiteFinished(getRelativePath(testSuiteName));
-    }
+    myLogger.logSuiteFinished(getRelativePath(testSuiteName));
   }
 
   /**
@@ -335,8 +321,6 @@ final class AutotoolsTestsReporter {
    * @param warn warning message
    */
   void reportWarning(@NotNull final String warn){
-    if (myLogger != null){
-      myLogger.warning(warn);
-    }
+    myLogger.warning(warn);
   }
 }
