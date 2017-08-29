@@ -117,7 +117,9 @@ final class AutotoolsTestsReporter {
 
   }
 
-  public static AutotoolsTestsReporter getInstance(final long timeBeforeStart, @NotNull final BuildProgressLogger logger,
+
+  @NotNull
+  static AutotoolsTestsReporter getInstance(final long timeBeforeStart, @NotNull final BuildProgressLogger logger,
                                                    @NotNull final String srcPath, @NotNull final Boolean needReplaceAmp,
                                                    @NotNull final Boolean needReplaceControls){
     final  AutotoolsTestsReporter autotoolsTestsReporter = new AutotoolsTestsReporter(timeBeforeStart, logger, srcPath);

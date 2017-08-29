@@ -61,7 +61,7 @@ final class AutotoolsBuildCLBService extends BuildServiceAdapter {
           continue;
         }
         idx += 7;
-        int idx2 = line.indexOf(')');
+        final int idx2 = line.indexOf(')');
         final String ac_init = line.substring(idx, idx2);
         final String[] params = ac_init.split(",");
         if (params.length < 2) {
@@ -145,7 +145,6 @@ final class AutotoolsBuildCLBService extends BuildServiceAdapter {
    * It identifies the need  to execute autoreconf.
    * @return true, if it is needed to execute autoreconf
    */
-  @NotNull
   private Boolean isNeededAutoreconf(){
     if (getRunnerParameters().get(UI_NEED_AUTORECONF) == null || !getRunnerParameters().get(UI_NEED_AUTORECONF).equalsIgnoreCase("true")) {
       final File[] files = getBuild().getCheckoutDirectory().listFiles();
@@ -201,6 +200,7 @@ final class AutotoolsBuildCLBService extends BuildServiceAdapter {
    * @throws RunBuildException if an {@link IOException} is thrown when reading
    *         the build script.
    */
+  @NotNull
   private String getScriptContent() throws RunBuildException{
     try{
       return getScriptContent0();
