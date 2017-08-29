@@ -8,7 +8,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import jetbrains.buildServer.agent.BuildProgressLogger;
 import jetbrains.buildServer.log.Loggers;
-import org.aspectj.weaver.ast.Test;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -93,6 +92,7 @@ final class AutotoolsTestsReporter {
   private static final  Pattern TRS_PATTERN = Pattern.compile("\\.trs$");
   private static final Pattern LOG_PATTERN = Pattern.compile("\\.log$");
   private static final Pattern TEST_RESULT_PATTERN = Pattern.compile("\\:test\\-result\\:\\s*(PASS|FAIL|SKIP|ERROR)");
+
   @VisibleForTesting
   AutotoolsTestsReporter(@NotNull final String srcPath) {
     myTimeBeforeStart = 0;
