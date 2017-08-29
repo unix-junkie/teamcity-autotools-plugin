@@ -70,7 +70,7 @@ public final class AutotoolsBuildRunType extends RunType{
     properties.put(UI_ADDITIONAL_MAKE_PARAMS, "all");
     properties.put(UI_ADDITIONAL_CONF_PARAMS, "");
     properties.put(UI_MAKE_CHECK, "check");
-    properties.put(UI_DEJAGNU_XML_REPLACE_AMP, Boolean.toString(false));
+    properties.put(UI_DEJAGNU_XML_REPLACE_AMP, Boolean.toString(true));
     properties.put(UI_DEJAGNU_XML_REPLACE_CONTROLS, Boolean.toString(true));
     return properties;
   }
