@@ -304,12 +304,10 @@ final class AutotoolsTestsReporter {
     }
     else
       if (!SUCCESS_TEST_RESULTS_SET.contains(TestStatus.safeValueOf(result))){
-        myLogger.logTestIgnored(testName, result);
-      }
-      else{
         if (!SKIP_TEST_RESULTS_SET.contains(TestStatus.safeValueOf(result))){
           myLogger.warning("Unknown test result " + result + " of test " + testName);
         }
+        myLogger.logTestIgnored(testName, result);
       }
     if (!stdOut.isEmpty()){
         myLogger.logTestStdOut(testName, stdOut);
