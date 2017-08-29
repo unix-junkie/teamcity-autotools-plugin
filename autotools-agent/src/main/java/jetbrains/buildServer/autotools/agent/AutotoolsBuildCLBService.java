@@ -37,8 +37,13 @@ final class AutotoolsBuildCLBService extends BuildServiceAdapter {
    */
   @NotNull
   private String getVersion(){
+    final File[] files = getBuild().getCheckoutDirectory().listFiles();
+    if (files == null) {
+      return "";
+    }
+
     File configure_ac = null;
-    for (final File file : getBuild().getCheckoutDirectory().listFiles()) {
+    for (final File file : files) {
       if (file.getName().equalsIgnoreCase("configure.ac") || file.getName().equalsIgnoreCase("configure.in")) {
         configure_ac = file;
         break;
@@ -143,7 +148,11 @@ final class AutotoolsBuildCLBService extends BuildServiceAdapter {
   @NotNull
   private Boolean isNeededAutoreconf(){
     if (getRunnerParameters().get(UI_NEED_AUTORECONF) == null || !getRunnerParameters().get(UI_NEED_AUTORECONF).equalsIgnoreCase("true")) {
-      for (final File file : getBuild().getCheckoutDirectory().listFiles()) {
+      final File[] files = getBuild().getCheckoutDirectory().listFiles();
+      if (files == null){
+        return true;
+      }
+      for (final File file : files) {
         if (file.getName().equalsIgnoreCase("configure")) {
           return false;
         }
