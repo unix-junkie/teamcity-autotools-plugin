@@ -94,14 +94,8 @@ final class AutotoolsTestsReporter {
   private static final Pattern TEST_RESULT_PATTERN = Pattern.compile("\\:test\\-result\\:\\s*(PASS|FAIL|SKIP|ERROR)");
 
   @VisibleForTesting
-  AutotoolsTestsReporter(@NotNull final String srcPath) {
-    myTimeBeforeStart = 0;
-    myLogger = null;
-    mySrcPath = srcPath;
-    myTestsLogFiles = new HashMap<String, File>();
-    myTestsTrsFiles = new HashMap<String, File>();
-    myTestsXmlFiles = new ArrayList<File>();
-    hasDejagnu = false;
+  AutotoolsTestsReporter(@NotNull final BuildProgressLogger logger, @NotNull final String srcPath) {
+    this(0L, logger, srcPath);
   }
 
 
