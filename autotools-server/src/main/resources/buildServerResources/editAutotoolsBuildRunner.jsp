@@ -50,7 +50,7 @@
   <td colspan="2">Test</td>
 </tr>
 <tr class="parameter">
-  <td>Extra make check targets and VARIABLES:</td>
+  <td><b>Extra make check targets and VARIABLES:</b></td>
   <td><props:textProperty name="${bean.makeCheckParam}" value="${propertiesBean.defaultProperties[bean.makeCheckParam]}" className="longField" maxlength="256"/>
     <span class="smallNote">Specify make targets to test your code.
     </span>
