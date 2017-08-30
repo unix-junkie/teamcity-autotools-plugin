@@ -19,7 +19,7 @@ public final class AutotoolsBuildConstants {
   /**
    *This constant is for runner plugin description name.
    */
-  public static final String DESCRIPTION = "Using Autotools for configure and build project";
+  public static final String DESCRIPTION = "GNU Autotools runner";
 
   /**
    * This constant is for runner plugin name for UI.
