@@ -84,7 +84,7 @@
   </th>
   <td>
     <props:checkboxProperty name="${bean.needDejagnuXmlReplaceAmp}" value="${propertiesBean.defaultProperties[bean.needDejagnuXmlReplaceAmp]}" />
-    <label for="${bean.needDejagnuXmlReplaceAmp}">Escape the <b>&</b> character in DejaGnu XML test reports</label>
+    <label for="${bean.needDejagnuXmlReplaceAmp}">Escape the <b>&amp;</b> character in DejaGnu XML test reports</label>
   </td>
 </tr>
 
