@@ -41,7 +41,7 @@
   <td colspan="2">Build</td>
 </tr>
 <tr>
-  <th>Build time make targets and VARIABLES:</th>
+  <th>Build time make targets:</th>
   <td><props:textProperty name="${bean.additionalMakeParamsKey}" value="${propertiesBean.defaultProperties[bean.additionalMakeParamsKey]}"  className="longField" maxlength="256"/>
     <span class="smallNote"><div style="max-width: 33em">Specify additional make targets and VARIABLES to build your code. Leave blank to use the defaults.</div>
       </span>
