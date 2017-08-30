@@ -8,12 +8,13 @@
 
 
 <style>
-  .smallWeigth{
+  .smallWidth{
     max-width: 33em;
   }
 
   .code{
     font-weight: bold;
+    white-space:nowrap;
   }
 </style>
 
@@ -24,12 +25,12 @@
 </tr>
 
 <tr>
-  <td/>
+  <th>Pre-configure:</th>
   <td>
     <props:checkboxProperty name="${bean.needAutoreconf}"/>
     <label for="${bean.needAutoreconf}">Execute autoreconf before running configure</label>
     <br/>
-    <div class="smallWeigth">
+    <div class="smallWidth">
       <span class="smallNote">Leave checked to (re-)generate the configure script if one is missing.
       </span>
     </div>
@@ -38,7 +39,7 @@
 <tr class="advancedSetting">
   <th>Directory containing the configure script:</th>
   <td><props:textProperty name="${bean.sourcePath}" value="${propertiesBean.defaultProperties[bean.sourcePath]}" className="longField" maxlength="256"/>
-    <div class="smallWeigth">
+    <div class="smallWidth">
     <span class="smallNote">Specify the directory containing the configure script. Leave blank to use the defaults.
       </span>
     </div>
@@ -47,9 +48,9 @@
 <tr>
   <th>Extra configure parameters:</th>
   <td><props:textProperty name="${bean.additionalConfigurateParamsKey}"  value="${propertiesBean.defaultProperties[bean.additionalConfigurateParamsKey]}"  className="longField" maxlength="256"/>
-    <div class="smallWeigth">
+    <div class="smallWidth">
       <span class="smallNote">Specify additional command line parameters for the configure script
-      (e.g.:<span class="code"> --sysconfdir=/etc --with-gnu-ld</span>). Leave blank to use the defaults.
+        (e.g.&nbsp;<span class="code">--sysconfdir=/etc</span> <span class="code"> --with-gnu-ld</span>). Leave blank to use the defaults.
       </span>
     </div>
   </td>
@@ -71,31 +72,27 @@
 <tr>
   <th>Test time make targets:</th>
   <td><props:textProperty name="${bean.makeCheckParam}" value="${propertiesBean.defaultProperties[bean.makeCheckParam]}" className="longField" maxlength="256"/>
-    <div class="smallWeigth">
+    <div class="smallWidth">
       <span class="smallNote">Specify make targets and VARIABLES to test your code. Leave blank to use the defaults.
       </span>
     </div>
   </td>
 </tr>
 <tr class="advancedSetting">
-  <td/>
+  <th rowspan="2">
+    DejaGnu options:
+  </th>
   <td>
     <props:checkboxProperty name="${bean.needDejagnuXmlReplaceAmp}" value="${propertiesBean.defaultProperties[bean.needDejagnuXmlReplaceAmp]}" />
-    <label for="${bean.needDejagnuXmlReplaceAmp}">Escape <b>&</b> in DejaGnu XML test result files</label>
-    <br/>
-    <div class="smallWeigth">
-      <span class="smallNote">Some DejaGnu versions produce malformed XML. Leave checked if not sure.
-      </span>
-    </div>
+    <label for="${bean.needDejagnuXmlReplaceAmp}">Escape the <b>&</b> character in DejaGnu XML test reports</label>
   </td>
 </tr>
 
 <tr class="advancedSetting">
-  <td/>
   <td>
     <props:checkboxProperty name="${bean.needDejagnuXmlReplaceControls}" value="${propertiesBean.defaultProperties[bean.needDejagnuXmlReplaceAmp]}" />
-    <label for="${bean.needDejagnuXmlReplaceControls}">Replace control characters in DejaGnu XML test result files</label>
-    <div class="smallWeigth">
+    <label for="${bean.needDejagnuXmlReplaceControls}">Replace control characters in DejaGnu XML test reports</label>
+    <div class="smallWidth">
       <span class="smallNote"><div style="max-width: 33em">Some DejaGnu versions produce malformed XML. Leave checked if not sure.</div>
       </span>
     </div>
