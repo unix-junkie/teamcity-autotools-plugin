@@ -24,7 +24,7 @@ public final class AutotoolsBuildConstants {
   /**
    * This constant is for runner plugin name for UI.
    */
-  public static final String DISPLAY_NAME = "Autotools configure and build";
+  public static final String DISPLAY_NAME = "GNU Autotools";
 
   /**
    * This constant is for prefix UI elements plugin names.
