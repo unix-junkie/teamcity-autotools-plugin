@@ -25,7 +25,7 @@
 <tr class="parameter">
   <td><b>Directory containing the configure script:</b></td>
   <td><props:textProperty name="${bean.sourcePath}" value="${propertiesBean.defaultProperties[bean.sourcePath]}" className="longField" maxlength="256"/>
-    <span class="smallNote">Specify path to the configure script. Leave blank to use default configure script
+    <span class="smallNote">Specify path to the configure script. Leave blank to use default configure script.
       </span>
   </td>
 </tr>
@@ -60,7 +60,7 @@
   <td/>
   <td>
     <props:checkboxProperty name="${bean.needDejagnuXmlReplaceAmp}" value="${propertiesBean.defaultProperties[bean.needDejagnuXmlReplaceAmp]}" />
-    <label for="${bean.needDejagnuXmlReplaceAmp}">Escape <b>&</b> in DejaGnun XML test result files</label>
+    <label for="${bean.needDejagnuXmlReplaceAmp}">Escape <b>&</b> in DejaGnu XML test result files</label>
     <br/>
     <span class="smallNote">Some DejaGnu versions produce malformed XML. Leave checked if note sure.
       </span>

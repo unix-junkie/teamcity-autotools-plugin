@@ -59,7 +59,7 @@ public final class AutotoolsBuildRunType extends RunType{
 
   @Override
   public String getViewRunnerParamsJspFilePath() {
-    return myPluginDescriptor.getPluginResourcesPath("viewAutotoolsBuildRunner.jsp");
+    return myPluginDescriptor.getPluginResourcesPath("editAutotoolsBuildRunner.jsp");
   }
 
   @Override
