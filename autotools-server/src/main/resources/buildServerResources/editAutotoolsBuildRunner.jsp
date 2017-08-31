@@ -5,7 +5,6 @@
 <jsp:useBean id="bean" class="jetbrains.buildServer.autotools.server.AutotoolsBuildBean"/>
 <jsp:useBean id="propertiesBean" scope="request" type="jetbrains.buildServer.controllers.BasePropertiesBean"/>
 
-
 <style type="text/css">
   div.smallWidth > span.smallNote {
     max-width: 33em;
@@ -42,7 +41,6 @@
   <td>
     <props:textProperty
         name="${bean.sourcePath}"
-        value="${propertiesBean.defaultProperties[bean.sourcePath]}"
         className="longField"
         maxlength="256"/>
     <div class="smallWidth">
@@ -57,7 +55,6 @@
   <td>
     <props:textProperty
         name="${bean.additionalConfigurateParamsKey}"
-        value="${propertiesBean.defaultProperties[bean.additionalConfigurateParamsKey]}"
         className="longField"
         maxlength="256"/>
     <div class="smallWidth">
@@ -74,11 +71,11 @@
 </tr>
 <tr>
   <th>Build-time make targets:</th>
-  <td><props:textProperty
-      name="${bean.additionalMakeParamsKey}"
-      value="${propertiesBean.defaultProperties[bean.additionalMakeParamsKey]}"
-      className="longField"
-      maxlength="256"/>
+  <td>
+    <props:textProperty
+        name="${bean.additionalMakeParamsKey}"
+        className="longField"
+        maxlength="256"/>
     <div class="smallWidth">
       <span class="smallNote">Specify <span class="code">make</span> targets and
         <span class="code">$(VARIABLES)</span> to build your code. Leave blank
@@ -91,11 +88,11 @@
 </tr>
 <tr>
   <th>Test-time make targets:</th>
-  <td><props:textProperty
-      name="${bean.makeCheckParam}"
-      value="${propertiesBean.defaultProperties[bean.makeCheckParam]}"
-      className="longField"
-      maxlength="256"/>
+  <td>
+    <props:textProperty
+        name="${bean.makeCheckParam}"
+        className="longField"
+        maxlength="256"/>
     <div class="smallWidth">
       <span class="smallNote">Specify <span class="code">make</span> targets and
         <span class="code">$(VARIABLES)</span> to test your code. Leave blank to
@@ -109,9 +106,7 @@
     DejaGnu options:
   </th>
   <td>
-    <props:checkboxProperty
-        name="${bean.needDejagnuXmlReplaceAmp}"
-        value="${propertiesBean.defaultProperties[bean.needDejagnuXmlReplaceAmp]}" />
+    <props:checkboxProperty name="${bean.needDejagnuXmlReplaceAmp}"/>
     <label for="${bean.needDejagnuXmlReplaceAmp}">Escape the <b>&amp;</b>
       character in DejaGnu XML test reports</label>
   </td>
@@ -119,9 +114,7 @@
 
 <tr class="advancedSetting">
   <td>
-    <props:checkboxProperty
-        name="${bean.needDejagnuXmlReplaceControls}"
-        value="${propertiesBean.defaultProperties[bean.needDejagnuXmlReplaceControls]}" />
+    <props:checkboxProperty name="${bean.needDejagnuXmlReplaceControls}"/>
     <label for="${bean.needDejagnuXmlReplaceControls}">Replace control
       characters in DejaGnu XML test reports</label>
     <div class="smallWidth">
