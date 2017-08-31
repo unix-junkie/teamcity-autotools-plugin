@@ -2,7 +2,7 @@
 <%@ taglib prefix="l" tagdir="/WEB-INF/tags/layout" %>
 <%@ taglib prefix="forms" tagdir="/WEB-INF/tags/forms" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:useBean id="bean" class="jetbrains.buildServer.autotools.server.AutotoolsBuildBean"/>
+<jsp:useBean id="keys" class="jetbrains.buildServer.autotools.server.AutotoolsBuildBean"/>
 <jsp:useBean id="propertiesBean" scope="request" type="jetbrains.buildServer.controllers.BasePropertiesBean"/>
 
 <style type="text/css">
@@ -27,8 +27,8 @@
 <tr>
   <th>Pre-configure:</th>
   <td>
-    <props:checkboxProperty name="${bean.needAutoreconf}"/>
-    <label for="${bean.needAutoreconf}">Execute <span class="code">autoreconf</span>
+    <props:checkboxProperty name="${keys.needAutoreconf}"/>
+    <label for="${keys.needAutoreconf}">Execute <span class="code">autoreconf</span>
       before running <span class="code">configure</span></label>
     <div class="smallWidth">
       <span class="smallNote">Leave checked to (re-)generate the
@@ -40,7 +40,7 @@
   <th>Directory containing the configure script:</th>
   <td>
     <props:textProperty
-        name="${bean.sourcePath}"
+        name="${keys.sourcePath}"
         className="longField"
         maxlength="256"/>
     <div class="smallWidth">
@@ -54,7 +54,7 @@
   <th>Extra configure parameters:</th>
   <td>
     <props:textProperty
-        name="${bean.additionalConfigurateParamsKey}"
+        name="${keys.additionalConfigurateParamsKey}"
         className="longField"
         maxlength="256"/>
     <div class="smallWidth">
@@ -73,7 +73,7 @@
   <th>Build-time make targets:</th>
   <td>
     <props:textProperty
-        name="${bean.additionalMakeParamsKey}"
+        name="${keys.additionalMakeParamsKey}"
         className="longField"
         maxlength="256"/>
     <div class="smallWidth">
@@ -90,7 +90,7 @@
   <th>Test-time make targets:</th>
   <td>
     <props:textProperty
-        name="${bean.makeCheckParam}"
+        name="${keys.makeCheckParam}"
         className="longField"
         maxlength="256"/>
     <div class="smallWidth">
@@ -106,16 +106,16 @@
     DejaGnu options:
   </th>
   <td>
-    <props:checkboxProperty name="${bean.needDejagnuXmlReplaceAmp}"/>
-    <label for="${bean.needDejagnuXmlReplaceAmp}">Escape the <b>&amp;</b>
+    <props:checkboxProperty name="${keys.needDejagnuXmlReplaceAmp}"/>
+    <label for="${keys.needDejagnuXmlReplaceAmp}">Escape the <b>&amp;</b>
       character in DejaGnu XML test reports</label>
   </td>
 </tr>
 
 <tr class="advancedSetting">
   <td>
-    <props:checkboxProperty name="${bean.needDejagnuXmlReplaceControls}"/>
-    <label for="${bean.needDejagnuXmlReplaceControls}">Replace control
+    <props:checkboxProperty name="${keys.needDejagnuXmlReplaceControls}"/>
+    <label for="${keys.needDejagnuXmlReplaceControls}">Replace control
       characters in DejaGnu XML test reports</label>
     <div class="smallWidth">
       <span class="smallNote">Some DejaGnu versions produce malformed XML. Leave
