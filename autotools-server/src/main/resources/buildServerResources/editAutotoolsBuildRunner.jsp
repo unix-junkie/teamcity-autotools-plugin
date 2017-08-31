@@ -1,4 +1,3 @@
-<%@ page import="jetbrains.buildServer.log.Loggers" %>
 <%@ taglib prefix="props" tagdir="/WEB-INF/tags/props" %>
 <%@ taglib prefix="l" tagdir="/WEB-INF/tags/layout" %>
 <%@ taglib prefix="forms" tagdir="/WEB-INF/tags/forms" %>
@@ -7,14 +6,16 @@
 <jsp:useBean id="propertiesBean" scope="request" type="jetbrains.buildServer.controllers.BasePropertiesBean"/>
 
 
-<style>
-  .smallWidth{
+<style type="text/css">
+  div.smallWidth > span.smallNote {
     max-width: 33em;
   }
 
-  .code{
-    font-weight: bold;
-    white-space:nowrap;
+  span.code {
+    font-family: Monospace, Courier New, Courier, monospace;
+    background-color: inherit;
+    color: inherit;
+    font-size: 100%;
   }
 </style>
 
@@ -28,29 +29,42 @@
   <th>Pre-configure:</th>
   <td>
     <props:checkboxProperty name="${bean.needAutoreconf}"/>
-    <label for="${bean.needAutoreconf}">Execute autoreconf before running configure</label>
-    <br/>
+    <label for="${bean.needAutoreconf}">Execute <span class="code">autoreconf</span>
+      before running <span class="code">configure</span></label>
     <div class="smallWidth">
-      <span class="smallNote">Leave checked to (re-)generate the configure script if one is missing.
-      </span>
+      <span class="smallNote">Leave checked to (re-)generate the
+        <span class="code">configure</span> script if one is missing.</span>
     </div>
   </td>
 </tr>
 <tr class="advancedSetting">
   <th>Directory containing the configure script:</th>
-  <td><props:textProperty name="${bean.sourcePath}" value="${propertiesBean.defaultProperties[bean.sourcePath]}" className="longField" maxlength="256"/>
+  <td>
+    <props:textProperty
+        name="${bean.sourcePath}"
+        value="${propertiesBean.defaultProperties[bean.sourcePath]}"
+        className="longField"
+        maxlength="256"/>
     <div class="smallWidth">
-    <span class="smallNote">Specify the directory containing the configure script. Leave blank to use the defaults.
-      </span>
+      <span class="smallNote">Specify the directory containing the
+        <span class="code">configure</span> script. Leave blank to use the
+        defaults.</span>
     </div>
   </td>
 </tr>
 <tr>
   <th>Extra configure parameters:</th>
-  <td><props:textProperty name="${bean.additionalConfigurateParamsKey}"  value="${propertiesBean.defaultProperties[bean.additionalConfigurateParamsKey]}"  className="longField" maxlength="256"/>
+  <td>
+    <props:textProperty
+        name="${bean.additionalConfigurateParamsKey}"
+        value="${propertiesBean.defaultProperties[bean.additionalConfigurateParamsKey]}"
+        className="longField"
+        maxlength="256"/>
     <div class="smallWidth">
-      <span class="smallNote">Specify additional command line parameters for the configure script
-        (e.g.&nbsp;<span class="code">--sysconfdir=/etc</span> <span class="code"> --with-gnu-ld</span>). Leave blank to use the defaults.
+      <span class="smallNote">Specify additional command line parameters for the
+        <span class="code">configure</span> script
+        (e.g.&nbsp;<span class="code">--sysconfdir=/etc --with-gnu-ld</span>).
+        Leave blank to use the defaults.
       </span>
     </div>
   </td>
@@ -59,10 +73,16 @@
   <td colspan="2">Build</td>
 </tr>
 <tr>
-  <th>Build time make targets:</th>
-  <td><props:textProperty name="${bean.additionalMakeParamsKey}" value="${propertiesBean.defaultProperties[bean.additionalMakeParamsKey]}"  className="longField" maxlength="256"/>
-    <div class="smallWeigth"><span class="smallNote">Specify make targets and VARIABLES to build your code. Leave blank to use the defaults.
-      </span>
+  <th>Build-time make targets:</th>
+  <td><props:textProperty
+      name="${bean.additionalMakeParamsKey}"
+      value="${propertiesBean.defaultProperties[bean.additionalMakeParamsKey]}"
+      className="longField"
+      maxlength="256"/>
+    <div class="smallWidth">
+      <span class="smallNote">Specify <span class="code">make</span> targets and
+        <span class="code">$(VARIABLES)</span> to build your code. Leave blank
+        to use the defaults.</span>
     </div>
   </td>
 </tr>
@@ -70,10 +90,16 @@
   <td colspan="2">Test</td>
 </tr>
 <tr>
-  <th>Test time make targets:</th>
-  <td><props:textProperty name="${bean.makeCheckParam}" value="${propertiesBean.defaultProperties[bean.makeCheckParam]}" className="longField" maxlength="256"/>
+  <th>Test-time make targets:</th>
+  <td><props:textProperty
+      name="${bean.makeCheckParam}"
+      value="${propertiesBean.defaultProperties[bean.makeCheckParam]}"
+      className="longField"
+      maxlength="256"/>
     <div class="smallWidth">
-      <span class="smallNote">Specify make targets and VARIABLES to test your code. Leave blank to use the defaults.
+      <span class="smallNote">Specify <span class="code">make</span> targets and
+        <span class="code">$(VARIABLES)</span> to test your code. Leave blank to
+        use the defaults.
       </span>
     </div>
   </td>
@@ -83,18 +109,24 @@
     DejaGnu options:
   </th>
   <td>
-    <props:checkboxProperty name="${bean.needDejagnuXmlReplaceAmp}" value="${propertiesBean.defaultProperties[bean.needDejagnuXmlReplaceAmp]}" />
-    <label for="${bean.needDejagnuXmlReplaceAmp}">Escape the <b>&amp;</b> character in DejaGnu XML test reports</label>
+    <props:checkboxProperty
+        name="${bean.needDejagnuXmlReplaceAmp}"
+        value="${propertiesBean.defaultProperties[bean.needDejagnuXmlReplaceAmp]}" />
+    <label for="${bean.needDejagnuXmlReplaceAmp}">Escape the <b>&amp;</b>
+      character in DejaGnu XML test reports</label>
   </td>
 </tr>
 
 <tr class="advancedSetting">
   <td>
-    <props:checkboxProperty name="${bean.needDejagnuXmlReplaceControls}" value="${propertiesBean.defaultProperties[bean.needDejagnuXmlReplaceAmp]}" />
-    <label for="${bean.needDejagnuXmlReplaceControls}">Replace control characters in DejaGnu XML test reports</label>
+    <props:checkboxProperty
+        name="${bean.needDejagnuXmlReplaceControls}"
+        value="${propertiesBean.defaultProperties[bean.needDejagnuXmlReplaceAmp]}" />
+    <label for="${bean.needDejagnuXmlReplaceControls}">Replace control
+      characters in DejaGnu XML test reports</label>
     <div class="smallWidth">
-      <span class="smallNote"><div style="max-width: 33em">Some DejaGnu versions produce malformed XML. Leave checked if not sure.</div>
-      </span>
+      <span class="smallNote">Some DejaGnu versions produce malformed XML. Leave
+        both boxes checked if not sure.</span>
     </div>
   </td>
 </tr>
