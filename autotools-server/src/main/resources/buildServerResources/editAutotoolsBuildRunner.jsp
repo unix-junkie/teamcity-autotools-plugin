@@ -121,7 +121,7 @@
   <td>
     <props:checkboxProperty
         name="${bean.needDejagnuXmlReplaceControls}"
-        value="${propertiesBean.defaultProperties[bean.needDejagnuXmlReplaceAmp]}" />
+        value="${propertiesBean.defaultProperties[bean.needDejagnuXmlReplaceControls]}" />
     <label for="${bean.needDejagnuXmlReplaceControls}">Replace control
       characters in DejaGnu XML test reports</label>
     <div class="smallWidth">
