@@ -46,7 +46,7 @@
     <div class="smallWidth">
       <span class="smallNote">Specify the directory containing the
         <span class="code">configure</span> script. Leave blank to use the
-        defaults.</span>
+        checkout directory.</span>
     </div>
   </td>
 </tr>
@@ -79,7 +79,7 @@
     <div class="smallWidth">
       <span class="smallNote">Specify <span class="code">make</span> targets and
         <span class="code">$(VARIABLES)</span> to build your code. Leave blank
-        to use the defaults.</span>
+        to use the default target.</span>
     </div>
   </td>
 </tr>
@@ -96,7 +96,7 @@
     <div class="smallWidth">
       <span class="smallNote">Specify <span class="code">make</span> targets and
         <span class="code">$(VARIABLES)</span> to test your code. Leave blank to
-        use the defaults.
+        use the default <span class="code">check</span> target.
       </span>
     </div>
   </td>
@@ -115,8 +115,10 @@
 <tr class="advancedSetting">
   <td>
     <props:checkboxProperty name="${keys.needDejagnuXmlReplaceControls}"/>
-    <label for="${keys.needDejagnuXmlReplaceControls}">Replace control
-      characters in DejaGnu XML test reports</label>
+    <label for="${keys.needDejagnuXmlReplaceControls}">Replace
+      <a href="<c:url value="https://en.wikipedia.org/wiki/C0_and_C1_control_codes#C0_.28ASCII_and_derivatives.29"/>"
+         rel="help" target="_blank">C0 control characters</a> in DejaGnu XML
+      test reports</label>
     <div class="smallWidth">
       <span class="smallNote">Some DejaGnu versions produce malformed XML. Leave
         both boxes checked if not sure.</span>
