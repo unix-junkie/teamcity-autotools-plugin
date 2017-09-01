@@ -4,9 +4,9 @@ TeamCity Autotools Plug-in
 [![Build Status](https://api.travis-ci.org/unix-junkie/teamcity-autotools-plugin.png?branch=master)](https://travis-ci.org/unix-junkie/teamcity-autotools-plugin)
 [![codecov.io](http://codecov.io/github/unix-junkie/teamcity-autotools-plugin/coverage.svg?branch=master)](http://codecov.io/github/unix-junkie/teamcity-autotools-plugin?branch=master)
 
-![Build runner UI](/unix-junkie/teamcity-autotools-plugin/wiki/images/teamcity-autotools-ui.png)
+![Build runner UI](https://github.com/unix-junkie/teamcity-autotools-plugin/wiki/images/teamcity-autotools-ui.png)
 
-See the [Wiki](/unix-junkie/teamcity-autotools-plugin/wiki)
+See the [Wiki](https://github.com/unix-junkie/teamcity-autotools-plugin/wiki)
 section for more screenshots.
 
 ### Features
